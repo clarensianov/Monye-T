@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('gambar_user');
-            $table->string('kata_pemulihan');
-            $table->string('tanggal');
+            $table->string('kata_pemulihan');            
             $table->timestamps();
         });
     }
