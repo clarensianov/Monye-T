@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('username', 30)->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('gambar_user');
-            $table->string('kata_pemulihan');            
+            $table->string('gambar_user')->nullable();
+            $table->string('kata_pemulihan')->nullable();            
             $table->timestamps();
         });
     }

@@ -19,6 +19,9 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $primaryKey = 'user_id';
+    
     protected $fillable = [
         'nama',
         'username',
@@ -26,9 +29,7 @@ class User extends Authenticatable
         'password',
         'gambar_user',
         'kata_pemulihan'
-    ];
-
-    const CREATED_AT = 'tanggal';    
+    ];     
 
     /**
      * The attributes that should be hidden for serialization.
