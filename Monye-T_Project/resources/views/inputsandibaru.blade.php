@@ -105,17 +105,24 @@
                             <h2 class="mt-5">Lupa Kata Sandi?</h2>
                             <p>Jangan Khawatir! Kami akan membantu anda</p>
                             <div class="w-65">
-                                <form action="">
-                                    <div class="form-1 d-flex flex-column mt-2">
-                                        <label for="Email" class="font-14">Email</label>
-                                        <input type="email" class="p-2-5 form-control" id="Email" placeholder="Masukkan email yang terdaftar">
-                                    </div>
-                                    <div class="form-2 d-none d-flex flex-column mt-3">
-                                        <label for="KataPemulihan" class="font-14">Kata Pemulihan</label>
-                                        <input type="text" class="p-2-5 form-control" id="KataPemulihan" placeholder="Masukkan kata pemulihan Anda">
+                            <form action="">
+                                    <div class="form-3 d-flex flex-column mt-3">
+                                        <label for="KataSandiBaru">Kata Sandi Baru</label>
+                                        <div class="password-box d-flex">
+                                            <input type="password" class="p-2-5 form-control" id="KataSandi" placeholder="Masukkan kata sandi baru">
+                                            <div class="w-10 d-flex justify-content-center align-items-center eye-button eye-toggle">
+                                                <i class="fa fa-eye" id="show_eye"></i>
+                                                <i class="fa fa-eye-slash d-none" id="hide_eye"></i>
+                                            </div>
+                                        </div>
+
+                                        <label class="mt-3" for="KonfirmasiKataSandi">Konfirmasi Kata Sandi</label>
+                                        <div class="password-box d-flex">
+                                            <input type="password" class="p-2-5 form-control" id="KonfirmasiKataSandi" placeholder="Masukkan kata sandi baru">
+                                        </div>
                                     </div>
 
-                                    <!-- <div class="d-flex flex-row gap-2 mt-2">
+                                    <div class="d-flex flex-row gap-2 mt-2">
                                         <div class="d-flex align-items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#EC0D0D" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
                                                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
@@ -124,18 +131,29 @@
                                         <div>
                                             <p class="text-serror m-0" style="font-weight: 500;">Email/Username Anda Sudah Terdaftar!</p>
                                         </div>                                    
-                                    </div>  -->
+                                    </div>
+
 
                                     <div>
-                                        <div style="box-shadow: 0 2px 2px 0 #00000025;" class="NextButton become-pointer d-flex align-items-center justify-content-center yellow-button border-0 w-100 mt-3 text-brown font-weight-700 button-layout">Selanjutnya</div>
-                                        <button style="box-shadow: 0 2px 2px 0 #00000025;" type="submit" class="d-none yellow-button border-0 w-100 mt-3 text-brown font-weight-700 button-layout">Check</button>
+                                        <button style="box-shadow: 0 2px 2px 0 #00000025;" type="submit" class="yellow-button border-0 w-100 mt-3 text-brown font-weight-700 button-layout" onclick="finishSubmit()">Selesai</button>
                                         <div class="BackButton become-pointer d-flex flex-row gap-2 align-items-center mt-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#00000065" class="bi bi-chevron-left" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
                                             </svg>
-                                            <a href="loginregister" style="color: #00000065; font-weight:500;" class="text-decoration-none backtologin m-0">Kembali</a>
-                                            <p style="color: #00000065; font-weight:500;" class="d-none mincounter m-0">Kembali</p>
+                                            <a href="lupasandi" class="text-decoration-none"><p style="color: #00000065; font-weight:500;" class=" m-0">Kembali</p></a>
                                         </div>
+                                    </div>
+
+                                    <div class="d-flex gap-2 w-100 align-items-center justify-content-center mt-5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" class="become-pointer circle bi bi-circle-fill" viewBox="0 0 16 16" value="1" hidden>
+                                            <circle cx="8" cy="8" r="8"/>
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#00000025" class="become-pointer circle bi bi-circle-fill" viewBox="0 0 16 16" value="2" hidden>
+                                            <circle cx="8" cy="8" r="8"/>
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#00000025" class="become-pointer circle bi bi-circle-fill" viewBox="0 0 16 16" value="3" hidden>
+                                            <circle cx="8" cy="8" r="8"/>
+                                        </svg>
                                     </div>
                                 </form>
                             </div>
