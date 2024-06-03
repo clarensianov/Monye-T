@@ -27,4 +27,5 @@ Route::get('/loginregister/register/katapemulihan', function (){return view('kat
 Route::put('/loginregister/register/katapemulihan/{id}', [UserController::class, 'katapemulihan'])->name('tes');
 
 Route::get('/lupasandi', function (){ return view('lupasandi');});
+Route::get('/inputsandi' , function (){ return view('inputsandibaru');});
 Route::get('/dashboard', function(){ return view('dashboard');})->middleware('auth');

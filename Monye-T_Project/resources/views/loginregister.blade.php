@@ -111,15 +111,15 @@
                             <h1 class="text-sblack font-weight-bold">Logo</h1>
                             <div class="row mt-4 w-50 justify-content-center">
                                 <div class="Daftar col d-flex justify-content-center become-pointer">
-                                    <h2 class="text-on-select">Daftar</h2>
+                                    <h2 class="text-not-on-select">Daftar</h2>
                                 </div>
                                 <div class="Masuk col d-flex justify-content-center become-pointer">
-                                    <h2 class="text-not-on-select">Masuk</h2>
+                                    <h2 class="text-on-select">Masuk</h2>
                                 </div>
                             </div>
 
                             <!-- Daftar -->
-                            <div class="DaftarArea w-100 d-flex flex-column align-items-center">
+                            <div class="DaftarArea w-100 d-none d-flex flex-column align-items-center">
                                 <p class="font-14 mt-2 font-weight-light">Mari bergabung dan ambil kendali atas keuangan Anda!</p>
                                 <div class="w-65">
                                     <form action="/loginregister/register" method="POST">
@@ -177,7 +177,7 @@
                         
 
                             <!-- Masuk -->
-                            <div class="MasukArea w-100 d-none d-flex flex-column align-items-center">
+                            <div class="MasukArea w-100 d-flex flex-column align-items-center">
                                 <p style="font-weight: 400;">Ayo Masuk Ke Akun Anda!</p>
                                 <div class="w-65 ">
                                     <form action="/loginregister/login" method="POST">
