@@ -24,8 +24,13 @@ Route::post('/loginregister/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
 
 Route::get('/loginregister/register/katapemulihan', function (){return view('katapemulihan');})->name('katapemulihan')->middleware('auth');    
-Route::put('/loginregister/register/katapemulihan/{id}', [UserController::class, 'katapemulihan'])->name('tes');
+Route::put('/loginregister/register/katapemulihan/{id}', [UserController::class, 'katapemulihan'])->name('create_katapemulihan');
 
-Route::get('/lupasandi', function (){ return view('lupasandi');});
-Route::get('/inputsandi' , function (){ return view('inputsandibaru');});
+Route::get('/lupasandi', function (){ return view('lupasandi');})->name('lupasandi');
+Route::post('/lupasandi',[UserController::class, 'lupasandi']);
+
+Route::get('/inputsandi' , function (){ return view('inputsandibaru');})->name('inputsandi');
+Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('change_password');
+
+
 Route::get('/dashboard', function(){ return view('dashboard');})->middleware('auth');

@@ -105,7 +105,7 @@
                             <h2 class="mt-5">Buat Kata Pemulihan Anda!</h2>
                             <p>Autentikasi Untuk Mengganti Kata Sandi Anda</p>
                             <div class="w-65">            
-                                <form action="{{ route('tes', Session::get('userData')) }}" method="POST">
+                                <form action="{{ route('create_katapemulihan', Session::get('userData')) }}" method="POST">
                                     @method('PUT')
                                     @csrf
                                     <div class="form-3 d-flex flex-column mt-3">
