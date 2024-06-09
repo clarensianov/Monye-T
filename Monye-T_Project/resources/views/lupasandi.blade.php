@@ -111,9 +111,28 @@
                                         <input type="email" class="p-2-5 form-control" id="Email" placeholder="Masukkan email yang terdaftar">
                                     </div>
                                     <div class="form-2 d-none d-flex flex-column mt-3">
-                                        <label for="KataPemulihan" class="font-14">Kata Pemulihan</label>
-                                        <input type="text" class="p-2-5 form-control" id="KataPemulihan" placeholder="Masukkan kata pemulihan Anda">
+                                        <div class="d-flex flex-column mt-3">
+                                            <label for="Kata Pemulihan">Kata Pemulihan</label>
+                                            <div class="d-flex flex-row align-items-center password-box w-100">
+                                                <input type="password" class="p-2-5 form-control" id="KataPemulihan" placeholder="Masukkan kata pemulihan anda" name="katapemulihan">
+                                                <div class="eye-toggle2 w-10 d-flex mx-1 justify-content-center align-items-center eye-button">
+                                                    <i class="fas fa-eye" id="show_eye2"></i>
+                                                    <i class="fas fa-eye-slash d-none" id="hide_eye2"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row gap-2 mt-2">
+                                        <div class="d-flex align-items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#EC0D0D" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="text-serror m-0" style="font-weight: 500;">Email/Username Anda Sudah Terdaftar!</p>
+                                        </div>                                    
+                                        </div>
                                     </div>
+                                    
 
                                     <!-- <div class="d-flex flex-row gap-2 mt-2">
                                         <div class="d-flex align-items-center">
@@ -152,6 +171,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
+        $(".eye-toggle2").click(function(){
+            $("#show_eye2").toggleClass("d-none");
+            $("#hide_eye2").toggleClass("d-none");
+            var input = $("#KataPemulihan");
+            if(input.attr("type") == "password"){
+                input.attr("type", "text");
+            }else{
+                input.attr("type", "password");
+            }
+        });
         var counter = 1;
 
         $(".NextButton").click(function(){
