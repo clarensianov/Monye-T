@@ -111,11 +111,7 @@
                                     <div class="form-3 d-flex flex-column mt-3">
                                         <label for="KataSandiBaru">Kata Sandi Baru</label>
                                         <div class="password-box d-flex">
-                                            <input type="password" class="p-2-5 form-control" id="KataSandi" placeholder="Masukkan kata sandi baru" name="password">
-                                            <div class="w-10 d-flex justify-content-center align-items-center eye-button eye-toggle">
-                                                <i class="fa fa-eye" id="show_eye"></i>
-                                                <i class="fa fa-eye-slash d-none" id="hide_eye"></i>
-                                            </div>
+                                            <input type="password" class="p-2-5 form-control" id="KataSandiBaru" placeholder="Masukkan kata sandi baru">
                                         </div>
 
                                         <label class="mt-3" for="KonfirmasiKataSandi">Konfirmasi Kata Sandi</label>
@@ -157,7 +153,7 @@
                                             <circle cx="8" cy="8" r="8"/>
                                         </svg>
                                     </div>
-                                </form>
+                                </>
                             </div>
                         </div>
 

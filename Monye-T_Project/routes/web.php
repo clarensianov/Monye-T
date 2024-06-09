@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/loginregister');
+Route::redirect('/home','/dashboard');
 
 Route::get('/loginregister', [UserController::class, 'index'])->name('loginregister')->middleware('guest');
 Route::post('/loginregister/login', [UserController::class, 'login']);

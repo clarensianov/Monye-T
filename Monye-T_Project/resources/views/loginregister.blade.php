@@ -190,10 +190,10 @@
                                             <div class="d-flex flex-column mt-3">
                                                 <label for="Kata Sandi">Kata Sandi</label>
                                                 <div class="d-flex flex-row align-items-center password-box w-100">
-                                                    <input type="password" class="p-2-5 form-control" id="KataSandi" placeholder="Masukkan kata sandi" name="password">
-                                                    <div class="eye-toggle w-10 d-flex mx-1 justify-content-center align-items-center eye-button">
-                                                        <i class="fas fa-eye" id="show_eye"></i>
-                                                        <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                                                    <input type="password" class="p-2-5 form-control" id="KataSandi2" placeholder="Masukkan kata sandi" name="password">
+                                                    <div class="eye-toggle2 w-10 d-flex mx-1 justify-content-center align-items-center eye-button">
+                                                        <i class="fas fa-eye" id="show_eye2"></i>
+                                                        <i class="fas fa-eye-slash d-none" id="hide_eye2"></i>
                                                     </div>
                                                 </div>
                                                 
@@ -247,11 +247,19 @@
         $(".eye-toggle").click(function(){
             $("#show_eye").toggleClass("d-none");
             $("#hide_eye").toggleClass("d-none");
-            var x = document.getElementById("KataSandi");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
+            if($("#show_eye").hasClass("d-none")){
+                $("#KataSandi").attr("type", "text");
+            }else{
+                $("#KataSandi").attr("type", "password");
+            }
+        });
+        $(".eye-toggle2").click(function(){
+            $("#show_eye2").toggleClass("d-none");
+            $("#hide_eye2").toggleClass("d-none");
+            if($("#show_eye2").hasClass("d-none")){
+                $("#KataSandi2").attr("type", "text");
+            }else{
+                $("#KataSandi2").attr("type", "password");
             }
         });
         $(".Daftar").click(function(){
