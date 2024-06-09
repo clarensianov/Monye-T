@@ -99,14 +99,40 @@ class UserController extends Controller
     public function lupasandi(Request $req){
         $req->validate([
             'email' => 'required|email',
-            'katapemulihan' => 'required'
+            'kata_pemulihan' => 'required'
         ],[
             'email.required' => 'Email wajib diisi',
             'email.email' => 'Format email tidak sesuai',
-            'katapemulihan.required' => 'Kata Pemulihan wajib diisi'
+            'kata_pemulihan.required' => 'Kata Pemulihan wajib diisi'
         ]);
 
+        $user = User::where('email', $req->email)->where('kata_pemulihan', $req->kata_pemulihan)->first();
 
+        if($user){                        
+            return redirect('/inputsandi')->with('user', $user->user_id);
+        }
+
+        return redirect('/lupasandi')->with('error', 'Email/Kata pemulihan tidak tersedia ataupun cocok');
+    }
+
+    public function inputsandi(Request $req, $id){
+        $req->validate([
+            'password' => 'required|confirmed|min:8',
+            'password_confirmation' => 'required'
+        ],[
+            'password.confirmed' => 'Password berbeda',
+            'password.min' => 'Password minimal 8 karakter'
+        ]);
+
+        $user = User::find($id);
+
+        if($user){
+            $user->password = Hash::make($req->password);
+            $user->save();
+            return redirect('/loginregister')->with('success_pass', 'Perubahan password berhasil!');
+        }
+
+        dd('gagal?!?');
     }
 
     public function logout(Request $req){

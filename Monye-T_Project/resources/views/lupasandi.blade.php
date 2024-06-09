@@ -105,10 +105,11 @@
                             <h2 class="mt-5">Lupa Kata Sandi?</h2>
                             <p>Jangan Khawatir! Kami akan membantu anda</p>
                             <div class="w-65">
-                                <form action="">
+                                <form action="/lupasandi" method="POST">
+                                    @csrf
                                     <div class="form-1 d-flex flex-column mt-2">
                                         <label for="Email" class="font-14">Email</label>
-                                        <input type="email" class="p-2-5 form-control" id="Email" placeholder="Masukkan email yang terdaftar">
+                                        <input type="email" class="p-2-5 form-control" id="Email" placeholder="Masukkan email yang terdaftar" name="email" value="{{ Session::get('email') }}">
                                     </div>
                                     <div class="form-2 d-none d-flex flex-column mt-3">
                                         <div class="d-flex flex-column mt-3">
