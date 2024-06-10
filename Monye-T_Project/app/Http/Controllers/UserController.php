@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -16,13 +17,17 @@ class UserController extends Controller
     }
 
     public function login(Request $req){
-        $req->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ], [
-            'email.required' => 'Email wajib diisi',
-            'password.required' => 'Password wajib diisi'
-        ]);
+        try{
+            $req->validate([
+                'email' => 'required',
+                'password' => 'required'
+            ], [
+                'email.required' => 'Email wajib diisi',
+                'password.required' => 'Password wajib diisi'
+            ]);            
+        }catch(ValidationException $e){
+            return back()->withErrors($e->errors())->withInput();
+        }
 
         $login = [
             'email' => $req->email,
@@ -43,23 +48,27 @@ class UserController extends Controller
         Session::flash('email', $req->email);
         Session::flash('username', $req->username);
 
-        $req->validate([
-            'namaDepan' => 'required',
-            'namaBelakang' => 'required',
-            'email' => 'required|email|unique:users',
-            'username' => 'required|unique:users',
-            'password' => 'required|min:8'
-        ], [
-            'namaDepan.required' => 'Nama Depan wajib diisi',
-            'namaBelakang.required' => 'Nama Belakang wajib diisi',
-            'email.required' => 'Email wajib diisi',
-            'email.email' => 'Email harus sesuai format',
-            'email.unique' => 'Email sudah pernah terdaftar, silahkan coba email yang lain',
-            'username.required' => 'Username wajib diisi',
-            'username.unique' => 'Username tidak tersedia/sudah digunakan',
-            'password.required' => 'Password wajib diisi',
-            'password.min' => 'Minimum password adalah 8 karakter'
-        ]);
+        try{
+            $req->validate([
+                'namaDepan' => 'required',
+                'namaBelakang' => 'required',
+                'email' => 'required|email|unique:users',
+                'username' => 'required|unique:users',
+                'password' => 'required|min:8'
+            ], [
+                'namaDepan.required' => 'Nama Depan wajib diisi',
+                'namaBelakang.required' => 'Nama Belakang wajib diisi',
+                'email.required' => 'Email wajib diisi',
+                'email.email' => 'Email harus sesuai format',
+                'email.unique' => 'Email sudah pernah terdaftar, silahkan coba email yang lain',
+                'username.required' => 'Username wajib diisi',
+                'username.unique' => 'Username tidak tersedia/sudah digunakan',
+                'password.required' => 'Password wajib diisi',
+                'password.min' => 'Minimum password adalah 8 karakter'
+            ]);
+        }catch(ValidationException $e){
+            return back()->withErrors($e->errors())->withInput();
+        }
 
         $data = [
             'nama' => $req->namaDepan . ' ' . $req->namaBelakang,
@@ -83,11 +92,18 @@ class UserController extends Controller
     }
 
     public function katapemulihan(Request $req, $id){        
-        $req->validate([
-            'katapemulihan' => 'required'
-        ], [
-            'katapemulihan.required' => 'Kata Pemulihan wajib diisi'
-        ]);
+        try{
+            $req->validate([
+                'katapemulihan' => 'required'
+            ], [
+                'katapemulihan.required' => 'Kata Pemulihan wajib diisi'
+            ]);
+        }catch(ValidationException $e){
+            return response()->json([
+                'message' => 'Validation failed.',
+                'errors' => $e->errors()
+            ], 422);
+        }
 
         $user = User::where('user_id', '=', $id)->first();
         $user->kata_pemulihan = $req->input('katapemulihan');
@@ -97,14 +113,21 @@ class UserController extends Controller
     }
 
     public function lupasandi(Request $req){
-        $req->validate([
-            'email' => 'required|email',
-            'kata_pemulihan' => 'required'
-        ],[
-            'email.required' => 'Email wajib diisi',
-            'email.email' => 'Format email tidak sesuai',
-            'kata_pemulihan.required' => 'Kata Pemulihan wajib diisi'
-        ]);
+        try{
+            $req->validate([
+                'email' => 'required|email',
+                'kata_pemulihan' => 'required'
+            ],[
+                'email.required' => 'Email wajib diisi',
+                'email.email' => 'Format email tidak sesuai',
+                'kata_pemulihan.required' => 'Kata Pemulihan wajib diisi'
+            ]);
+        }catch(ValidationException $e){
+            return response()->json([
+                'message' => 'Validation failed.',
+                'errors' => $e->errors()
+            ], 422);
+        }
 
         $user = User::where('email', $req->email)->where('kata_pemulihan', $req->kata_pemulihan)->first();
 
@@ -116,14 +139,21 @@ class UserController extends Controller
     }
 
     public function inputsandi(Request $req, $id){
-        $req->validate([
-            'password' => 'required|confirmed|min:8',
-            'password_confirmation' => 'required'
-        ],[
-            'password.confirmed' => 'Password berbeda',
-            'password.min' => 'Password minimal 8 karakter'
-        ]);
-
+        try{
+            $req->validate([
+                'password' => 'required|confirmed|min:8',
+                'password_confirmation' => 'required'
+            ],[
+                'password.confirmed' => 'Password berbeda',
+                'password.min' => 'Password minimal 8 karakter'
+            ]);
+        }catch(ValidationException $e){
+            return response()->json([
+                'message' => 'Validation failed.',
+                'errors' => $e->errors()
+            ], 422);
+        }
+        
         $user = User::find($id);
 
         if($user){
