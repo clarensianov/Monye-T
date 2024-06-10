@@ -99,10 +99,7 @@ class UserController extends Controller
                 'katapemulihan.required' => 'Kata Pemulihan wajib diisi'
             ]);
         }catch(ValidationException $e){
-            return response()->json([
-                'message' => 'Validation failed.',
-                'errors' => $e->errors()
-            ], 422);
+            return back()->withErrors($e->errors())->withInput();
         }
 
         $user = User::where('user_id', '=', $id)->first();
@@ -115,27 +112,22 @@ class UserController extends Controller
     public function lupasandi(Request $req){
         try{
             $req->validate([
-                'email' => 'required|email',
-                'kata_pemulihan' => 'required'
+                'email' => 'required',
+                'katapemulihan' => 'required'
             ],[
-                'email.required' => 'Email wajib diisi',
-                'email.email' => 'Format email tidak sesuai',
-                'kata_pemulihan.required' => 'Kata Pemulihan wajib diisi'
+                'email.required' => 'Email wajib diisi',                
+                'katapemulihan.required' => 'Kata Pemulihan wajib diisi'
             ]);
-        }catch(ValidationException $e){
-            return response()->json([
-                'message' => 'Validation failed.',
-                'errors' => $e->errors()
-            ], 422);
+        }catch(ValidationException $e){                        
+            return back()->withErrors($e->errors())->withInput();
         }
 
-        $user = User::where('email', $req->email)->where('kata_pemulihan', $req->kata_pemulihan)->first();
-
-        if($user){                        
+        $user = User::where('email', $req->email)->where('kata_pemulihan', $req->katapemulihan)->first();        
+        if($user){                    
             return redirect('/inputsandi')->with('user', $user->user_id);
-        }
+        }        
 
-        return redirect('/lupasandi')->with('error', 'Email/Kata pemulihan tidak tersedia ataupun cocok');
+        return back()->with('error', 'Email/Kata pemulihan tidak tersedia ataupun cocok');
     }
 
     public function inputsandi(Request $req, $id){
@@ -144,14 +136,12 @@ class UserController extends Controller
                 'password' => 'required|confirmed|min:8',
                 'password_confirmation' => 'required'
             ],[
-                'password.confirmed' => 'Password berbeda',
-                'password.min' => 'Password minimal 8 karakter'
+                'password.confirmed' => 'Password konfirmasi berbeda',
+                'password.min' => 'Password minimal 8 karakter',
+                'password.required' => 'Password harus diisi'
             ]);
         }catch(ValidationException $e){
-            return response()->json([
-                'message' => 'Validation failed.',
-                'errors' => $e->errors()
-            ], 422);
+            return back()->with('user', $id)->withErrors($e->errors())->withInput();
         }
         
         $user = User::find($id);

@@ -111,13 +111,16 @@
                                     <div class="form-3 d-flex flex-column mt-3">
                                         <label for="KataSandiBaru">Kata Sandi Baru</label>
                                         <div class="password-box d-flex">
-                                            <input type="password" class="p-2-5 form-control" id="KataSandiBaru" placeholder="Masukkan kata sandi baru">
-                                        </div>
+                                            <input type="password" class="p-2-5 form-control" id="KataSandiBaru" placeholder="Masukkan kata sandi baru" name="password">                                            
+                                        </div>                                        
 
                                         <label class="mt-3" for="KonfirmasiKataSandi">Konfirmasi Kata Sandi</label>
                                         <div class="password-box d-flex">
-                                            <input type="password" class="p-2-5 form-control" id="KonfirmasiKataSandi" placeholder="Masukkan kata sandi baru" name="password_confirmation">
+                                            <input type="password" class="p-2-5 form-control" id="KonfirmasiKataSandi" placeholder="Masukkan kata sandi baru" name="password_confirmation">                                            
                                         </div>
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror 
                                     </div>
 
                                     {{-- <div class="d-flex flex-row gap-2 mt-2">

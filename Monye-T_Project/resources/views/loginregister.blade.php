@@ -99,6 +99,11 @@
     }
 </style>
 <body>
+    @if (session('success_pass'))
+        <div class="alert alert-warning" role="alert">
+            {{ session('success_pass') }}
+        </div>>                                    
+    @endif
     <div class="w-100 vh-100 Yellow d-flex justify-content-center align-items-center">
         <div class=" w-75 bg-swhite container-field corner-radius d-flex align-items-center">
             <div class="w-100 h-100">
@@ -116,11 +121,10 @@
                                 <div class="Masuk col d-flex justify-content-center become-pointer">
                                     <h2 class="text-on-select">Masuk</h2>
                                 </div>
-                            </div>
-
-                            <!-- Daftar -->
+                            </div>                            
+                            <!-- Daftar -->                
                             <div class="DaftarArea w-100 d-none d-flex flex-column align-items-center">
-                                <p class="font-14 mt-2 font-weight-light">Mari bergabung dan ambil kendali atas keuangan Anda!</p>
+                                <p class="font-14 mt-2 font-weight-light">Mari bergabung dan ambil kendali atas keuangan Anda!</p>                                
                                 <div class="w-65">
                                     <form action="/loginregister/register" method="POST">
                                         @csrf
