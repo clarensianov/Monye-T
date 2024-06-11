@@ -21,7 +21,7 @@
         width: 45%;
     }
     .h-85{
-        scale: 0.93;
+        scale: 0.85;
     }
     .Yellow{
         background-color: #FEEE72;
@@ -122,72 +122,48 @@
                                     <h2 class="text-on-select">Masuk</h2>
                                 </div>
                             </div>                            
-                            <!-- Daftar -->                
-                            <div class="DaftarArea w-100 d-none d-flex flex-column align-items-center">
-                                <p class="font-14 mt-2 font-weight-light">Mari bergabung dan ambil kendali atas keuangan Anda!</p>                                
-                                <div class="w-65">
-                                    <form action="/loginregister/register" method="POST">
+
+                            <!-- Masuk -->
+                            <div class="MasukArea w-100 d-flex flex-column align-items-center">
+                                <p style="font-weight: 400;">Ayo Masuk Ke Akun Anda!</p>
+                                <div class="w-65 ">
+                                    <form action="/loginregister/login" method="POST">
                                         @csrf
                                         <div class="w-100">
-                                            <div class="d-flex flex-row w-100 justify-content-between">
-                                                <div class="d-flex flex-column w-45">
-                                                    <label for="NamaDepan">Nama depan</label>
-                                                    <input type="text" class="p-2-5 form-control" id="NamaDepan" placeholder="Nama Depan"  name="namaDepan" value="{{ Session::get('namaDepan') }}">    
-                                                    @error('namaDepan')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                                <div class="d-flex flex-column w-45">
-                                                    <label for="NamaBelakang">Nama belakang</label>
-                                                    <input type="text" class="p-2-5 form-control" id="NamaBelakang" placeholder="Nama Belakang" value="{{ Session::get('namaBelakang') }}" name="namaBelakang">
-                                                    @error('namaBelakang')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-100 mt-3">
-                                            <div class="d-flex flex-column mt-2">
-                                                <label for="Email">Email</label>
-                                                <input type="email" class="p-2-5 form-control" id="Email" placeholder="Masukkan email" value="{{ Session::get('email') }}" name="email">
-                                                @error('email')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
                                             <div class="d-flex flex-column mt-3">
-                                                <label for="Username">Username</label>
-                                                <input type="text" class="p-2-5 form-control" id="Username" placeholder="Masukkan username" value="{{ Session::get('username') }}" name="username">
-                                                @error('username')
+                                                <label for="Email">Email</label>
+                                                <input type="text" class="p-2-5 form-control" id="Email" placeholder="Masukkan email" value="{{ Session::get('email') }}" name="email">
+                                                @error('email')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="d-flex flex-column mt-3">
                                                 <label for="Kata Sandi">Kata Sandi</label>
                                                 <div class="d-flex flex-row align-items-center password-box w-100">
-                                                    <input type="password" class="p-2-5 form-control" id="KataSandi" placeholder="Masukkan kata sandi" name="password">
-                                                    <div class="eye-toggle w-10 d-flex mx-1 justify-content-center align-items-center eye-button">
-                                                        <i class="fas fa-eye" id="show_eye"></i>
-                                                        <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                                                    <input type="password" class="p-2-5 form-control" id="KataSandi2" placeholder="Masukkan kata sandi" name="password">
+                                                    <div class="eye-toggle2 w-10 d-flex mx-1 justify-content-center align-items-center eye-button">
+                                                        <i class="fas fa-eye" id="show_eye2"></i>
+                                                        <i class="fas fa-eye-slash d-none" id="hide_eye2"></i>
                                                     </div>
                                                 </div>
                                                 @error('password')
                                                     <span class="text-danger">{{ $message }}</span>
-                                                @enderror  
+                                                @enderror
                                             </div>
                                         </div>
-                                        @if (session('registerFailed'))
-                                            <div class="d-flex flex-row gap-2 mt-2">
+                                        @if (session('loginFailed'))
+                                            <div class="d-flex flex-row gap-2 mt-2 mb-5">
                                                 <div class="d-flex align-items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#EC0D0D" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
                                                         <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
                                                     </svg>
                                                 </div>
                                                 <div>
-                                                    <p class="text-danger m-0" style="font-weight: 500;">{{ session('registerFailed') }}</p>
+                                                    <p class="text-danger m-0" style="font-weight: 500;">{{ session('loginFailed') }}</p>
                                                 </div>
-                                            </div>                                    
+                                            </div>
                                         @endif
-                                        {{-- <div class="d-flex flex-row gap-2 mt-2">
+                                        {{-- <div class="d-flex flex-row gap-2 mt-2 mb-5">
                                             <div class="d-flex align-items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#EC0D0D" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
                                                     <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
@@ -195,16 +171,20 @@
                                             </div>
                                             <div>
                                                 <p class="text-serror m-0" style="font-weight: 500;">Email/Username Anda Sudah Terdaftar!</p>
-                                            </div>                                    
+                                            </div>
                                         </div> --}}
-                                        <div class="w-100">
+                                        <div class="mt-5 w-100 d-flex flex-column align-items-center">
+                                            <div class="d-flex justify-content-end">
+                                                <a href="lupasandi" class="LupaPassword become-pointer font-16 text-underscore m-0 text-sblack" style="font-weight: 700;"><u>Lupa kata sandi?</u></a>
+                                            </div>
 
-                                            <!-- abis nekan tombol daftar Ini nanti di redirect ke blade buatkatapemulihan -->                                            
-                                            <button style="box-shadow: 0 2px 2px 0 #00000025;" type="submit" class="yellow-button border-0 w-100 mt-3 text-brown font-weight-700 button-layout">Daftar</button>
+                                            <!-- abis nekan tombol masuk Ini nanti di direct ke blade home -->
+                                            <button style="box-shadow: 0 2px 2px 0 #00000025;" type="submit" class="yellow-button border-0 w-100 mt-3 text-brown font-weight-700 button-layout">Masuk</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
