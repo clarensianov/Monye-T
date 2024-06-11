@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
 </head>
 <style>
+    form{
+        scale: 0.87;
+        margin-top: -25px;
+    }
     .w-65{
         width: 65%;
     }
@@ -97,9 +101,13 @@
     .eye-button:hover{
         background-color: #FEEE72;
     }
+    .gap-8{
+        gap: 120px;
+    
+    }
 </style>
 <body>
-    @if (session('success_pass'))
+@if (session('success_pass'))
         <div class="alert alert-warning" role="alert">
             {{ session('success_pass') }}
         </div>>                                    
@@ -114,18 +122,23 @@
                     <div class="col">
                         <div class=" flex-column d-flex justify-content-center align-items-center h-85 w-100">
                             <h1 class="text-sblack font-weight-bold">Logo</h1>
-                            <div class="row mt-4 w-50 justify-content-center">
-                                <div class="Daftar col d-flex justify-content-center become-pointer">
-                                    <h2 class="text-not-on-select">Daftar</h2>
-                                </div>
-                                <div class="Masuk col d-flex justify-content-center become-pointer">
-                                    <h2 class="text-on-select">Masuk</h2>
-                                </div>
-                            </div>                            
+                            <div class="d-flex flex-row gap-8 mt-4 w-50 justify-content-center">
+                                <a href="/register" class="text-decoration-none">
+                                    <div class="Daftar col d-flex justify-content-center become-pointer">
+                                        <h2 class="text-on-select">Daftar</h2>
+                                    </div>
+                                </a>
+                                <a href="/login" class="text-decoration-none">
+                                    <div class="Masuk col d-flex justify-content-center become-pointer">
+                                        <h2 class="text-not-on-select">Masuk</h2>
+                                    </div>
+                                </a>
+                            </div>  
+
                             <!-- Daftar -->                
-                            <div class="DaftarArea w-100 d-none d-flex flex-column align-items-center">
+                            <div class="DaftarArea w-100 d-flex flex-column align-items-center">
                                 <p class="font-14 mt-2 font-weight-light">Mari bergabung dan ambil kendali atas keuangan Anda!</p>                                
-                                <div class="w-65">
+                                <div class="w-65 top-0">
                                     <form action="/loginregister/register" method="POST">
                                         @csrf
                                         <div class="w-100">
@@ -133,35 +146,47 @@
                                                 <div class="d-flex flex-column w-45">
                                                     <label for="NamaDepan">Nama depan</label>
                                                     <input type="text" class="p-2-5 form-control" id="NamaDepan" placeholder="Nama Depan"  name="namaDepan" value="{{ Session::get('namaDepan') }}">    
+                                                    <div class="d-flex flex-row">
+                                                    &nbsp;
                                                     @error('namaDepan')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
+                                                    </div>
                                                 </div>
                                                 <div class="d-flex flex-column w-45">
                                                     <label for="NamaBelakang">Nama belakang</label>
                                                     <input type="text" class="p-2-5 form-control" id="NamaBelakang" placeholder="Nama Belakang" value="{{ Session::get('namaBelakang') }}" name="namaBelakang">
+                                                    <div class="d-flex flex-row">
+                                                    &nbsp;
                                                     @error('namaBelakang')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                        <span class="text-danger"> {{ $message }}</span>
                                                     @enderror
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="w-100 mt-3">
+                                        <div class="w-100 mt-2">
                                             <div class="d-flex flex-column mt-2">
                                                 <label for="Email">Email</label>
                                                 <input type="email" class="p-2-5 form-control" id="Email" placeholder="Masukkan email" value="{{ Session::get('email') }}" name="email">
-                                                @error('email')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                                <div class="d-flex flex-row">
+                                                    &nbsp;
+                                                    @error('email')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                    </div>
                                             </div>
-                                            <div class="d-flex flex-column mt-3">
+                                            <div class="d-flex flex-column mt-2">
                                                 <label for="Username">Username</label>
                                                 <input type="text" class="p-2-5 form-control" id="Username" placeholder="Masukkan username" value="{{ Session::get('username') }}" name="username">
-                                                @error('username')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                                <div class="d-flex flex-row">
+                                                    &nbsp;
+                                                    @error('username')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                    </div>
                                             </div>
-                                            <div class="d-flex flex-column mt-3">
+                                            <div class="d-flex flex-column mt-2">
                                                 <label for="Kata Sandi">Kata Sandi</label>
                                                 <div class="d-flex flex-row align-items-center password-box w-100">
                                                     <input type="password" class="p-2-5 form-control" id="KataSandi" placeholder="Masukkan kata sandi" name="password">
@@ -170,9 +195,12 @@
                                                         <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
                                                     </div>
                                                 </div>
-                                                @error('password')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror  
+                                                <div class="d-flex flex-row">
+                                                    &nbsp;
+                                                    @error('password')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>  
                                             </div>
                                         </div>
                                         @if (session('registerFailed'))
@@ -216,18 +244,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
-        $(".Daftar").click(function(){
-            $(".Daftar").children().addClass("text-on-select");
-            $(".Daftar").children().removeClass("text-not-on-select");
-            $(".Masuk").children().removeClass("text-on-select");
-            $(".Masuk").children().addClass("text-not-on-select");
-        });
-        $(".Masuk").click(function(){
-            $(".Masuk").children().addClass("text-on-select");
-            $(".Masuk").children().removeClass("text-not-on-select");
-            $(".Daftar").children().removeClass("text-on-select");
-            $(".Daftar").children().addClass("text-not-on-select");
-        });
+        
         $(".eye-toggle").click(function(){
             $("#show_eye").toggleClass("d-none");
             $("#hide_eye").toggleClass("d-none");
@@ -245,14 +262,6 @@
             }else{
                 $("#KataSandi2").attr("type", "password");
             }
-        });
-        $(".Daftar").click(function(){
-            $(".DaftarArea").removeClass("d-none");
-            $(".MasukArea").addClass("d-none");
-        });
-        $(".Masuk").click(function(){
-            $(".MasukArea").removeClass("d-none");
-            $(".DaftarArea").addClass("d-none");
         });
     });
 </script>

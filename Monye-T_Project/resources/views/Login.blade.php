@@ -20,6 +20,9 @@
     .w-45{
         width: 45%;
     }
+    .w-85{
+        width: 85%;
+    }
     .h-85{
         scale: 0.85;
     }
@@ -97,12 +100,23 @@
     .eye-button:hover{
         background-color: #FEEE72;
     }
+    .gap-8{
+        gap: 120px;
+    }
+    #myAlert{
+        scale: 2;
+    }
 </style>
 <body>
     @if (session('success_pass'))
-        <div class="alert alert-warning" role="alert">
-            {{ session('success_pass') }}
-        </div>>                                    
+        <div id="alert" class="fade show w-100 d-flex justify-content-center position-absolute mt-3">
+            <div class="alert w-85 alert-success alert-dismissible fade show d-flex justify-content-between " role="alert">
+                {{ session('success_pass') }}
+                <div id="myAlert" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </div>
+            </div>
+        </div>
     @endif
     <div class="w-100 vh-100 Yellow d-flex justify-content-center align-items-center">
         <div class=" w-75 bg-swhite container-field corner-radius d-flex align-items-center">
@@ -114,13 +128,17 @@
                     <div class="col">
                         <div class=" flex-column d-flex justify-content-center align-items-center h-85 w-100">
                             <h1 class="text-sblack font-weight-bold">Logo</h1>
-                            <div class="row mt-4 w-50 justify-content-center">
-                                <div class="Daftar col d-flex justify-content-center become-pointer">
-                                    <h2 class="text-not-on-select">Daftar</h2>
-                                </div>
-                                <div class="Masuk col d-flex justify-content-center become-pointer">
-                                    <h2 class="text-on-select">Masuk</h2>
-                                </div>
+                            <div class="d-flex flex-row gap-8 mt-4 w-50 justify-content-center">
+                                <a href="/register" class="text-decoration-none">
+                                    <div class="Daftar col d-flex justify-content-center become-pointer">
+                                        <h2 class="text-not-on-select">Daftar</h2>
+                                    </div>
+                                </a>
+                                <a href="/login" class="text-decoration-none">
+                                    <div class="Masuk col d-flex justify-content-center become-pointer">
+                                        <h2 class="text-on-select">Masuk</h2>
+                                    </div>
+                                </a>
                             </div>                            
 
                             <!-- Masuk -->
@@ -133,9 +151,12 @@
                                             <div class="d-flex flex-column mt-3">
                                                 <label for="Email">Email</label>
                                                 <input type="text" class="p-2-5 form-control" id="Email" placeholder="Masukkan email" value="{{ Session::get('email') }}" name="email">
-                                                @error('email')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                                <div class="d-flex flex-row">
+                                                    &nbsp;
+                                                    @error('email')
+                                                        <span class="text-danger"> {{ $message }}</span>
+                                                    @enderror
+                                                    </div>
                                             </div>
                                             <div class="d-flex flex-column mt-3">
                                                 <label for="Kata Sandi">Kata Sandi</label>
@@ -146,9 +167,12 @@
                                                         <i class="fas fa-eye-slash d-none" id="hide_eye2"></i>
                                                     </div>
                                                 </div>
-                                                @error('password')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                                <div class="d-flex flex-row">
+                                                    &nbsp;
+                                                    @error('password')
+                                                        <span class="text-danger"> {{ $message }}</span>
+                                                    @enderror
+                                                    </div>
                                             </div>
                                         </div>
                                         @if (session('loginFailed'))
@@ -196,6 +220,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
+        $("#myAlert").click(function(){
+            $("#alert").alert("close");
+        });
         $(".Daftar").click(function(){
             $(".Daftar").children().addClass("text-on-select");
             $(".Daftar").children().removeClass("text-not-on-select");

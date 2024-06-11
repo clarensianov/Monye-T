@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/login');
 Route::redirect('/home','/dashboard');
 
-Route::get('/login', [UserController::class, 'index'])->name('loginregister')->middleware('guest');
+Route::get('/login', [UserController::class, 'loginindex'])->name('loginregister')->middleware('guest');
 Route::get('/register', [UserController::class, 'registerindex'])->name('register')->middleware('guest');
 
 Route::post('/loginregister/login   ', [UserController::class, 'login']);
