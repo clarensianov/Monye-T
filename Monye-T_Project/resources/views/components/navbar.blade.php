@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+   <!-- bootstrap -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+   <!-- google font -->
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+   <!-- font awesome -->
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+</head>
+<body>
+    <header class="position-fixed">
+        <div class="d-flex flex-column flex-shrink-0 sidebar-wrap">
+            <a style="padding: 10px;" href="/" class="mt-5 text-decoration-none logo-wrap">
+                <div class="d-flex justify-content-center">
+                    <img src="{{ asset('../assets/navbar/LOGO.png') }}" alt="">
+                </div> 
+                <h2 class="m-0">Monye-T</h2>
+            </a>
+            <hr>
+            <div style="padding: 10px;">
+                <div class="yellowbg d-flex justify-content-center align-items-center buttoncircle mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                    </svg>
+                    <h2>Transaksi</h2>
+                </div>
+            </div>
+            <ul style="padding: 10px;" class="nav nav-pills flex-column mb-auto mt-3 beforehover">
+                <li class="nav-item">
+                    <a href="{{ redirect('home') }}" class="nav-link active" aria-current="page">
+                        <div class="icon-wrap">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <span class="beforehover">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link">
+                        <div class="icon-wrap">
+                            <i class="bi bi-database"></i>
+                        </div>
+                        <span class="">Anggaran</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link">
+                        <div class="icon-wrap">
+                            <i class="bi bi-cash"></i>
+                        </div>
+                        <span class="">Transaksi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link">
+                        <div class="icon-wrap">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <span class="">Grup</span>
+                    </a>
+                </li>
+            </ul>
+            <div>
+                <div class="loginButton d-flex justify-content-center align-items-center">
+                    <img class="profilepic" src="{{ asset('../Assets/Navbar/default.png') }}" alt="">
+                    <h2>{{ Auth::user()->username }}</h2>
+                </div>
+            </div>
+        </div>            
+    </header>
+    
+</body>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap Icons CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css" rel="stylesheet">
+</html>

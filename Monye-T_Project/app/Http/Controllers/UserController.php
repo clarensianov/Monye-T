@@ -36,6 +36,10 @@ class UserController extends Controller
 
         if (Auth::attempt($login)) {
             $req->session()->regenerate();
+            
+            // $user = User::where('email', $req->email)->first();
+            // $req->session()->put('nama', $user->nama);
+            // dd(session('nama'));
             return redirect()->intended('/dashboard');
         } 
 
