@@ -99,6 +99,11 @@
     }
 </style>
 <body>
+    @if (session('success_pass'))
+        <div class="alert alert-warning" role="alert">
+            {{ session('success_pass') }}
+        </div>>                                    
+    @endif
     <div class="w-100 vh-100 Yellow d-flex justify-content-center align-items-center">
         <div class=" w-75 bg-swhite container-field corner-radius d-flex align-items-center">
             <div class="w-100 h-100">
@@ -116,11 +121,10 @@
                                 <div class="Masuk col d-flex justify-content-center become-pointer">
                                     <h2 class="text-on-select">Masuk</h2>
                                 </div>
-                            </div>
-
-                            <!-- Daftar -->
+                            </div>                            
+                            <!-- Daftar -->                
                             <div class="DaftarArea w-100 d-none d-flex flex-column align-items-center">
-                                <p class="font-14 mt-2 font-weight-light">Mari bergabung dan ambil kendali atas keuangan Anda!</p>
+                                <p class="font-14 mt-2 font-weight-light">Mari bergabung dan ambil kendali atas keuangan Anda!</p>                                
                                 <div class="w-65">
                                     <form action="/loginregister/register" method="POST">
                                         @csrf
@@ -129,10 +133,16 @@
                                                 <div class="d-flex flex-column w-45">
                                                     <label for="NamaDepan">Nama depan</label>
                                                     <input type="text" class="p-2-5 form-control" id="NamaDepan" placeholder="Nama Depan"  name="namaDepan" value="{{ Session::get('namaDepan') }}">    
+                                                    @error('namaDepan')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="d-flex flex-column w-45">
                                                     <label for="NamaBelakang">Nama belakang</label>
                                                     <input type="text" class="p-2-5 form-control" id="NamaBelakang" placeholder="Nama Belakang" value="{{ Session::get('namaBelakang') }}" name="namaBelakang">
+                                                    @error('namaBelakang')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -140,10 +150,16 @@
                                             <div class="d-flex flex-column mt-2">
                                                 <label for="Email">Email</label>
                                                 <input type="email" class="p-2-5 form-control" id="Email" placeholder="Masukkan email" value="{{ Session::get('email') }}" name="email">
+                                                @error('email')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="d-flex flex-column mt-3">
                                                 <label for="Username">Username</label>
                                                 <input type="text" class="p-2-5 form-control" id="Username" placeholder="Masukkan username" value="{{ Session::get('username') }}" name="username">
+                                                @error('username')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="d-flex flex-column mt-3">
                                                 <label for="Kata Sandi">Kata Sandi</label>
@@ -153,9 +169,24 @@
                                                         <i class="fas fa-eye" id="show_eye"></i>
                                                         <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
                                                     </div>
-                                                </div>  
+                                                </div>
+                                                @error('password')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror  
                                             </div>
                                         </div>
+                                        @if (session('registerFailed'))
+                                            <div class="d-flex flex-row gap-2 mt-2">
+                                                <div class="d-flex align-items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#EC0D0D" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+                                                    </svg>
+                                                </div>
+                                                <div>
+                                                    <p class="text-danger m-0" style="font-weight: 500;">{{ session('registerFailed') }}</p>
+                                                </div>
+                                            </div>                                    
+                                        @endif
                                         {{-- <div class="d-flex flex-row gap-2 mt-2">
                                             <div class="d-flex align-items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#EC0D0D" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
@@ -186,6 +217,9 @@
                                             <div class="d-flex flex-column mt-3">
                                                 <label for="Email">Email</label>
                                                 <input type="text" class="p-2-5 form-control" id="Email" placeholder="Masukkan email" value="{{ Session::get('email') }}" name="email">
+                                                @error('email')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="d-flex flex-column mt-3">
                                                 <label for="Kata Sandi">Kata Sandi</label>
@@ -196,9 +230,23 @@
                                                         <i class="fas fa-eye-slash d-none" id="hide_eye2"></i>
                                                     </div>
                                                 </div>
-                                                
+                                                @error('password')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
+                                        @if (session('loginFailed'))
+                                            <div class="d-flex flex-row gap-2 mt-2 mb-5">
+                                                <div class="d-flex align-items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#EC0D0D" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+                                                    </svg>
+                                                </div>
+                                                <div>
+                                                    <p class="text-danger m-0" style="font-weight: 500;">{{ session('loginFailed') }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
                                         {{-- <div class="d-flex flex-row gap-2 mt-2 mb-5">
                                             <div class="d-flex align-items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#EC0D0D" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
