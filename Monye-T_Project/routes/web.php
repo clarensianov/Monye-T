@@ -13,15 +13,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::redirect('/', '/loginregister');
+Route::redirect('/', '/login');
 Route::redirect('/home','/dashboard');
 
-Route::get('/popup-dompet', function(){
-    return view('popup_dompet');
-});
+Route::get('/login', [UserController::class, 'loginindex'])->name('loginregister')->middleware('guest');
+Route::get('/register', [UserController::class, 'registerindex'])->name('register')->middleware('guest');
 
-Route::get('/loginregister', [UserController::class, 'index'])->name('loginregister')->middleware('guest');
-Route::post('/loginregister/login', [UserController::class, 'login']);
+Route::post('/loginregister/login   ', [UserController::class, 'login']);
 Route::post('/loginregister/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
 
@@ -36,3 +34,4 @@ Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('cha
 
 
 Route::get('/dashboard', function(){ return view('dashboard');})->middleware('auth');
+Route::get('/navbar', function(){ return view('components.navbar');});
