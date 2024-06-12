@@ -1,0 +1,132 @@
+.popup {
+    display: none; /* Sembunyikan modal secara default */
+    position: fixed; /* Tetap di tempat (fixed) */
+    z-index: 1; /* Tampilkan modal di atas konten lainnya */
+    left: 0;
+    top: 0;
+    width: 100%; /* Lebar penuh */
+    height: 100%; /* Tinggi penuh */
+    /* overflow: auto; Tambahkan scrollbar jika diperlukan */
+    background-color: rgb(0,0,0); /* Warna hitam dengan opasitas */
+    background-color: rgba(0,0,0,0.4); /* Warna hitam dengan opasitas */
+    /* align-items: center; */
+    align-content: center;
+    /* text-align: center; */
+}
+
+.popup-content {
+    background-color: #FDFCF7;
+    /* padding: 20px; */
+    width: 40%; /* Lebar modal */
+    margin: 0 auto;
+    height: 48%;
+    border-radius: 35px;
+    box-shadow: 5px 5px #888888;
+    font-family: 'Inter';
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.header {
+    background-color: #FEEE72;
+    width: 40%;
+    height: 13%;
+    text-align: center;
+    border-top-left-radius: 35px;
+    padding-top: 1px;
+}
+
+.header-title {
+    font-weight: 600;
+    font-size:20px;
+    color: #43362B;
+}
+
+.FormArea {
+    padding-top: 5px;
+    padding-left: 35px;
+    padding-right: 20px;
+}
+
+.flex {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.flex .currency {
+    font-size: 15px;
+    padding: 2px 10px 0 20px;
+    color: rgba(0, 0, 0, 0.5);
+    border: 0.2px solid rgba(0, 0, 0, 0.4);
+    border-right: 0;
+    line-height: 2.5;
+    border-radius: 10px 0 0 10px;
+    background-color: #FFFFFF;
+}
+
+.TextField-title {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.textfield{
+    padding: 15px;
+    border-radius: 10px;
+    width: 85%; 
+    border: 0.2px solid rgba(0, 0, 0, 0.4);
+}
+
+
+.textfield-saldo{
+    padding: 15px;
+    border-radius: 0 10px 10px 0;
+    width: 76.5%;
+    border: 0.2px solid rgba(0, 0, 0, 0.4);
+    border-left: 0;
+}
+
+.textfield:focus{
+    border: 2px solid yellow;
+}
+
+input::placeholder {
+    font-size: 15px;
+    font-weight: 100;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.ButtonArea {
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    /* padding-top: 5px;
+    padding-left: 35px;
+    padding-right: 10px; */
+}
+
+.yellow-button{
+    background-color: #FEEE7285;
+    transition: ease 0.3s;
+    padding: 15px;
+    width: 50%;
+    border: 0;
+    border-radius: 10px;
+}
+.yellow-button:hover{
+    background-color: #FEEE72;
+}
+

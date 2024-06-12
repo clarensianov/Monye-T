@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/loginregister');
 Route::redirect('/home','/dashboard');
 
+Route::get('/popup-dompet', function(){
+    return view('popup_dompet');
+});
+
 Route::get('/loginregister', [UserController::class, 'index'])->name('loginregister')->middleware('guest');
 Route::post('/loginregister/login', [UserController::class, 'login']);
 Route::post('/loginregister/register', [UserController::class, 'register']);
