@@ -12,8 +12,11 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    public function index(){
-        return view('loginregister');
+    public function loginindex(){
+        return view('login');
+    }
+    public function registerindex(){
+        return view('register');
     }
 
     public function login(Request $req){
@@ -150,7 +153,7 @@ class UserController extends Controller
         if($user){
             $user->password = Hash::make($req->password);
             $user->save();
-            return redirect('/loginregister')->with('success_pass', 'Perubahan password berhasil!');
+            return redirect('/login')->with('success_pass', 'Perubahan password berhasil!');
         }
 
         dd('gagal?!?');
@@ -160,6 +163,6 @@ class UserController extends Controller
         Auth::logout();
         $req->session()->invalidate();
         $req->session()->regenerateToken();
-        return redirect('/loginregister');
+        return redirect('/login');
     }
 }

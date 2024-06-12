@@ -110,9 +110,12 @@
                                     <div class="form-1 d-flex flex-column mt-2">
                                         <label for="Email" class="font-14">Email</label>
                                         <input type="email" class="p-2-5 form-control" id="Email" placeholder="Masukkan email yang terdaftar" name="email" value="{{ Session::get('email') }}">
-                                        @error('email')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror 
+                                        <div class="d-flex flex-row">
+                                            &nbsp;
+                                            @error('email')
+                                                <span class="text-danger"> {{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="form-2 d-none d-flex flex-column mt-3">
                                         <div class="d-flex flex-column mt-3">
@@ -124,9 +127,12 @@
                                                     <i class="fas fa-eye-slash d-none" id="hide_eye2"></i>
                                                 </div>
                                             </div>
-                                            @error('katapemulihan')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror 
+                                            <div class="d-flex flex-row">
+                                                &nbsp;
+                                                @error('katapemulihan')
+                                                    <span class="text-danger"> {{ $message }}</span>
+                                                @enderror
+                                            </div>
                                         </div>
                                         {{-- <div class="d-flex flex-row gap-2 mt-2">
                                         <div class="d-flex align-items-center">
@@ -171,7 +177,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#00000065" class="bi bi-chevron-left" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
                                             </svg>
-                                            <a href="loginregister" style="color: #00000065; font-weight:500;" class="text-decoration-none backtologin m-0">Kembali</a>
+                                            <a href="/login" style="color: #00000065; font-weight:500;" class="text-decoration-none backtologin m-0">Kembali</a>
                                             <p style="color: #00000065; font-weight:500;" class="d-none mincounter m-0">Kembali</p>
                                         </div>
                                     </div>
