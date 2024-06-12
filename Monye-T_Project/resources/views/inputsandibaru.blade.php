@@ -118,9 +118,12 @@
                                         <div class="password-box d-flex">
                                             <input type="password" class="p-2-5 form-control" id="KonfirmasiKataSandi" placeholder="Masukkan kata sandi baru" name="password_confirmation">                                            
                                         </div>
-                                        @error('password')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror 
+                                        <div class="d-flex flex-row">
+                                            &nbsp;
+                                            @error('password')
+                                                <span class="text-danger"> {{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     </div>
 
                                     {{-- <div class="d-flex flex-row gap-2 mt-2">
