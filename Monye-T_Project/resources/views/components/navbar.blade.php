@@ -36,7 +36,7 @@
             </div>
             <ul style="padding: 10px;" class="nav nav-pills flex-column mb-auto mt-3 beforehover">
                 <li class="nav-item">
-                    <a href="{{ redirect('home') }}" class="nav-link active" aria-current="page">
+                    <a href="/dashboard" class="nav-link active" aria-current="page">
                         <div class="icon-wrap">
                             <i class="fas fa-home"></i>
                         </div>
