@@ -56,42 +56,46 @@
     color: #43362B;
 }
 
-.FormArea {
+.field-group {
     padding-top: 5px;
-    padding-left: 35px;
+    padding-left: 50px;
     padding-right: 20px;
 }
 
 .flex {
     display: flex;
     justify-content: flex-start;
+    /* overflow: hidden; */
 }
 
 .flex .currency {
     font-size: 15px;
-    padding: 2px 10px 0 20px;
-    color: rgba(0, 0, 0, 0.5);
-    border: 0.2px solid rgba(0, 0, 0, 0.4);
+    font-weight: 500;
+    padding: 2px 10px 0 15px;
+    color: rgba(0, 0, 0, 1);
+    outline: 2px solid #FEEE7285;
+    /* border: 0.2px solid rgba(0, 0, 0, 0.4); */
     border-right: 0;
     line-height: 2.5;
     border-radius: 10px 0 0 10px;
-    background-color: #FFFFFF;
+    background-color: #FEEE7285;
 }
 
 .TextField-title {
     font-weight: 400;
     font-size: 16px;
+    margin-bottom: 1.5%;
+    margin-bottom: 1%;
 }
 
-.textfield{
+.text-field{
     padding: 15px;
     border-radius: 10px;
     width: 85%; 
     border: 0.2px solid rgba(0, 0, 0, 0.4);
 }
 
-
-.textfield-saldo{
+.text-field-saldo{
     padding: 15px;
     border-radius: 0 10px 10px 0;
     width: 76.5%;
@@ -99,8 +103,15 @@
     border-left: 0;
 }
 
-.textfield:focus{
-    border: 2px solid yellow;
+.text-field:focus {
+    outline: 2px solid #FEEE72; 
+    border: 0;
+}
+
+
+.text-field-saldo:focus {
+    outline: 2px solid #FEEE72;
+    border: 0;
 }
 
 input::placeholder {
@@ -110,7 +121,7 @@ input::placeholder {
 }
 
 .ButtonArea {
-    padding: 25px;
+    padding: 6%;
     display: flex;
     justify-content: center;
     /* padding-top: 5px;

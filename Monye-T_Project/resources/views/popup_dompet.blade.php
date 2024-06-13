@@ -21,18 +21,19 @@
           <h1 class="header-title">Tambah Dompet</h1>
         </div>
 
-        <div class="FormArea">
+        <div class="field-group">
           <p class="TextField-title">Masukkan nama dompet barumu!</p>
-          <input type="text" class="textfield" id="NamaDompet" placeholder="Nama Dompet Baru"  name="namaDompet">  
+          <input type="text" class="text-field" id="NamaDompet" placeholder="Nama Dompet Baru"  name="namaDompet">  
         </div>
 
-        <div class="FormArea">
+        <div class="field-group">
           <p class="TextField-title">Masukkan saldo awal dompet barumu!</p>
           <div class="flex">
-            <span class="currency">Rp</span>
-            <input type="text" class="textfield-saldo" id="SaldoAwal" placeholder="Saldo Awal Dompet Baru"  name="saldoAwal">  
+            <span class="currency" aria-hidden="true">Rp</span>
+            <input type="text" class="text-field-saldo" id="SaldoAwal" placeholder="Saldo Awal Dompet Baru"  name="saldoAwal">  
           </div>
         </div>
+
         
         <div class="ButtonArea">
           <button style="box-shadow: 0 2px 2px 0 #00000025;" type="submit" class="yellow-button">Tambah</button>

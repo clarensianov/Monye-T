@@ -35,3 +35,7 @@ Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('cha
 
 Route::get('/dashboard', function(){ return view('dashboard');})->middleware('auth');
 Route::get('/navbar', function(){ return view('components.navbar');});
+
+Route::get('/popup-dompet', function(){
+    return view('popup_dompet');
+});
