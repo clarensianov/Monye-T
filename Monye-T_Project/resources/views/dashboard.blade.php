@@ -1,6 +1,8 @@
 @extends('components.navbar')
 
+
 @section('style')
+
 <style>
     *{
         margin: 0;
@@ -72,7 +74,68 @@
 
 
 @section('content')
+        {{-- Tambah Dompet --}}
+        <a href="#myPopup" class="text-decoration-none text-black">
+            <div  class="addDompet  LightYellow dompetCard d-flex justify-content-center align-items-center" id="tambahDompet">
+                <svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                </svg>
+                <h2 class="mb-0">Dompet</h2>
+            </div>
+        </a>
 
+        <!-- POPUP TAMBAH DOMPET -->
+        <div id="myPopup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <div class="header">
+            <h1 class="header-title">Tambah Dompet</h1>
+            </div>
+
+            <div class="field-group">
+            <p class="TextField-title">Masukkan nama dompet barumu!</p>
+            <input type="text" class="text-field" id="NamaDompet" placeholder="Nama Dompet Baru"  name="namaDompet">  
+            </div>
+
+            <div class="field-group">
+            <p class="TextField-title">Masukkan saldo awal dompet barumu!</p>
+            <div class="flex">
+                <span class="currency" aria-hidden="true">Rp</span>
+                <input type="text" class="text-field-saldo" id="SaldoAwal" placeholder="Saldo Awal Dompet Baru"  name="saldoAwal">  
+            </div>
+            </div>
+
+
+            <div class="ButtonArea">
+            <button style="box-shadow: 0 2px 2px 0 #00000025;" type="submit" class="yellow-button">Tambah</button>
+            </div>
+
+        </div>
+        </div>
+
+        <a href="#" class="text-decoration-none text-black">
+            <div class="dompetList dompetCard YellowMore d-flex align-items-center p-3">
+                <div>
+                    <h3 style="font-weight: 700;">BCA</h3>
+                    <h5 style="font-weight: 400;" class="mt-3">Rp. 1.000.000</h5>
+                </div>
+            </div>
+        </a>   
+    </div>
+</div>
+<br>
+<br>
+<div class="w-85 d-flex justify-content-between">
+    <div class="w-50">
+        <h3 class="boldFont">History</h3>
+        <div class="historyCard w-85 mt-3">
+
+        </div>
+        <div class="historyCard w-85 mt-3">
+
+        </div>
+        <div class="historyCard w-85 mt-3">
+                  
 <div class="Dashboard w-100 d-flex justify-content-center flex-column align-items-center">
     <div class="w-85 text-black ">
         <h2>Halo, {{ Auth::user()->username }}</h2>
@@ -144,5 +207,3 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
