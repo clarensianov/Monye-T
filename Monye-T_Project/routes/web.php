@@ -23,6 +23,9 @@ Route::post('/loginregister/login   ', [UserController::class, 'login']);
 Route::post('/loginregister/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
 
+//tes
+Route::get('/logout1', [UserController::class, 'logout']);
+
 Route::get('/loginregister/register/katapemulihan', function (){return view('katapemulihan');})->name('katapemulihan')->middleware('auth');    
 Route::put('/loginregister/register/katapemulihan/{id}', [UserController::class, 'katapemulihan'])->name('create_katapemulihan');
 
@@ -35,3 +38,5 @@ Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('cha
 
 Route::get('/dashboard', function(){ return view('dashboard');})->middleware('auth');
 Route::get('/navbar', function(){ return view('components.navbar');});
+
+Route::get('/popup-dompet', function(){return view('popup_dompet');})->name('popupdompet');

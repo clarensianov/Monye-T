@@ -16,8 +16,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 </head>
+@yield('style')
 <body>
-    <header class="position-fixed">
+    <header class="position-absolute top-0">
         <div class="d-flex flex-column flex-shrink-0 sidebar-wrap">
             <a style="padding: 10px;" href="/" class="mt-5 text-decoration-none logo-wrap">
                 <div class="d-flex justify-content-center">
@@ -36,7 +37,7 @@
             </div>
             <ul style="padding: 10px;" class="nav nav-pills flex-column mb-auto mt-3 beforehover">
                 <li class="nav-item">
-                    <a href="{{ redirect('home') }}" class="nav-link active" aria-current="page">
+                    <a href="/dashboard" class="nav-link active" aria-current="page">
                         <div class="icon-wrap">
                             <i class="fas fa-home"></i>
                         </div>
@@ -76,7 +77,7 @@
             </div>
         </div>            
     </header>
-    
+    @yield('content')
 </body>
 <!-- Bootstrap JS and dependencies -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
