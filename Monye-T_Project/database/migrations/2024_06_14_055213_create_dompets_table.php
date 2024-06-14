@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kantungs', function (Blueprint $table) {
-            $table->bigIncrements('kantung_id');
+        Schema::dropIfExists('kantungs');
+
+        Schema::create('dompets', function (Blueprint $table) {
+            $table->bigIncrements('dompet_id');
             $table->bigInteger('user_id');
-            $table->string('nama_kantung');
+            $table->string('nama_dompet');
             $table->bigInteger('jumlah_uang');
             $table->timestamps();
         });
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kantungs');
+        Schema::dropIfExists('dompets');
     }
 };

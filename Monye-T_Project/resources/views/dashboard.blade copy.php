@@ -89,18 +89,18 @@
         <div class="header">
             <h1 class="header-title">Tambah Dompet</h1>
         </div>
-        <form action="{{ route('input_dompet') }}" method="POST">
+        <form action="" method="POST">
             @csrf
             <div class="field-group">
                 <p class="TextField-title">Masukkan nama dompet barumu!</p>
-                <input type="text" class="text-field" id="NamaDompet" name="namaDompet" placeholder="Nama Dompet Baru">
+                <input type="text" class="text-field" id="NamaDompet" placeholder="Nama Dompet Baru" name="namaDompet">
             </div>
 
             <div class="field-group">
                 <p class="TextField-title">Masukkan saldo awal dompet barumu!</p>
                 <div class="flex">
                     <span class="currency" aria-hidden="true">Rp</span>
-                    <input type="text" class="text-field-saldo" id="SaldoAwal" name="saldoAwal" placeholder="Saldo Awal Dompet Baru"
+                    <input type="text" class="text-field-saldo" id="SaldoAwal" placeholder="Saldo Awal Dompet Baru"
                         name="saldoAwal">
                 </div>
             </div>

@@ -55,8 +55,8 @@ class User extends Authenticatable
         return $this->hasMany(Budget::class, 'users_id', 'user_id');
     }
 
-    public function kantungs(): HasMany{
-        return $this->hasMany(Kantung::class, 'users_id', 'user_id');
+    public function dompets(): HasMany{
+        return $this->hasMany(Dompet::class, 'users_id', 'user_id');
     }
 
     public function kategoris(): HasMany{
