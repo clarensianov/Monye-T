@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\KantungController;
+use App\Http\Controllers\DompetController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,4 +41,4 @@ Route::get('/dashboard', function(){ return view('dashboard');})->name('dashboar
 // Route::get('/navbar', function(){ return view('components.navbar');});
 
 // Route::get('/popup-dompet', function(){return view('popup_dompet');})->name('popupdompet');
-Route::post('/inputDompet', [KantungController::class, 'inputDompet'])->name('input_dompet');
+Route::post('/inputDompet', [DompetController::class, 'inputDompet'])->name('input_dompet');

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class KantungController extends Controller
+class DompetController extends Controller
 {
     // Tambah Dompet
     public function inputDompet(Request $req)
