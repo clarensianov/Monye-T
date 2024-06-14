@@ -36,9 +36,4 @@ class DompetController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Dompet berhasil ditambahkan!');
     }
-
-    public function getDompet()
-    {
-        
-    }
 }
