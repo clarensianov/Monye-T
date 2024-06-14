@@ -56,7 +56,7 @@ class User extends Authenticatable
     }
 
     public function dompets(): HasMany{
-        return $this->hasMany(Dompet::class, 'users_id', 'user_id');
+        return $this->hasMany(Dompet::class, 'user_id', 'user_id');
     }
 
     public function kategoris(): HasMany{

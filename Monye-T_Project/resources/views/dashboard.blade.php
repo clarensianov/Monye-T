@@ -169,14 +169,17 @@
                 </div>
             </a>
 
-            <a href="#" class="text-decoration-none text-black">
-                <div class="dompetList dompetCard YellowMore d-flex align-items-center p-3">
-                    <div>
-                        <h3 style="font-weight: 700;">BCA</h3>
-                        <h5 style="font-weight: 400;" class="mt-3">Rp. 1.000.000</h5>
+            {{-- View Semua Dompet User --}}
+            @foreach($dompets as $dompet)
+                <a href="#" class="text-decoration-none text-black">
+                    <div class="dompetList dompetCard YellowMore d-flex align-items-center p-3">
+                        <div>
+                            <h3 style="font-weight: 700;">{{ $dompet->nama_dompet }}</h3>
+                            <h5 style="font-weight: 400;" class="mt-3">Rp {{ $dompet->jumlah_uang }}</h5>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            @endforeach
         </div>
     </div>
     <br>

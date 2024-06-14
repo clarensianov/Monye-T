@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\KantungController;
+use App\Http\Controllers\DompetController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,8 +38,14 @@ Route::get('/inputsandi' , function (){ return view('inputsandibaru');})->name('
 Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('change_password');
 
 
-Route::get('/dashboard', function(){ return view('dashboard');})->name('dashboard')->middleware('auth');
+Route::get('/dashboard', function(){ 
+    // Take all user's dompet (function found in user model)
+    $dompets = Auth::user()->dompets;
+    // dd($dompets);
+
+    return view('dashboard', compact('dompets'));
+})->name('dashboard')->middleware('auth');
 // Route::get('/navbar', function(){ return view('components.navbar');});
 
 // Route::get('/popup-dompet', function(){return view('popup_dompet');})->name('popupdompet');
-Route::post('/inputDompet', [KantungController::class, 'inputDompet'])->name('input_dompet');
+Route::post('/inputDompet', [DompetController::class, 'inputDompet'])->name('input_dompet');
