@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KantungController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +37,8 @@ Route::get('/inputsandi' , function (){ return view('inputsandibaru');})->name('
 Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('change_password');
 
 
-Route::get('/dashboard', function(){ return view('dashboard');})->middleware('auth');
-Route::get('/navbar', function(){ return view('components.navbar');});
+Route::get('/dashboard', function(){ return view('dashboard');})->name('dashboard')->middleware('auth');
+// Route::get('/navbar', function(){ return view('components.navbar');});
 
-Route::get('/popup-dompet', function(){return view('popup_dompet');})->name('popupdompet');
+// Route::get('/popup-dompet', function(){return view('popup_dompet');})->name('popupdompet');
+Route::post('/inputDompet', [KantungController::class, 'inputDompet'])->name('input_dompet');

@@ -15,10 +15,15 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-</head>
-@yield('style')
+    @yield('style')
+    <style>
+        header {
+            z-index: 999;
+        }
+    </style>
+    </head>
 <body>
-    <header class="position-absolute top-0">
+    <header class="position-fixed top-0">
         <div class="d-flex flex-column flex-shrink-0 sidebar-wrap">
             <a style="padding: 10px;" href="/" class="mt-5 text-decoration-none logo-wrap">
                 <div class="d-flex justify-content-center">

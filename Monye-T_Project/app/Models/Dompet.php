@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Kantung extends Model
+class Dompet extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'kantung_id';
+    protected $primaryKey = 'dompet_id';
     
     protected $fillable = [
-        'nama_kantung',
+        'nama_dompet',
         'jumlah_uang',
         'user_id'
     ];     
