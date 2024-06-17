@@ -205,21 +205,11 @@
                 <div class="d-flex justify-content-between">
                     <h3 class="boldFont">Recap</h3>
                     <div class="dropdown">
-                        <button style="border: 1px solid black;" class="btn dropdown-toggle" type="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Range
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <div class="dropdown-item" href="#">Tes 1</div>
-                            </li>
-                            <li>
-                                <div class="dropdown-item" href="#">Tes 2</div>
-                            </li>
-                            <li>
-                                <div class="dropdown-item" href="#">Tes 3</div>
-                            </li>
-                        </ul>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
                     </div>
                 </div>
 
@@ -228,9 +218,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="graph mt-4">
-
     </div>
 </div>
 
