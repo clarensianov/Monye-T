@@ -28,7 +28,7 @@ Route::post('/logout', [UserController::class, 'logout']);
 //tes
 Route::get('/logout1', [UserController::class, 'logout']);
 
-Route::get('/loginregister/register/katapemulihan', function (){return view('katapemulihan');})->name('katapemulihan')->middleware('auth');    
+Route::get('/loginregister/register/katapemulihan', function (){return view('katapemulihan');})->name('katapemulihan')->middleware('auth');
 Route::put('/loginregister/register/katapemulihan/{id}', [UserController::class, 'katapemulihan'])->name('create_katapemulihan');
 
 Route::get('/lupasandi', function (){ return view('lupasandi');})->name('lupasandi');
@@ -38,14 +38,12 @@ Route::get('/inputsandi' , function (){ return view('inputsandibaru');})->name('
 Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('change_password');
 
 
-Route::get('/dashboard', function(){ 
+Route::get('/dashboard', function(){
     // Take all user's dompet (function found in user model)
     $dompets = Auth::user()->dompets;
     // dd($dompets);
 
     return view('dashboard', compact('dompets'));
 })->name('dashboard')->middleware('auth');
-// Route::get('/navbar', function(){ return view('components.navbar');});
 
-// Route::get('/popup-dompet', function(){return view('popup_dompet');})->name('popupdompet');
 Route::post('/inputDompet', [DompetController::class, 'inputDompet'])->name('input_dompet');

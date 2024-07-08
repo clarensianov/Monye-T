@@ -112,38 +112,6 @@
     </div>
 </div>
 
-<!-- Sesudah -->
-<!-- <div class="Dashboard w-100 d-flex justify-content-center flex-column align-items-center">
-
-    <a href="#" class="text-decoration-none text-black">
-        <div class="dompetList dompetCard YellowMore d-flex align-items-center p-3">
-            <div>
-                <h3 style="font-weight: 700;">BCA</h3>
-                <h5 style="font-weight: 400;" class="mt-3">Rp. 1.000.000</h5>
-            </div>
-        </div>
-    </a>
-    <br>
-    <br>
-    <div class="w-85 d-flex justify-content-between">
-        <div class="w-50">
-            <h3 class="boldFont">History</h3>
-            <div class="historyCard w-85 mt-3">
-
-            </div>
-            <div class="historyCard w-85 mt-3">
-
-            </div>
-            <div class="historyCard w-85 mt-3">
-
-
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
-
 <!-- Sebelum -->
 <div class="Dashboard w-100 d-flex justify-content-center flex-column align-items-center">
     <div class="w-85 text-black ">
