@@ -84,7 +84,7 @@
             width: 76.5%;
             border: 0.2px solid rgba(0, 0, 0, 0.4);
             border-left: 0;
-            -moz-appearance: textfield; 
+            -moz-appearance: textfield;
         }
 
         .text-field-saldo::-webkit-outer-spin-button,
@@ -123,7 +123,7 @@
         .isiBukti {
             padding-top: 20px;
         }
-        
+
         .file-upload-input {
             display: none;
         }
@@ -155,7 +155,7 @@
         .select-container {
             margin-bottom: 20px;
         }
-        
+
         .select-wrapper {
             margin-top: 20px;
             position: relative;
@@ -214,7 +214,7 @@
             justify-content: center;
 
         }
-    
+
         .tombolPencet {
             background-color: #FEEE72;
             width: 500px;
@@ -263,11 +263,11 @@
                     <div class="field-group">
                         <div class="flex">
                           <span class="currency" aria-hidden="true">Rp</span>
-                          <input type="number" class="text-field-saldo" id="SaldoAwal" placeholder="Saldo Awal Dompet Baru" name="saldoAwal">  
+                          <input type="number" class="text-field-saldo" id="SaldoAwal" placeholder="Saldo Awal Dompet Baru" name="saldoAwal">
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="deskripsi">
                     <h4>Deskripsi (Opsional)</h4>
                     <div class="isiDeskripsi">
@@ -304,7 +304,7 @@
                         </select>
                     </div>
                 </div>
-            
+
                 <div class="kategori select-container">
                     <h4>Kategori</h4>
                     <div class="select-wrapper">
@@ -346,7 +346,7 @@
         // Get the output div
         var output = document.getElementById("output");
 
-        // When the user clicks the button, open the modal 
+        // When the user clicks the button, open the modal
         btn.onclick = function() {
             modal.style.display =
             "block";
@@ -391,6 +391,6 @@
             modal.style.display = "none";
         }
     </script>
-    
+
 </body>
 </html>
