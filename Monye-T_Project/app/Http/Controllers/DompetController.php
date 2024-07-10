@@ -28,7 +28,7 @@ class DompetController extends Controller
         $data = [
             'nama_dompet' => $req->namaDompet, 
             'jumlah_uang' => $req->saldoAwal, 
-            'user_id' => Auth::user()->user_id
+            'users_id' => Auth::user()->user_id
         ];
 
         $kantung = Dompet::create($data);
