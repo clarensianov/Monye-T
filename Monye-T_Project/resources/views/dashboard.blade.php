@@ -147,7 +147,7 @@
 <!-- Sebelum -->
 <div class="Dashboard w-100 d-flex justify-content-center flex-column align-items-center">
     <div class="w-85 text-black ">
-        <h2>Halo, {{ $data['user']->username }}</h2>
+        <h2>Halo, {{ auth()->user()->username }}</h2>
         <h4>Apakah Kamu Sudah Mencatat Keuanganmu Hari ini?</h4>
     </div>
     <br>
@@ -170,7 +170,7 @@
             </a>
 
             {{-- View Semua Dompet User --}}
-            @foreach($dompets as $dompet)
+            @foreach(auth()->user()->dompets as $dompet)
                 <a href="#myPopUp" class="text-decoration-none text-black" onclick="showEditDompetPopUp('{{ $dompet->dompet_id }}' ,'{{ $dompet->nama_dompet }}', '{{ $dompet->jumlah_uang }}')">
                     <div class="dompetList dompetCard YellowMore d-flex align-items-center p-3" id="editDompet">
                         <div>

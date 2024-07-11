@@ -43,8 +43,8 @@ Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('cha
 
 Route::get('/dashboard', function(){
     // Take all user's dompet (function found in user model)
+    // dd(Auth::user()->dompets);
     $dompets = Auth::user()->dompets;
-    // dd($dompets);
 
     return view('dashboard', compact('dompets'));
 })->name('dashboard')->middleware('auth');

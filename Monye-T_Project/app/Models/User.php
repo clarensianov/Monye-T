@@ -21,7 +21,7 @@ class User extends Authenticatable
      */
 
     protected $primaryKey = 'user_id';
-    
+
     protected $fillable = [
         'nama',
         'username',
@@ -29,7 +29,7 @@ class User extends Authenticatable
         'password',
         'gambar_user',
         'kata_pemulihan'
-    ];     
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -52,26 +52,26 @@ class User extends Authenticatable
     ];
 
     public function budgets(): HasMany{
-        return $this->hasMany(Budget::class);
+        return $this->hasMany(Budget::class, "users_id");
     }
 
     public function dompets(): HasMany{
-        return $this->hasMany(Dompet::class);
+        return $this->hasMany(Dompet::class, "users_id");
     }
 
     public function kategoris(): HasMany{
-        return $this->hasMany(Kategori::class);
+        return $this->hasMany(Kategori::class, "users_id");
     }
 
     public function pencatatans(): HasMany{
-        return $this->hasMany(Pencatatan::class);
+        return $this->hasMany(Pencatatan::class, "users_id");
     }
 
     public function pencatatan_grups(): HasMany{
-        return $this->hasMany(Pencatatan_Grup::class);
+        return $this->hasMany(Pencatatan_Grup::class, "users_id");
     }
 
     public function grup_users(): HasMany{
-        return $this->hasMany(Grup_User::class);
+        return $this->hasMany(Grup_User::class, "users_id");
     }
 }
