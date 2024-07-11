@@ -52,26 +52,26 @@ class User extends Authenticatable
     ];
 
     public function budgets(): HasMany{
-        return $this->hasMany(Budget::class, 'users_id', 'user_id');
+        return $this->hasMany(Budget::class);
     }
 
     public function dompets(): HasMany{
-        return $this->hasMany(Dompet::class, 'user_id', 'user_id');
+        return $this->hasMany(Dompet::class);
     }
 
     public function kategoris(): HasMany{
-        return $this->hasMany(Kategori::class, 'users_id', 'user_id');
+        return $this->hasMany(Kategori::class);
     }
 
     public function pencatatans(): HasMany{
-        return $this->hasMany(Pencatatan::class, 'users_id', 'user_id');
+        return $this->hasMany(Pencatatan::class);
     }
 
     public function pencatatan_grups(): HasMany{
-        return $this->hasMany(Pencatatan_Grup::class, 'users_id', 'user_id');
+        return $this->hasMany(Pencatatan_Grup::class);
     }
 
     public function grup_users(): HasMany{
-        return $this->hasMany(Grup_User::class, 'users_id', 'user_id');
+        return $this->hasMany(Grup_User::class);
     }
 }

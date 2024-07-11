@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('pencatatans', function (Blueprint $table) {
             $table->bigIncrements('pencatatan_id');
             $table->bigInteger('users_id');
-            $table->bigInteger('kategori_id');
-            $table->bigInteger('kantung_id');
+            $table->bigInteger('kategoris_id');
+            $table->bigInteger('dompets_id');
             $table->string('status');
             $table->bigInteger('jumlah');
-            $table->string('deskripsi');
-            $table->string('bukti');
+            $table->string('deskripsi')->nullable();
+            $table->string('bukti')->nullable();
             $table->string('tanggal');
             $table->timestamps();
         });

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Dompet extends Model
@@ -15,10 +17,14 @@ class Dompet extends Model
     protected $fillable = [
         'nama_dompet',
         'jumlah_uang',
-        'user_id'
+        'users_id'
     ];     
 
-    public function users(): HasOne{
-        return $this->hasOne(User::class, 'user_id');
+    public function users(): BelongsTo{
+        return $this->belongsTo(User::class, 'users_id');
+    }
+
+    public function pencatatans(): HasMany{
+        return $this->hasMany(Pencatatan::class);
     }
 }

@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/login');
 Route::redirect('/home','/dashboard');
 
+Route::get('/testingaja', function(){return view('popup_Transaksi');});
+
 Route::get('/login', [UserController::class, 'loginindex'])->name('loginregister')->middleware('guest');
 Route::get('/register', [UserController::class, 'registerindex'])->name('register')->middleware('guest');
 

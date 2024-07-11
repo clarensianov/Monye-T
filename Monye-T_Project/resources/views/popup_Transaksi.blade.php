@@ -248,78 +248,80 @@
         </div>
         <!-- wrap columns in a row -->
         <div class="row p-4" id="transaksiForm">
-            <!-- left column -->
-            <div class="column col-md-6">
-                <div class="peruntukan">
-                    <h4>Peruntukan</h4>
-                    <div class="isiPeruntukan">
-                        <label ><input type="radio" name="purpose" id="income" value="Pemasukan">Pemasukan</label>
-                        <label style="margin-left: 80px"><input type="radio" name="purpose" id="expense" value="Pengeluaran">Pengeluaran</label>
+            <form action="" method="POST">
+                <!-- left column -->
+                <div class="column col-md-6">
+                    <div class="peruntukan">
+                        <h4>Peruntukan</h4>
+                        <div class="isiPeruntukan">
+                            <label ><input type="radio" name="purpose" id="income" value="Pemasukan">Pemasukan</label>
+                            <label style="margin-left: 80px"><input type="radio" name="purpose" id="expense" value="Pengeluaran">Pengeluaran</label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="nominal">
-                    <h4>Nominal</h4>
-                    <div class="field-group">
-                        <div class="flex">
-                          <span class="currency" aria-hidden="true">Rp</span>
-                          <input type="number" class="text-field-saldo" id="SaldoAwal" placeholder="Saldo Awal Dompet Baru" name="saldoAwal">
+                    <div class="nominal">
+                        <h4>Nominal</h4>
+                        <div class="field-group">
+                            <div class="flex">
+                            <span class="currency" aria-hidden="true">Rp</span>
+                            <input type="number" class="text-field-saldo" id="SaldoAwal" placeholder="Saldo Awal Dompet Baru" name="saldoAwal">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="deskripsi">
+                        <h4>Deskripsi (Opsional)</h4>
+                        <div class="isiDeskripsi">
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Isi Deskripsi disini" name="deskripsi">
+                        </div>
+                    </div>
+
+                    <div class="bukti">
+                        <h4>Bukti (Opsional)</h4>
+                        <div class="isiBukti">
+                            <input type="file" id="file" class="file-upload-input"/>
+                            <label for="file" class="file-upload-label">Upload File</label>
                         </div>
                     </div>
                 </div>
 
-                <div class="deskripsi">
-                    <h4>Deskripsi (Opsional)</h4>
-                    <div class="isiDeskripsi">
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Isi Deskripsi disini">
+                <!-- right column -->
+                <div class="column col-md-6">
+                    <div class="tanggal">
+                        <h4>Tanggal</h4>
+                        <div class="isiTanggal">
+                            <input type="date" id="tanggal1" name="tanggal" value="">
+                        </div>
                     </div>
-                </div>
 
-                <div class="bukti">
-                    <h4>Bukti (Opsional)</h4>
-                    <div class="isiBukti">
-                        <input type="file" id="file" class="file-upload-input"/>
-                        <label for="file" class="file-upload-label">Upload File</label>
+                    <div class="dompet select-container">
+                        <h4>Dompet</h4>
+                        <div class="select-wrapper">
+                            <select name="dompet" id="dompet1">
+                                <option value="">Pilih Dompet</option>
+                                <option value="BCA">BCA</option>
+                                <option value="BRI">BRI</option>
+                                <option value="Simpanan">Simpanan</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- right column -->
-            <div class="column col-md-6">
-                <div class="tanggal">
-                    <h4>Tanggal</h4>
-                    <div class="isiTanggal">
-                        <input type="date" id="tanggal1" name="tanggal1" value="">
+                    <div class="kategori select-container">
+                        <h4>Kategori</h4>
+                        <div class="select-wrapper">
+                            <select name="kategori" id="kategori1">
+                                <option value="">Pilih Kategori</option>
+                                <option value="Jalan-jalan">Jalan-jalan</option>
+                                <option value="Hiburan">Hiburan</option>
+                                <option value="Kebutuhan">Kebutuhan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tombol">
+                        <button type="button" class="tombolPencet" id="submitBtn">Tambah Transaksi</button>
                     </div>
                 </div>
-
-                <div class="dompet select-container">
-                    <h4>Dompet</h4>
-                    <div class="select-wrapper">
-                        <select name="dompet1" id="dompet1">
-                            <option value="">Pilih Dompet</option>
-                            <option value="BCA">BCA</option>
-                            <option value="BRI">BRI</option>
-                            <option value="Simpanan">Simpanan</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="kategori select-container">
-                    <h4>Kategori</h4>
-                    <div class="select-wrapper">
-                        <select name="kategori1" id="kategori1">
-                            <option value="">Pilih Kategori</option>
-                            <option value="Jalan-jalan">Jalan-jalan</option>
-                            <option value="Hiburan">Hiburan</option>
-                            <option value="Kebutuhan">Kebutuhan</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="tombol">
-                    <button type="button" class="tombolPencet" id="submitBtn">Tambah Transaksi</button>
-                </div>
-            </div>
+            </form>
         </div>
       </div>
     </div>

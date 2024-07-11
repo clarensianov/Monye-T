@@ -35,13 +35,22 @@ class UserController extends Controller
         $login = [
             'email' => $req->email,
             'password' => $req->password
-        ];
+        ];        
 
         if (Auth::attempt($login)) {
             $req->session()->regenerate();
-
-            return redirect()->intended('/dashboard');
-        } 
+            $user = auth()->user();
+            $dompetUser = User::find($user->user_id)->dompets;
+            $kategoriUser = User::find($user->user_id)->kategoris;
+            // Fetch wallets and categories only if needed
+            if (!empty($dompetUser) && !empty($kategoriUser)) {                
+                $data = compact('user', 'dompetUser', 'kategoriUser');
+            } else {
+                $data = compact('user');
+            }
+        
+            return redirect()->with('data', $data)->intended('/dashboard');
+        }
 
         return back()->with('loginFailed', 'Gagal Login');
     }

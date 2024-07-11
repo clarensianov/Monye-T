@@ -147,7 +147,7 @@
 <!-- Sebelum -->
 <div class="Dashboard w-100 d-flex justify-content-center flex-column align-items-center">
     <div class="w-85 text-black ">
-        <h2>Halo, {{ Auth::user()->username }}</h2>
+        <h2>Halo, {{ $data['user']->username }}</h2>
         <h4>Apakah Kamu Sudah Mencatat Keuanganmu Hari ini?</h4>
     </div>
     <br>
