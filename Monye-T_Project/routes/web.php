@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DompetController;
+use App\Http\Controllers\PencatatanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -47,3 +48,7 @@ Route::get('/dashboard', function(){
 })->name('dashboard')->middleware('auth');
 
 Route::post('/inputDompet', [DompetController::class, 'inputDompet'])->name('input_dompet');
+Route::post('/editDompet', [DompetController::class, 'editDompet'])->name('edit_dompet');
+
+Route::get('/pencatatan', [PencatatanController::class, 'index'])->name('pencatatan');
+
