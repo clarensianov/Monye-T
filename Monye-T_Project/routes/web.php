@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DompetController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/login');
 Route::redirect('/home','/dashboard');
 
-Route::get('/testingaja', function(){return view('popup_Transaksi');});
+
 
 Route::get('/login', [UserController::class, 'loginindex'])->name('loginregister')->middleware('guest');
 Route::get('/register', [UserController::class, 'registerindex'])->name('register')->middleware('guest');
@@ -42,10 +43,16 @@ Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('cha
 
 Route::get('/dashboard', function(){
     // Take all user's dompet (function found in user model)
-    $dompets = Auth::user()->dompets;
+    // $dompets = Auth::user()->dompets;
     // dd($dompets);
 
-    return view('dashboard', compact('dompets'));
+    // return view('dashboard', compact('dompets'));
+    return view('dashboard');
 })->name('dashboard')->middleware('auth');
 
 Route::post('/inputDompet', [DompetController::class, 'inputDompet'])->name('input_dompet');
+
+
+//test
+Route::get('/testingaja', function(){return view('popup_Transaksi');});
+Route::post('/inputTx/{id}', [TransactionController::class, 'inputTransaction'])->name('input_transaction');

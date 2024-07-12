@@ -25,6 +25,6 @@ class Dompet extends Model
     }
 
     public function pencatatans(): HasMany{
-        return $this->hasMany(Pencatatan::class);
+        return $this->hasMany(Pencatatan::class, 'dompets_id', 'dompet_id');
     }
 }

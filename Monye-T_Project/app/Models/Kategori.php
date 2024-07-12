@@ -23,6 +23,6 @@ class Kategori extends Model
     }
 
     public function pencatatans(): HasMany{
-        return $this->hasMany(Pencatatan::class);
+        return $this->hasMany(Pencatatan::class, 'kategoris_id', 'kategori_id');
     }
 }

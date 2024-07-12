@@ -20,7 +20,7 @@ return new class extends Migration
             $table->bigInteger('jumlah');
             $table->string('deskripsi')->nullable();
             $table->string('bukti')->nullable();
-            $table->string('tanggal');
+            $table->date('tanggal');
             $table->timestamps();
         });
     }

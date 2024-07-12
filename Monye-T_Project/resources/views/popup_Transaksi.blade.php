@@ -228,12 +228,35 @@
         .tombolPencet:hover {
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
+        .file-upload-status {
+            margin-top: 10px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .uploading {
+            color: blue;
+        }
+
+        .uploaded {
+            color: green;
+        }
+
     </style>
 </head>
 <body>
 
     <h2>Modal Pop-up Example</h2>
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @break  <!-- Hanya menampilkan satu pesan error -->
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <!-- Trigger/Open The Modal -->
     <button id="myBtn">Open Modal</button>
 
@@ -246,83 +269,91 @@
         <div class="TransaksiBaru" style="width: 40%">
             <h1 class="">Transaksi Baru</h1>
         </div>
-        <!-- wrap columns in a row -->
-        <div class="row p-4" id="transaksiForm">
-            <form action="" method="POST">
-                <!-- left column -->
-                <div class="column col-md-6">
-                    <div class="peruntukan">
-                        <h4>Peruntukan</h4>
-                        <div class="isiPeruntukan">
-                            <label ><input type="radio" name="purpose" id="income" value="Pemasukan">Pemasukan</label>
-                            <label style="margin-left: 80px"><input type="radio" name="purpose" id="expense" value="Pengeluaran">Pengeluaran</label>
+        <!-- wrap columns in a row -->        
+        <form action="{{ route('input_transaction', ['id' => 1]) }}" method="POST" enctype="multipart/form-data>
+            <div class="row p-4" id="transaksiForm">
+                    @csrf
+                    <!-- left column -->
+                    <div class="column col-md-6">
+                        {{-- tujuan --}}
+                        <div class="peruntukan">
+                            <h4>Peruntukan</h4>
+                            <div class="isiPeruntukan">
+                                <label ><input type="radio" name="tujuan" id="income" value="Pemasukkan">Pemasukan</label>
+                                <label style="margin-left: 80px"><input type="radio" name="tujuan" id="expense" value="Pengeluaran">Pengeluaran</label>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="nominal">
-                        <h4>Nominal</h4>
-                        <div class="field-group">
-                            <div class="flex">
-                            <span class="currency" aria-hidden="true">Rp</span>
-                            <input type="number" class="text-field-saldo" id="SaldoAwal" placeholder="Saldo Awal Dompet Baru" name="saldoAwal">
+                        {{-- nominal --}}
+                        <div class="nominal"> 
+                            <h4>Nominal</h4>
+                            <div class="field-group">
+                                <div class="flex">
+                                <span class="currency" aria-hidden="true">Rp</span>
+                                <input type="number" class="text-field-saldo" id="SaldoAwal" placeholder="Saldo Awal Dompet Baru" name="nominal">
+                                </div>
+                            </div>
+                        </div>
+                        {{-- deskripsi --}}
+                        <div class="deskripsi">
+                            <h4>Deskripsi (Opsional)</h4>
+                            <div class="isiDeskripsi">
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Isi Deskripsi disini" name="deskripsi">
+                            </div>
+                        </div>
+                        {{-- bukti --}}
+                        <div class="bukti">
+                            <h4>Bukti (Opsional)</h4>
+                            <div class="isiBukti">
+                                <input type="file" id="file" class="file-upload-input" name="bukti"/>
+                                <label for="file" class="file-upload-label">Upload File</label>
+                                <div id="file-upload-status" class="file-upload-status"></div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="deskripsi">
-                        <h4>Deskripsi (Opsional)</h4>
-                        <div class="isiDeskripsi">
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Isi Deskripsi disini" name="deskripsi">
+                    <!-- right column -->
+                    <div class="column col-md-6">
+                        {{-- tanggal --}}
+                        <div class="tanggal">
+                            <h4>Tanggal</h4>
+                            <div class="isiTanggal">
+                                <input type="date" id="tanggal1" name="tanggal" value="">
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="bukti">
-                        <h4>Bukti (Opsional)</h4>
-                        <div class="isiBukti">
-                            <input type="file" id="file" class="file-upload-input"/>
-                            <label for="file" class="file-upload-label">Upload File</label>
+                        {{-- dompet --}}
+                        @php
+                            $dompets = App\Models\User::find(1)->dompets;
+                            $kategoris = App\Models\User::find(1)->kategoris;
+                        @endphp
+                        <div class="dompet select-container">                            
+                            <h4>Dompet</h4>
+                            <div class="select-wrapper">
+                                <select name="dompet" id="dompet1">                                    
+                                    <option value="">Pilih Dompet</option>
+                                    @foreach ($dompets as $dompet)
+                                        <option value={{ $dompet->dompet_id }}>{{ $dompet->nama_dompet }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        {{-- kategori --}}
+                        <div class="kategori select-container">
+                            <h4>Kategori</h4>
+                            <div class="select-wrapper">
+                                <select name="kategori" id="kategori1">
+                                    <option value="">Pilih Kategori</option>
+                                    @foreach ($kategoris as $kategori)
+                                        <option value={{ $kategori->kategori_id }}>{{ $kategori->nama_kategori }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="tombol">
+                            <button type="submit" class="tombolPencet" id="submitBtn">Tambah Transaksi</button>
                         </div>
                     </div>
                 </div>
-
-                <!-- right column -->
-                <div class="column col-md-6">
-                    <div class="tanggal">
-                        <h4>Tanggal</h4>
-                        <div class="isiTanggal">
-                            <input type="date" id="tanggal1" name="tanggal" value="">
-                        </div>
-                    </div>
-
-                    <div class="dompet select-container">
-                        <h4>Dompet</h4>
-                        <div class="select-wrapper">
-                            <select name="dompet" id="dompet1">
-                                <option value="">Pilih Dompet</option>
-                                <option value="BCA">BCA</option>
-                                <option value="BRI">BRI</option>
-                                <option value="Simpanan">Simpanan</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="kategori select-container">
-                        <h4>Kategori</h4>
-                        <div class="select-wrapper">
-                            <select name="kategori" id="kategori1">
-                                <option value="">Pilih Kategori</option>
-                                <option value="Jalan-jalan">Jalan-jalan</option>
-                                <option value="Hiburan">Hiburan</option>
-                                <option value="Kebutuhan">Kebutuhan</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="tombol">
-                        <button type="button" class="tombolPencet" id="submitBtn">Tambah Transaksi</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        </form>
       </div>
     </div>
 
@@ -333,6 +364,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
+
         // Get the modal
         var modal = document.getElementById("myModal");
 
@@ -392,6 +424,27 @@
 
             modal.style.display = "none";
         }
+
+        document.getElementById('file').addEventListener('change', function() {
+            var statusElement = document.getElementById('file-upload-status');
+            statusElement.textContent = 'File sedang diunggah...';
+            statusElement.classList.remove('uploaded');
+            statusElement.classList.add('uploading');
+
+        // Simulate file upload for demo purposes
+            setTimeout(function() {
+                statusElement.textContent = 'File telah diunggah.';
+                statusElement.classList.remove('uploading');
+                statusElement.classList.add('uploaded');
+            }, 2000); // Ganti dengan waktu unggah sebenarnya
+        });
+
+        document.getElementById('upload-form').addEventListener('submit', function() {
+            var statusElement = document.getElementById('file-upload-status');
+            statusElement.textContent = 'File sedang diunggah...';
+            statusElement.classList.remove('uploaded');
+            statusElement.classList.add('uploading');
+        });
     </script>
 
 </body>

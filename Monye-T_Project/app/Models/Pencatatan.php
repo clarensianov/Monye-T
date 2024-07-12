@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,6 +24,16 @@ class Pencatatan extends Model
         'bukti', //nullable
         'tanggal'
     ];     
+
+    // public function getTanggalAttribute($value)
+    // {
+    //     return Carbon::parse($value)->format('m/d/Y');
+    // }
+
+    // public function setTanggalAttribute($value)
+    // {
+    //     $this->attributes['tanggal'] = Carbon::createFromFormat('m/d/Y', $value)->format('m/d/Y');
+    // }
 
     public function users(): BelongsTo{
         return $this->belongsTo(User::class, 'users_id', 'user_id');

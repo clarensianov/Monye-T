@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseFormatter;
+use App\Models\Dompet;
+use App\Models\Kategori;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,20 +49,14 @@ class UserController extends Controller
                 $data = compact('user', 'dompetUser', 'kategoriUser');
             } else {
                 $data = compact('user');
-            }
-        
-            return redirect()->with('data', $data)->intended('/dashboard');
+            }            
+            return view('dashboard', $data);            
         }
 
         return back()->with('loginFailed', 'Gagal Login');
     }
 
     public function register(Request $req){
-        Session::flash('namaDepan', $req->namaDepan);
-        Session::flash('namaBelakang', $req->namaBelakang);
-        Session::flash('email', $req->email);
-        Session::flash('username', $req->username);
-
         try{
             $req->validate([
                 'namaDepan' => 'required',
@@ -96,9 +92,26 @@ class UserController extends Controller
             'password' => $req->password
         ];
 
+        $kategoris = ['Pendapatan','Makanan', 'Iuran', 'Hiburan', 
+        'Pendidikan', 'Kesehatan', 'Transportasi'];
+
         if (Auth::attempt($login)) {
             $req->session()->regenerate();
-            return redirect()->route('katapemulihan')->with('userData', $data->user_id);
+            Dompet::create([
+                'users_id' => auth()->user()->user_id,
+                'nama_dompet' => 'Utama',
+                'jumlah_uang' => 0
+            ]);            
+
+            foreach ($kategoris as $kategori) {
+                Kategori::create([
+                    'users_id' => auth()->user()->user_id,
+                    'nama_kategori' => $kategori
+                ]);
+            }
+            
+
+            return redirect()->route('katapemulihan')->with('userData', auth()->user()->user_id);
         }
 
         dd('gagal');
@@ -119,7 +132,16 @@ class UserController extends Controller
         $user->kata_pemulihan = $req->input('katapemulihan');
         $user->save();
 
-        return redirect('/dashboard');
+        $user = auth()->user();
+        $dompetUser = User::find($user->user_id)->dompets;
+        $kategoriUser = User::find($user->user_id)->kategoris;
+        // Fetch wallets and categories only if needed
+        if (!empty($dompetUser) && !empty($kategoriUser)) {                
+            $data = compact('user', 'dompetUser', 'kategoriUser');
+        } else {
+            $data = compact('user');
+        }            
+        return view('dashboard', $data);
     }
 
     public function lupasandi(Request $req){

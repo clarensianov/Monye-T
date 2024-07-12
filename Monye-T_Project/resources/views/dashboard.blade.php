@@ -115,7 +115,7 @@
 <!-- Sebelum -->
 <div class="Dashboard w-100 d-flex justify-content-center flex-column align-items-center">
     <div class="w-85 text-black ">
-        <h2>Halo, {{ $data['user']->username }}</h2>
+        <h2>Halo, {{ $user->username }}</h2>
         <h4>Apakah Kamu Sudah Mencatat Keuanganmu Hari ini?</h4>
     </div>
     <br>
@@ -138,7 +138,7 @@
             </a>
 
             {{-- View Semua Dompet User --}}
-            @foreach($dompets as $dompet)
+            @foreach($dompetUser as $dompet)
                 <a href="#" class="text-decoration-none text-black">
                     <div class="dompetList dompetCard YellowMore d-flex align-items-center p-3">
                         <div>
