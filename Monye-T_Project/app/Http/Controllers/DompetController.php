@@ -14,10 +14,10 @@ class DompetController extends Controller
     {
         try {
             $req->validate([
-                'namaDompet' => 'string|required', 
+                'namaDompet' => 'string|required',
                 'saldoAwal' => 'required'
             ], [
-                'namaDompet.required' => 'Nama Dompet wajib diisi', 
+                'namaDompet.required' => 'Nama Dompet wajib diisi',
                 'saldoAwal' => 'Saldo Awal wajib diisi'
                 // jumlah_uang (DB) = saldo awal (CODE)
             ]);
@@ -26,12 +26,42 @@ class DompetController extends Controller
         }
 
         $data = [
-            'nama_dompet' => $req->namaDompet, 
-            'jumlah_uang' => $req->saldoAwal, 
-            'users_id' => Auth::user()->user_id
+            'nama_dompet' => $req->namaDompet,
+            'jumlah_uang' => $req->saldoAwal,
+            'user_id' => Auth::user()->user_id
         ];
 
-        $kantung = Dompet::create($data);
+        Dompet::create($data);
+        // dd($kantung);
+
+        return redirect()->route('dashboard')->with('success', 'Dompet berhasil ditambahkan!');
+    }
+
+    public function editDompet(Request $req)
+    {
+
+        try {
+            $req->validate([
+                'namaDompet' => 'string|required',
+                'saldoDompet' => 'required'
+            ], [
+                'namaDompet.required' => 'Nama Dompet wajib diisi',
+                'saldoDompet' => 'Saldo Awal wajib diisi'
+                // jumlah_uang (DB) = saldo awal (CODE)
+            ]);
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+
+        }
+
+        $data = [
+            'nama_dompet' => $req->namaDompet,
+            'jumlah_uang' => $req->saldoDompet,
+            'user_id' => Auth::user()->user_id
+        ];
+
+        $dompet = Dompet::findOrFail($req->DompetID);
+        $dompet->update($data);
         // dd($kantung);
 
         return redirect()->route('dashboard')->with('success', 'Dompet berhasil ditambahkan!');

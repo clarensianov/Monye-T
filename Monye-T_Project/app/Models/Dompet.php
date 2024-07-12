@@ -13,12 +13,12 @@ class Dompet extends Model
     use HasFactory;
 
     protected $primaryKey = 'dompet_id';
-    
+
     protected $fillable = [
         'nama_dompet',
         'jumlah_uang',
         'users_id'
-    ];     
+    ];
 
     public function users(): BelongsTo{
         return $this->belongsTo(User::class, 'users_id');

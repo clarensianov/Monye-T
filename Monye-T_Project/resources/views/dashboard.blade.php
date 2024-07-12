@@ -112,6 +112,38 @@
     </div>
 </div>
 
+<!-- POPUP EDIT DOMPET -->
+<div id="editPopUp" class="popup">
+    <div class="popup-content">
+        <span class="close" id="closeEdit">&times;</span>
+        <div class="header">
+            <h1 class="header-title">Edit Dompet</h1>
+        </div>
+        <form action="{{ route('edit_dompet') }}" method="POST">
+            @csrf
+            <input type="text" class="text-field" id="DompetID" name="DompetID" hidden>
+
+            <div class="field-group">
+                <p class="TextField-title">Nama Dompet</p>
+                <input type="text" class="text-field" id="NamaDompetEdit" name="namaDompet" placeholder="Nama Dompet Baru" value="">
+            </div>
+
+            <div class="field-group">
+                <p class="TextField-title">Saldo Dompet</p>
+                <div class="flex">
+                    <span class="currency" aria-hidden="true">Rp</span>
+                    <input type="text" class="text-field-saldo" id="SaldoDompet" name="saldoDompet" placeholder="Saldo Dompet Baru"
+                        name="saldoAwal">
+                </div>
+            </div>
+
+            <div class="ButtonArea">
+                <button style="box-shadow: 0 2px 2px 0 #00000025;" type="submit" class="yellow-button">Edit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <!-- Sebelum -->
 <div class="Dashboard w-100 d-flex justify-content-center flex-column align-items-center">
     <div class="w-85 text-black ">
@@ -142,8 +174,8 @@
                 <a href="#" class="text-decoration-none text-black">
                     <div class="dompetList dompetCard YellowMore d-flex align-items-center p-3">
                         <div>
-                            <h3 style="font-weight: 700;">{{ $dompet->nama_dompet }}</h3>
-                            <h5 style="font-weight: 400;" class="mt-3">Rp {{ $dompet->jumlah_uang }}</h5>
+                            <h3 class="namaDompet" style="font-weight: 700;">{{ $dompet->nama_dompet }}</h3>
+                            <h5 class="saldoDompet" style="font-weight: 400;" class="mt-3">Rp {{ $dompet->jumlah_uang }}</h5>
                         </div>
                     </div>
                 </a>
@@ -190,4 +222,39 @@
 </div>
 
 <script src="{{ asset('/popup/popup.js') }}"></script>
+
+<script>
+
+    function showEditDompetPopUp(dompet_id, nama_dompet, jumlah_uang)
+    {
+        var edit_modal = document.getElementById("editPopUp");
+
+        var txt_nama_dompet = document.getElementById("NamaDompetEdit");
+
+        var txt_jumlah_uang = document.getElementById("SaldoDompet");
+
+        var txt_dompet_id = document.getElementById("DompetID");
+
+        txt_nama_dompet.value = nama_dompet;
+        txt_jumlah_uang.value = jumlah_uang;
+        txt_dompet_id.value = dompet_id;
+
+        edit_modal.style.display = "block";
+
+        // Ambil elemen <span> yang menutup modal
+        var edit_span = document.getElementById("closeEdit");
+
+        // Ketika <span> diklik, tutup modal
+        edit_span.onclick = function() {
+            edit_modal.style.display = "none";
+        }
+
+        // Ketika pengguna mengklik di luar modal, tutup modal
+        window.onclick = function(event) {
+            if (event.target == edit_modal) {
+                edit_modal.style.display = "none";
+            }
+        }
+    }
+</script>
 @endsection

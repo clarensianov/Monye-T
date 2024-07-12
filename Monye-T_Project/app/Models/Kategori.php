@@ -11,12 +11,12 @@ class Kategori extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'pencatatan_id';
-    
+    protected $primaryKey = 'kategori_id';
+
     protected $fillable = [
         'users_id',
         'nama_kategori'
-    ];     
+    ];
 
     public function users(): BelongsTo{
         return $this->belongsTo(User::class, 'users_id', 'user_id');
