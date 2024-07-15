@@ -3,6 +3,7 @@
 use App\Http\Controllers\DompetController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\PencatatanController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -60,4 +61,7 @@ Route::post('/inputTx/{id}', [TransactionController::class, 'inputTransaction'])
 Route::post('/editDompet', [DompetController::class, 'editDompet'])->name('edit_dompet');
 
 Route::get('/pencatatan', [PencatatanController::class, 'index'])->name('pencatatan');
+
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+
 
