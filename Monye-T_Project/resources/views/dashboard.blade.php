@@ -79,9 +79,9 @@
 </style>
 @endsection
 
+
+
 @section('content')
-
-
 <!-- POPUP TAMBAH DOMPET -->
 <div id="myPopup" class="popup">
     <div class="popup-content">
@@ -219,6 +219,7 @@
             </div>
         </div>
     </div>
+    @include('components.flash')
 </div>
 
 <script src="{{ asset('/popup/popup.js') }}"></script>
