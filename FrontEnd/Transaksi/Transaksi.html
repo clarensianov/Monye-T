@@ -116,10 +116,17 @@
     .scrollItem::-webkit-scrollbar{
         display: none;
     }
+    .text-yellow{
+        color: #FEEE72;
+    }
+
+    .bg-yellow{
+        background-color: #FEEE72;
+    }
 </style>
 <body>
-    <div class="w-100 d-flex mt-4 flex-column align-items-center">
-        <div class="w-85 text-black ">
+    <div class="w-100 d-flex flex-column align-items-center">
+        <div class="w-85 mt-4 text-black ">
             <h2>Transaksi</h2>
         </div>
         <hr style="width:100%; height: 2px; z-index: -3; background-color: #0000004a;">
@@ -316,55 +323,26 @@
                         Rp. 500.000
                     </div>
                 </div>
-
-                <div class="itemRow mt-2 d-flex flex-row justify-content-between">
-                    <div class="columnItem d-flex align-items-center justify-content-center w-100">
-                        29 Juni 2024
-                    </div>
-                    <div class="columnItem d-flex align-items-center justify-content-center w-100">
-                        Blu
-                    </div>
-                    <div class="columnItem d-flex align-items-center justify-content-center w-100">
-                        <i class="fa fa-suitcase m-2"></i>
-                        Liburan
-                    </div>
-                    <div class="columnItem d-flex align-items-center justify-content-center" style="width: 150%;">
-                        <p class="descLimit w-85 text-center m-0">Ini Kemarin pengeluaran liburan di jogja</p>
-                    </div>
-                    <div class="columnItem d-flex align-items-center justify-content-center w-100">
-                        <div class="tipe-pengeluaran">
-                            Pengeluaran
-                        </div>
-                    </div>
-                    <div style="font-weight:600;" class="d-flex align-items-center justify-content-center w-100">
-                        Rp. 500.000
-                    </div>
-                </div>
-
-                <div class="itemRow mt-2 d-flex flex-row justify-content-between">
-                    <div class="columnItem d-flex align-items-center justify-content-center w-100">
-                        29 Juni 2024
-                    </div>
-                    <div class="columnItem d-flex align-items-center justify-content-center w-100">
-                        Blu
-                    </div>
-                    <div class="columnItem d-flex align-items-center justify-content-center w-100">
-                        <i class="fa fa-suitcase m-2"></i>
-                        Liburan
-                    </div>
-                    <div class="columnItem d-flex align-items-center justify-content-center" style="width: 150%;">
-                        <p class="descLimit w-85 text-center m-0">Ini Kemarin pengeluaran liburan di jogja</p>
-                    </div>
-                    <div class="columnItem d-flex align-items-center justify-content-center w-100">
-                        <div class="tipe-pengeluaran">
-                            Pengeluaran
-                        </div>
-                    </div>
-                    <div style="font-weight:600;" class="d-flex align-items-center justify-content-center w-100">
-                        Rp. 500.000
-                    </div>
-                </div>
             </div>
+            <div class="mt-4 w-100 d-flex justify-content-center">
+                <nav class="m-0" aria-label="Page navigation">
+                    <ul class="m-0 pagination">
+                      <li class="page-item">
+                        <a class="page-link bg-white text-black" href="#" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+                      <li class="page-item"><a class="page-link bg-white tes-item " href="#">1</a></li>
+                      <li class="page-item"><a class="page-link bg-white text-black" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link bg-white text-black" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link bg-white text-black" href="#" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                    </ul>
+                </nav>  
+            </div>              
         </div>
         <br>
         <br>
@@ -399,7 +377,7 @@
     $.fn.datepicker.dates['in'] = {
         days: ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"],
         daysShort: ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
-        daysMin: ["Mg", "Sn", "Sl", "Rb", "Km", "Jm", "Sb"],
+        daysMin: ["S", "M", "T", "W", "T", "F", "S"],
         months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
         monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
         today: "Hari Ini",
@@ -431,6 +409,11 @@
     }).on('changeDate', function (selected) {
         var maxDate = new Date(selected.date.valueOf());
         $('#fromdate').datepicker('setEndDate', maxDate);
+    });
+    // change text color when test-item pressed
+    $(".tes-item").click(function(){
+        $(".tes-item").css("color", "#000000");
+        $(this).css("color", "#FEEE72");
     });
 </script>
 </html>
