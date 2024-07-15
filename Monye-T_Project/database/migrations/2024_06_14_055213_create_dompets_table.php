@@ -15,7 +15,7 @@ return new class extends Migration
 
         Schema::create('dompets', function (Blueprint $table) {
             $table->bigIncrements('dompet_id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('users_id');
             $table->string('nama_dompet');
             $table->bigInteger('jumlah_uang');
             $table->timestamps();

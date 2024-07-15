@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DompetController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\PencatatanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/login');
 Route::redirect('/home','/dashboard');
 
+
+
 Route::get('/login', [UserController::class, 'loginindex'])->name('loginregister')->middleware('guest');
 Route::get('/register', [UserController::class, 'registerindex'])->name('register')->middleware('guest');
 
@@ -28,7 +32,7 @@ Route::post('/logout', [UserController::class, 'logout']);
 //tes
 Route::get('/logout1', [UserController::class, 'logout']);
 
-Route::get('/loginregister/register/katapemulihan', function (){return view('katapemulihan');})->name('katapemulihan')->middleware('auth');    
+Route::get('/loginregister/register/katapemulihan', function (){return view('katapemulihan');})->name('katapemulihan')->middleware('auth');
 Route::put('/loginregister/register/katapemulihan/{id}', [UserController::class, 'katapemulihan'])->name('create_katapemulihan');
 
 Route::get('/lupasandi', function (){ return view('lupasandi');})->name('lupasandi');
@@ -38,14 +42,22 @@ Route::get('/inputsandi' , function (){ return view('inputsandibaru');})->name('
 Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('change_password');
 
 
-Route::get('/dashboard', function(){ 
+Route::get('/dashboard', function(){
     // Take all user's dompet (function found in user model)
-    $dompets = Auth::user()->dompets;
+    // $dompets = Auth::user()->dompets;
     // dd($dompets);
 
-    return view('dashboard', compact('dompets'));
+    // return view('dashboard', compact('dompets'));
+    return view('dashboard');
 })->name('dashboard')->middleware('auth');
-// Route::get('/navbar', function(){ return view('components.navbar');});
 
-// Route::get('/popup-dompet', function(){return view('popup_dompet');})->name('popupdompet');
 Route::post('/inputDompet', [DompetController::class, 'inputDompet'])->name('input_dompet');
+
+
+//test
+Route::get('/testingaja', function(){return view('popup_Transaksi');});
+Route::post('/inputTx/{id}', [TransactionController::class, 'inputTransaction'])->name('input_transaction');
+Route::post('/editDompet', [DompetController::class, 'editDompet'])->name('edit_dompet');
+
+Route::get('/pencatatan', [PencatatanController::class, 'index'])->name('pencatatan');
+

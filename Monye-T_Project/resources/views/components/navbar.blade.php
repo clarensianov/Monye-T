@@ -28,7 +28,7 @@
             <a style="padding: 10px;" href="/" class="mt-5 text-decoration-none logo-wrap">
                 <div class="d-flex justify-content-center">
                     <img src="{{ asset('../assets/navbar/LOGO.png') }}" alt="">
-                </div> 
+                </div>
                 <h2 class="m-0">Monye-T</h2>
             </a>
             <hr>
@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('pencatatan') }}" class="nav-link">
                         <div class="icon-wrap">
                             <i class="bi bi-cash"></i>
                         </div>
@@ -80,7 +80,7 @@
                     <h2>{{ Auth::user()->username }}</h2>
                 </div>
             </div>
-        </div>            
+        </div>
     </header>
     @yield('content')
 </body>

@@ -1,3 +1,4 @@
+// {{ Tambah Dompet }}
 // Ambil elemen modal
 var modal = document.getElementById("myPopup");
 
@@ -25,4 +26,3 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-

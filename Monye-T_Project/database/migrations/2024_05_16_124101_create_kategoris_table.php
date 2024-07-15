@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('kategoris', function (Blueprint $table) {
             $table->bigIncrements('kategori_id');
             $table->bigInteger('users_id');
-            $table->string('nama_kategori')->unique();
+            $table->string('nama_kategori');
             $table->timestamps();
+                    
+            $table->unique(['users_id', 'nama_kategori']);
         });
     }
 

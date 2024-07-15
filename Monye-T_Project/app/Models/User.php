@@ -21,7 +21,7 @@ class User extends Authenticatable
      */
 
     protected $primaryKey = 'user_id';
-    
+
     protected $fillable = [
         'nama',
         'username',
@@ -29,7 +29,7 @@ class User extends Authenticatable
         'password',
         'gambar_user',
         'kata_pemulihan'
-    ];     
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -56,7 +56,7 @@ class User extends Authenticatable
     }
 
     public function dompets(): HasMany{
-        return $this->hasMany(Dompet::class, 'user_id', 'user_id');
+        return $this->hasMany(Dompet::class, 'users_id', 'user_id');
     }
 
     public function kategoris(): HasMany{
