@@ -186,7 +186,7 @@
     <br>
     <div class="w-85 d-flex justify-content-between">
         <div class="w-50">
-            <h3 class="boldFont">History</h3>
+        <h3 class="boldFont">Riwayat</h3>
             <div class="historyCard w-85 mt-3">
 
             </div>
@@ -203,7 +203,7 @@
         <div class="w-50">
             <div class="w-85">
                 <div class="d-flex justify-content-between">
-                    <h3 class="boldFont">Recap</h3>
+                    <h3 class="boldFont">Rekap</h3>
                     <div class="dropdown">
                     <select class="form-select" aria-label="Default select example">
                         <option selected value="1">One</option>
