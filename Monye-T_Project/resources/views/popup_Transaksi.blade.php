@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modal Pop-up Example</title>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
             font-family: "Inter", sans-serif;
@@ -242,25 +233,10 @@
             color: green;
         }
 
-    </style>
-</head>
-<body>
-
-    <h2>Modal Pop-up Example</h2>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @break  <!-- Hanya menampilkan satu pesan error -->
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <!-- Trigger/Open The Modal -->
+</style>
+<div>
     <button id="myBtn">Open Modal</button>
 
-    <!-- The Modal -->
     <div id="myModal" class="modal">
 
       <!-- Modal content -->
@@ -356,9 +332,7 @@
         </form>
       </div>
     </div>
-
-    <!-- Div to display the output -->
-    <div id="output"></div>
+</div>
 
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
