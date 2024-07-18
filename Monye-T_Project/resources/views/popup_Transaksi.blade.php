@@ -1,9 +1,4 @@
 <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body {
-            font-family: "Inter", sans-serif;
-        }
-
         .TransaksiBaru{
             background-color: #ffde59;
             padding: 25px 0px 10px 25px;
@@ -31,7 +26,7 @@
             border-radius: 10px;
             position: relative; /* Ensure relative positioning */
         }
-        .close {
+        .closeModal {
             color: #aaa;
             position: absolute;
             top: 10px;
@@ -39,8 +34,8 @@
             font-size: 28px;
             font-weight: bold;
         }
-        .close:hover,
-        .close:focus {
+        .closeModal:hover,
+        .closeModal:focus {
             color: black;
             text-decoration: none;
             cursor: pointer;
@@ -235,13 +230,12 @@
 
 </style>
 <div>
-    <button id="myBtn">Open Modal</button>
 
-    <div id="myModal" class="modal">
+    <div id="ModalJosh" class="modal p-0 overflow-hidden">
 
       <!-- Modal content -->
-      <div class="modal-content p-0">
-        <span class="close">&times;</span>
+      <div class="modal-content p-0" style="scale: 0.9;">
+        <span class="closeModal">&times;</span>
         <div class="TransaksiBaru" style="width: 40%">
             <h1 class="">Transaksi Baru</h1>
         </div>
@@ -340,13 +334,13 @@
     <script>
 
         // Get the modal
-        var modal = document.getElementById("myModal");
+        var modalJosh = document.getElementById("ModalJosh");
 
         // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
+        var btnJosh = document.getElementById("ButtonAddTransaksi");
 
         // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+        var closeButton = document.getElementsByClassName("closeModal")[0];
 
         // Get the submit button
         var submitBtn = document.getElementById("submitBtn");
@@ -355,20 +349,19 @@
         var output = document.getElementById("output");
 
         // When the user clicks the button, open the modal
-        btn.onclick = function() {
-            modal.style.display =
-            "block";
+        btnJosh.onclick = function() {
+            modalJosh.style.display ="block";
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
+        closeButton.onclick = function() {
+            modalJosh.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            if (event.target == modalJosh) {
+                modalJosh.style.display = "none";
             }
         }
 
@@ -396,7 +389,7 @@
                 <p><strong>Bukti:</strong> ${fileName}</p>
             `;
 
-            modal.style.display = "none";
+            modalJosh.style.display = "none";
         }
 
         document.getElementById('file').addEventListener('change', function() {
@@ -420,6 +413,3 @@
             statusElement.classList.add('uploading');
         });
     </script>
-
-</body>
-</html>
