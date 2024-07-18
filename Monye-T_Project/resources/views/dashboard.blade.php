@@ -143,11 +143,14 @@
         </form>
     </div>
 </div>
-
+@php
+    $dompetUser = App\Models\User::find(auth()->user()->user_id)->dompets;
+    $kategoriUser = App\Models\User::find(auth()->user()->user_id)->kategoris;
+@endphp
 <!-- Sebelum -->
 <div class="Dashboard w-100 d-flex justify-content-center flex-column align-items-center">
     <div class="w-85 text-black ">
-        <h2>Halo, {{ $user->username }}</h2>
+        <h2>Halo, {{ auth()->user()->username }}</h2>
         <h4>Apakah Kamu Sudah Mencatat Keuanganmu Hari ini?</h4>
     </div>
     <br>
@@ -171,7 +174,7 @@
 
             {{-- View Semua Dompet User --}}
             @foreach($dompetUser as $dompet)
-                <a href="#" class="text-decoration-none text-black">
+                <a onclick="showEditDompetPopUp('{{ $dompet->dompet_id }}', '{{ $dompet->nama_dompet }}', '{{ $dompet->jumlah_uang }}')" class="text-decoration-none text-black">
                     <div class="dompetList dompetCard YellowMore d-flex align-items-center p-3">
                         <div>
                             <h3 class="namaDompet" style="font-weight: 700;">{{ $dompet->nama_dompet }}</h3>

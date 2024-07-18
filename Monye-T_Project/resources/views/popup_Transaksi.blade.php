@@ -246,7 +246,7 @@
             <h1 class="">Transaksi Baru</h1>
         </div>
         <!-- wrap columns in a row -->        
-        <form action="{{ route('input_transaction', ['id' => 1]) }}" method="POST" enctype="multipart/form-data>
+        <form action="{{ route('input_transaction', ['id' => 1]) }}" method="POST" enctype="multipart/form-data">
             <div class="row p-4" id="transaksiForm">
                     @csrf
                     <!-- left column -->

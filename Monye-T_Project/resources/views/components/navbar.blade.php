@@ -15,6 +15,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+
+    
     @yield('style')
     <style>
         header {
@@ -89,4 +91,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 <!-- Bootstrap Icons CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css" rel="stylesheet">
+@yield('script')
 </html>
