@@ -223,8 +223,6 @@
         </div>
     </div>
     @include('components.flash')
-
-
 </div>
 
 <script src="{{ asset('/popup/popup.js') }}"></script>
