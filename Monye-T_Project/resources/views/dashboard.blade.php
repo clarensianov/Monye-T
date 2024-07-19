@@ -119,7 +119,7 @@
         <div class="header">
             <h1 class="header-title">Edit Dompet</h1>
         </div>
-        <form action="{{ route('edit_dompet') }}" method="POST">
+        <form action="{{ route('edit_dompet') }}" method="POST">            
             @csrf
             <input type="text" class="text-field" id="DompetID" name="DompetID" hidden>
 
@@ -132,8 +132,7 @@
                 <p class="TextField-title">Saldo Dompet</p>
                 <div class="flex">
                     <span class="currency" aria-hidden="true">Rp</span>
-                    <input type="text" class="text-field-saldo" id="SaldoDompet" name="saldoDompet" placeholder="Saldo Dompet Baru"
-                        name="saldoAwal">
+                    <input type="text" class="text-field-saldo" id="SaldoDompet" name="saldoDompet" placeholder="Saldo Dompet Baru">
                 </div>
             </div>
 
