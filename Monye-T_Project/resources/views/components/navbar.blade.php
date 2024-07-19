@@ -16,7 +16,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 
-    
+
     @yield('style')
     <style>
         header {
@@ -79,7 +79,7 @@
             <div>
                 <div class="loginButton d-flex justify-content-center align-items-center">
                     <img class="profilepic" src="{{ asset('../Assets/Navbar/default.png') }}" alt="">
-                    {{-- <h2>{{ Auth::user()->username }}</h2> --}}
+                    <h2>{{ Auth::user()->username }}</h2>
                 </div>
             </div>
         </div>
