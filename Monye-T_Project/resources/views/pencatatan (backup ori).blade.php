@@ -63,21 +63,6 @@
         border-radius: 10.37px;
         box-shadow: 0 4.61px 4.61px 0 rgba(0, 0, 0, 0.25);
     }
-
-    /* Update Style untuk menyesuaikan Data Tables */
-    /* Kalau g gini, stylenya ngikut class bootstrap table dan gbs diotak-atik */
-    .table tr{
-        /* background-color: #ffec5ed9; */
-        height: 60px;
-        border-radius: 10.37px;
-        box-shadow: 0 4.61px 4.61px 0 rgba(0, 0, 0, 0.25);
-    }
-    .table th{
-        background-color: #ffec5ed9;
-        border-right: 1.15px solid rgba(0, 0, 0, 0.25);
-        font-weight: 600;
-        color: #43362B;
-    }
     .columnTitle{
         border-right: 1.15px solid rgba(0, 0, 0, 0.25);
         font-weight: 600;
@@ -201,23 +186,66 @@
                 </div>
             </div>
             <br>
+            <div class="rowTitle d-flex flex-row justify-content-between">
+                <div class="columnTitle d-flex align-items-center justify-content-center w-100">
+                    Tanggal
+                </div>
+                <div class="columnTitle d-flex align-items-center justify-content-center w-100">
+                    Dompet
+                </div>
+                <div class="columnTitle d-flex align-items-center justify-content-center w-100">
+                    Kategori
+                </div>
+                <div class="columnTitle d-flex align-items-center justify-content-center" style="width: 150%;">
+                    Deskripsi
+                </div>
+                <div class="columnTitle d-flex align-items-center justify-content-center w-100">
+                    Status
+                </div>
+                <div style="font-weight: 600;" class="d-flex align-items-center justify-content-center w-100">
+                    Jumlah
+                </div>
+            </div>
 
-            {{-- Data Tables --}}
-            <table id="tbl_list" class="table table-striped table-bordered d-flex flex-column" cellspacing="0" width="100%">
-                <thead class="md-2">
-                    <tr class="rowTitle d-flex flex-row justify-content-between">
-                        <th class="columnTitle d-flex align-items-center justify-content-center w-100">Tanggal</th>
-                        <th class="columnTitle d-flex align-items-center justify-content-center w-100">Dompet</th>
-                        <th class="columnTitle d-flex align-items-center justify-content-center w-100">Kategori</th>
-                        <th class="columnTitle d-flex align-items-center justify-content-center w-100">Deskripsi</th>
-                        <th class="columnTitle d-flex align-items-center justify-content-center w-100">Status</th>
-                        <th class="columnTitle d-flex align-items-center justify-content-center w-100">Jumlah</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-            </table>
+            <div class="scrollItem mt-1">
+                @php
+                    $dompets = $user->dompets;
+                @endphp
+
+                @foreach($pencatatans as $pencatatan)
+                    <div class="itemRow mt-2 d-flex flex-row justify-content-between">
+                        <div class="columnItem d-flex align-items-center justify-content-center w-100">
+                            {{ $pencatatan->tanggal }}
+                        </div>
+                        <div class="columnItem d-flex align-items-center justify-content-center w-100">
+                            @php
+                                $dompet = App\Models\Dompet::findOrFail($pencatatan->kantung_id);
+                                // dd($dompet);
+                            @endphp
+                            {{ $dompet->nama_dompet }}
+                        </div>
+                        <div class="columnItem d-flex align-items-center justify-content-center w-100">
+                            <i class="fa fa-suitcase m-2"></i>
+                            @php
+                                $kategori = App\Models\Kategori::findOrFail($pencatatan->kategori_id);
+                                // $kategori = App\Models\Kategori::all();
+                            @endphp
+                            {{ $kategori->nama_kategori }}
+                        </div>
+                        <div class="columnItem d-flex align-items-center justify-content-center" style="width: 150%;">
+                            <p class="descLimit w-85 text-center m-0">{{ $pencatatan->deskripsi }}</p>
+                        </div>
+                        <div class="columnItem d-flex align-items-center justify-content-center w-100">
+                            <div class="tipe-pemasukan">
+                                {{ $pencatatan->status }}
+                            </div>
+                        </div>
+                        <div style="font-weight:600;" class="d-flex align-items-center justify-content-center w-100">
+                            Rp {{ $pencatatan->jumlah }}
+                        </div>
+                    </div>
+                @endforeach
+        </div>
         <br>
         <br>
 
@@ -285,86 +313,6 @@
     }).on('changeDate', function (selected) {
         var maxDate = new Date(selected.date.valueOf());
         $('#fromdate').datepicker('setEndDate', maxDate);
-    });
-</script>
-
-{{-- Data Table AJAX Requirements --}}
-<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-<script src="https://cdn.datatables.net/datetime/1.5.2/js/dataTables.dateTime.min.js"></script>
-<script type="text/javascript">
- $(document).ready(function() {
-        // Initialize DataTable
-console.log(1);
-        // Create date inputs
-        minDate = new DateTime('#min', {
-            format: 'YYYY-MM-DD'
-        });
-        maxDate = new DateTime('#max', {
-            format: 'YYYY-MM-DD'
-        });
-
-        var table = $('#tbl_list').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('pencatatan.data') }}", // Route for fetching data
-                type: 'POST', // Use POST method for DataTables server-side processing
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: function(d) {
-                    d.min = $('#min').val();
-                    d.max = $('#max').val();
-                    d.age = $('#ageSelection').val();
-                }
-            },
-            columns: [
-                { data: 'tanggal', name: 'tanggal' },
-                { data: 'nama_dompet', name: 'nama_dompet' },
-                { data: 'nama_kategori', name: 'nama_kategori' },
-                { data: 'deskripsi', name: 'deskripsi' },
-                { data: 'status', name: 'status' },
-                { data: 'jumlah', name: 'jumlah' }
-            ],
-            createdRow:function(row, data, dataIndex, cells) {
-                $(row).addClass('itemRow mt-2 d-flex flex-row justify-content-between');
-            },
-            columnDefs:[
-                { className: 'columnItem d-flex align-items-center justify-content-center w-100', targets: "_all" }
-            ],
-            error: function(xhr, error, code) {
-            console.log('Error:', error);
-            console.log('Code:', code);
-            console.log('Response:', xhr.responseText);
-        }
-            // language: {
-            //         url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Indonesian.json",
-            //         "lengthMenu": "Tampilkan _MENU_ entri per halaman",
-            //         "zeroRecords": "Tidak ditemukan data yang sesuai",
-            //         "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-            //         "infoEmpty": "Tidak ada data",
-            //         "infoFiltered": "(disaring dari _MAX_ total entri)",
-            //         "search": "Cari:",
-            //         "paginate": {
-            //             "first": "Pertama",
-            //             "last": "Terakhir",
-            //             "next": "Selanjutnya",
-            //             "previous": "Sebelumnya"
-            //         },
-            //         "processing": "Sedang memproses..."
-            //     }
-            });
-
-        // Apply date range filtering
-        $('#min, #max').on('change', function () {
-            table.draw();
-        });
-
-        $('#ageSelection').on('change', function () {
-            // console.log($('#ageSelection').val());
-            table.draw();
-        });
     });
 </script>
 @endsection

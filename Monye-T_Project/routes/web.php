@@ -61,6 +61,7 @@ Route::get('/testingaja', function(){return view('popup_Transaksi');});
 Route::post('/inputTx', [TransactionController::class, 'inputTransaction'])->name('input_transaction');
 
 Route::get('/pencatatan', [PencatatanController::class, 'index'])->name('pencatatan');
+Route::post('/pencatatan', [PencatatanController::class, 'fetchData'])->name('pencatatan.data');
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 

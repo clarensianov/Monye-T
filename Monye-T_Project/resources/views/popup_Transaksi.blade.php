@@ -239,7 +239,7 @@
         <div class="TransaksiBaru" style="width: 40%">
             <h1 class="">Transaksi Baru</h1>
         </div>
-        <!-- wrap columns in a row -->        
+        <!-- wrap columns in a row -->
         <form action="{{ route('input_transaction')}}" method="POST" enctype="multipart/form-data">
             <div class="row p-4" id="transaksiForm">
                     @csrf
@@ -249,12 +249,12 @@
                         <div class="peruntukan">
                             <h4>Peruntukan</h4>
                             <div class="isiPeruntukan">
-                                <label ><input type="radio" name="tujuan" id="income" value="Pemasukkan">Pemasukan</label>
+                                <label ><input type="radio" name="tujuan" id="income" value="Pemasukan">Pemasukan</label>
                                 <label style="margin-left: 80px"><input type="radio" name="tujuan" id="expense" value="Pengeluaran">Pengeluaran</label>
                             </div>
                         </div>
                         {{-- nominal --}}
-                        <div class="nominal"> 
+                        <div class="nominal">
                             <h4>Nominal</h4>
                             <div class="field-group">
                                 <div class="flex">
@@ -295,10 +295,10 @@
                             $dompets = App\Models\User::find(auth()->user()->user_id)->dompets;
                             $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;
                         @endphp
-                        <div class="dompet select-container">                            
+                        <div class="dompet select-container">
                             <h4>Dompet</h4>
                             <div class="select-wrapper">
-                                <select name="dompet" id="dompet1">                                    
+                                <select name="dompet" id="dompet1">
                                     <option value="">Pilih Dompet</option>
                                     @foreach ($dompets as $dompet)
                                         <option value={{ $dompet->dompet_id }}>{{ $dompet->nama_dompet }}</option>
