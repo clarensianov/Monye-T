@@ -240,7 +240,7 @@
             <h1 class="">Transaksi Baru</h1>
         </div>
         <!-- wrap columns in a row -->        
-        <form action="{{ route('input_transaction', ['id' => 1]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('input_transaction')}}" method="POST" enctype="multipart/form-data">
             <div class="row p-4" id="transaksiForm">
                     @csrf
                     <!-- left column -->
@@ -276,7 +276,7 @@
                             <div class="isiBukti">
                                 <input type="file" id="file" class="file-upload-input" name="bukti"/>
                                 <label for="file" class="file-upload-label">Upload File</label>
-                                <div id="file-upload-status" class="file-upload-status"></div>
+                                {{-- <div id="file-upload-status" class="file-upload-status"></div> --}}
                             </div>
                         </div>
                     </div>
@@ -292,8 +292,8 @@
                         </div>
                         {{-- dompet --}}
                         @php
-                            $dompets = App\Models\User::find(1)->dompets;
-                            $kategoris = App\Models\User::find(1)->kategoris;
+                            $dompets = App\Models\User::find(auth()->user()->user_id)->dompets;
+                            $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;
                         @endphp
                         <div class="dompet select-container">                            
                             <h4>Dompet</h4>
