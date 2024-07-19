@@ -35,6 +35,7 @@
             left: 15%;
         }
 
+
         .profile-info {
             text-align: left;
             margin-top: 10px;
@@ -207,6 +208,8 @@
                     }
                 });
             });
+
+            //tes
 
             changeProfilePicLink.addEventListener('click', function () {
                 profilePicInput.click();
