@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DompetController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\PencatatanController;
@@ -66,3 +67,6 @@ Route::post('/pencatatan', [PencatatanController::class, 'fetchData'])->name('pe
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
 
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
