@@ -46,7 +46,7 @@ class UserController extends Controller
         if (Auth::attempt($login)) {
             $req->session()->regenerate();
 
-            return view('dashboard');            
+            return redirect('dashboard');
         }
 
         return back()->with('loginFailed', 'Gagal Login');
