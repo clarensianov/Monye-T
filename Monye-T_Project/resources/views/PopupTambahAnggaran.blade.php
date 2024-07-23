@@ -53,77 +53,63 @@
               <button type="button" class="btn-close" style="margin-right: 30px;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="d-flex mt-3">
-                <form action="" class="w-100 d-flex flex-column w-100 align-items-center">
-                <div class="" style="width: 90%;">
-                    <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3">Masukkan Nama Anggaran Barumu</label>
-                    <input name="NamaAnggaran" type="text" class="w-100 px-3 py-2 border border-2" style="border-radius: 10px;" placeholder="Nama Anggaran Baru">
-                </div>
-                <div class="" style="width: 90%;">
-                    <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3 mt-3">Masukkan saldo untuk anggaranmu</label>
-                    <div class="d-flex">
-                        <span class="input-group-append">
-                            <span class="input-group-text Rupiah h-100 d-block">
-                                Rp
-                            </span>
-                        </span>
-                        <input class="w-100 px-3 py-2 inputNumber" type="number">
+                <form action="{{ route('anggaran.create') }}" method="POST" class="w-100 d-flex flex-column align-items-center">
+                    @csrf
+                    <div class="mb-3" style="width: 90%;">
+                        <label style="font-size: 18px;" for="NamaAnggaran">Masukkan Nama Anggaran Barumu</label>
+                        <input name="NamaAnggaran" type="text" class="w-100 px-3 py-2 border border-2" style="border-radius: 10px;" placeholder="Nama Anggaran Baru">
                     </div>
-                </div>
-                <div class="" style="width: 90%;">
-                    <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3 mt-3">Pilih kategori untuk anggaran barumu!</label>
-                    <select class="form-select px-3 py-2 border-dropdown" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>                      
-                </div>
-                <div style="width: 90%;" class="mt-3 d-flex flex-column justify-content-between">
-                    <label style="font-size: 18px;">Pilih Jangka waktu Anggaranmu!</label>
-                    <div class="d-flex w-100 justify-content-between">
-                        <div class="" style="width: 100%;">
-                            <div class="d-flex flex-column w-100 justify-content-end">
-                                <label for="" style="font-size: 15px;">Mulai</label>
-                                <div class="d-flex">
-                                    <input placeholder="1 Jan 2024" style="width: 85%;" class="px-3 py-2 input-tanggal" type="text" id="fromdate">
-                                    <span class="input-group-append">
-                                        <span class="calendar-logo input-group-text h-100 d-block">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
+                    <div class="mb-3" style="width: 90%;">
+                        <label style="font-size: 18px;" for="saldo">Masukkan saldo untuk anggaranmu</label>
+                        <div class="input-group">
+                            <span class="input-group-text">Rp</span>
+                            <input name="saldo" class="form-control" type="number" step="0.01">
                         </div>
-                        <div class="" style="width: 100%;">
-                            <div class="d-flex flex-column w-100 justify-content-end">
-                                <label for="" style="font-size: 15px;">Berakhir</label>
-                                <div class="d-flex">
-                                    <input placeholder="1 Jan 2024" style="width: 85%;" class="px-3 py-2 input-tanggal" type="text" id="todate">
-                                    <span class="input-group-append">
-                                        <span class="calendar-logo input-group-text h-100 d-block">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
-                                    </span>
-                                </div>
+                    </div>
+            
+                    @php
+                        $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;
+                    @endphp
+            
+                    <div class="mb-3" style="width: 90%;">
+                        <label style="font-size: 18px;" for="kategori">Pilih kategori untuk anggaran barumu!</label>
+                        <select class="form-select" aria-label="Pilih Kategori" name="kategori">
+                            <option value="" selected>Pilih kategori...</option>
+                            @foreach ($kategoris as $kategori)
+                                <option value="{{ $kategori->kategori_id }}">{{ $kategori->nama_kategori }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3" style="width: 90%;">
+                        <label style="font-size: 18px;">Pilih Jangka waktu Anggaranmu!</label>
+                        <div class="d-flex justify-content-between">
+                            <div style="width: 48%;">
+                                <label for="fromdate" style="font-size: 15px;">Mulai</label>
+                                <input class="form-control" type="date" id="fromdate" name="tanggal_pembuatan">
+                            </div>
+                            <div style="width: 48%;">
+                                <label for="todate" style="font-size: 15px;">Berakhir</label>
+                                <input class="form-control" type="date" id="todate" name="tanggal_berakhir">
                             </div>
                         </div>
                     </div>
-
+            
                     <div style="width: 90%; margin: 20px 0" class="d-flex flex-column align-items-center">
-                        <div class="d-flex flex-row gap-2 mt-2 mb-3">
-                            <div class="d-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#EC0D0D" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
-                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
-                                </svg>
+                        @if ($errors->any())
+                            <div class="d-flex flex-row gap-2 mt-2 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#EC0D0D" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+                                    </svg>
+                                </div>
+                                <div>                                
+                                    <p class="m-0" style="font-weight: 500; color: #EC0D0D;">{{ $errors->first() }}</p>                                
+                                </div>
                             </div>
-                            <div>
-                                <p class="m-0" style="font-weight: 500; color: #EC0D0D;">Email/Username Anda Sudah Terdaftar!</p>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn" style="padding: 15px 100px; background-color: #FEEE72; font-weight:600;">Tambah</button>
+                        @endif
+                        <button type="submit" class="btn" style="padding: 15px 100px; background-color: #FEEE72; font-weight: 600;">Tambah</button>
                     </div>
-                </div>
-            </form>
+                </form>
             </div>
           </div>
         </div>

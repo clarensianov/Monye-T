@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nama_budget');
             $table->bigInteger('jumlah');
             $table->string('tanggal_pembuatan');
-            $table->string('tanggal_berakhir');
+            $table->string('tanggal_berakhir');            
             $table->timestamps();
         });
     }
