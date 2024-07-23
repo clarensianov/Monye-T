@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -139,7 +138,7 @@
                 </form>
             </div>                        
         </div>
-        <div class="text-black mt-4 d-flex flex-wrap" style="width: 76%; height:500px; column-gap: 100px; row-gap:50px;">
+        <div class="text-black mt-4 d-flex flex-wrap" style="width: 76%; height:500px; column-gap: 50px; row-gap:50px;">
             <div class="bg-white CardAnggaran">
                 <div class="d-flex align-items-center w-100 justify-content-evenly mt-3">
                     <div>
@@ -296,7 +295,7 @@
                     </a>
                 </div>
             </div>
-            <a href="" class="bg-white CardAnggaran">
+            <a class="bg-white CardAnggaran" onclick="ModalAnggaran()">
                 <div class="d-flex align-items-center w-100 h-100 justify-content-evenly">
                     <i style="font-size: 120px; color:#5BBA6F;" class="bi bi-plus"></i>
                 </div>
@@ -322,6 +321,7 @@
               </nav>
         </div>
     </div>
+    @include('PopupTambahAnggaran')
 </body>
 <!-- Bootstrap JS and dependencies -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
@@ -348,5 +348,7 @@
             $(".search_input").css("caret-color", "transparent");
         }
     });
+    function ModalAnggaran(){
+        $('#exampleModalToggle').modal('show');
+    }
 </script>
-</html>

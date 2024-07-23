@@ -218,7 +218,7 @@
             margin-top: 10px;
             color: #333;
             font-size: 14px;
-        }
+        }  
 
         .uploading {
             color: blue;
