@@ -119,6 +119,7 @@
     }
 </style>
 @endsection
+
 @section('content')
     <div class="w-100 d-flex mt-4 flex-column align-items-center">
         <div class="w-85 text-black ">
@@ -133,7 +134,7 @@
                         <h5 class="m-0 text-transaksi">Total Pemasukan</h5>
                     </div>
                     <div>
-                        <h2 style="font-weight: 700 ; font-size: 36px; margin-left: 25px; margin-top: 6px;" class="w-100">Rp. 2.000.000</h2>
+                        <h2 style="font-weight: 700 ; font-size: 36px; margin-left: 25px; margin-top: 6px;" class="w-100" id="total_pemasukan"></h2>
                     </div>
                 </div>
                 <div class="cardTransaksi cardPengeluaran">
@@ -142,7 +143,7 @@
                         <h5 class="m-0 text-transaksi">Total Pengeluaran</h5>
                     </div>
                     <div>
-                        <h2 style="font-weight: 700 ; font-size: 36px; margin-left: 25px; margin-top: 6px;" class="w-100">Rp. 1.000.000</h2>
+                        <h2 style="font-weight: 700 ; font-size: 36px; margin-left: 25px; margin-top: 6px;" class="w-100" id="total_pengeluaran"></h2>
                     </div>
                 </div>
             </div>
@@ -175,29 +176,29 @@
                 </div>
                 <div class="d-flex flex-row gap-3 align-items-end">
                     <div>
-                        <select class="form-select selectdown" aria-label="Default select example">
+                        <select class="form-select selectdown" aria-label="Default select example" id="dompet_filter">
                             <option selected>Dompet</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            @foreach (auth()->user()->dompets as $dompet)
+                                <option value={{ $dompet->dompet_id }}>{{ $dompet->nama_dompet }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div>
-                        <select class="form-select selectdown" aria-label="Default select example">
+                        <select class="form-select selectdown" aria-label="Default select example" id="kategori_filter">
                             <option selected>Kategori</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            @foreach (auth()->user()->kategoris as $kategori)
+                                <option value={{ $kategori->kategori_id }}>{{ $kategori->nama_kategori }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div>
-                        <select class="form-select selectdown" aria-label="Default select example">
+                        <select class="form-select selectdown" aria-label="Default select example" id="status_filter">
                             <option selected>Status</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option value="Pemasukan">Pemasukan</option>
+                            <option value="Pengeluaran">Pengeluaran</option>
                         </select>
                     </div>
+                    <button id="button" onclick="resetForm()">Reset Filter</button>
                 </div>
             </div>
             <br>
@@ -218,10 +219,13 @@
 
                 </tbody>
             </table>
-        <br>
-        <br>
-
+            <br>
+            <br>
+        </div>
     </div>
+
+    @include('popup_Transaksi')
+
 @endsection
 
 @section('script')
@@ -239,13 +243,19 @@
 <!-- Bootstrap Date Picker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+{{-- Data Table AJAX Requirements --}}
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.5.2/js/dataTables.dateTime.min.js"></script>
+
 <script>
-    $(".descLimit").each(function(){
-        console.log($(this).text());
+$(".descLimit").each(function(){
+        // console.log($(this).text());
         if($(this).text().length > 30){
             $(this).text($(this).text().substr(0, 30) + "...");
         }
     });
+
     $(".input-group-append").click(function(){
         $(this).prev().focus();
     });
@@ -258,14 +268,16 @@
         monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
         today: "Hari Ini",
         clear: "Bersihkan",
-        format: "dd MM yyyy",
+        // format: "dd MM yyyy",
+        // format: "dd MM yyyy",
         titleFormat: "MM yyyy",
         weekStart: 0
     };
 
     // Show only day for selected month
     $('#fromdate').datepicker({
-        format: "dd MM yyyy",
+        // format: "dd MM yyyy",
+        format: 'yyyy-mm-dd',
         todayHighlight: true,
         autoclose: true,
         clearBtn: true,
@@ -273,10 +285,14 @@
         endDate: new Date(),
     }).on('changeDate', function (selected) {
         var minDate = new Date(selected.date.valueOf());
+        minDate = moment(minDate).format('YYYY-MM-DD');
+        $('#fromdate').val(minDate);
         $('#todate').datepicker('setStartDate', minDate);
     });
+
     $('#todate').datepicker({
-        format: "dd MM yyyy",
+        // format: "dd MM yyyy",
+        format: 'yyyy-mm-dd',
         todayHighlight: true,
         autoclose: true,
         clearBtn: true,
@@ -284,26 +300,19 @@
         endDate: new Date(),
     }).on('changeDate', function (selected) {
         var maxDate = new Date(selected.date.valueOf());
+        maxDate = moment(maxDate).format('YYYY-MM-DD');
+        $('#todate').val(maxDate);
         $('#fromdate').datepicker('setEndDate', maxDate);
     });
 </script>
 
-{{-- Data Table AJAX Requirements --}}
-<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-<script src="https://cdn.datatables.net/datetime/1.5.2/js/dataTables.dateTime.min.js"></script>
 <script type="text/javascript">
  $(document).ready(function() {
-        // Initialize DataTable
-console.log(1);
-        // Create date inputs
-        minDate = new DateTime('#min', {
-            format: 'YYYY-MM-DD'
-        });
-        maxDate = new DateTime('#max', {
-            format: 'YYYY-MM-DD'
-        });
+        var dompet_filter = $('#dompet_filter').val();
+        var kategori_filter = $('#kategori_filter').val();
+        var status_filter = $('#status_filter').val();
 
+        // Initialize DataTable
         var table = $('#tbl_list').DataTable({
             processing: true,
             serverSide: true,
@@ -314,9 +323,11 @@ console.log(1);
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: function(d) {
-                    d.min = $('#min').val();
-                    d.max = $('#max').val();
-                    d.age = $('#ageSelection').val();
+                    d.fromdate = $('#fromdate').val();
+                    d.todate = $('#todate').val();
+                    d.dompet_filter = $('#dompet_filter').val();
+                    d.kategori_filter = $('#kategori_filter').val();
+                    d.status_filter = $('#status_filter').val();
                 }
             },
             columns: [
@@ -325,46 +336,168 @@ console.log(1);
                 { data: 'nama_kategori', name: 'nama_kategori' },
                 { data: 'deskripsi', name: 'deskripsi' },
                 { data: 'status', name: 'status' },
-                { data: 'jumlah', name: 'jumlah' }
+                { data: 'jumlah', name: 'jumlah' },
+                { data: 'action', name: 'action', orderable: false },
             ],
+            order: [[0, 'desc']],
             createdRow:function(row, data, dataIndex, cells) {
                 $(row).addClass('itemRow mt-2 d-flex flex-row justify-content-between');
             },
             columnDefs:[
                 { className: 'columnItem d-flex align-items-center justify-content-center w-100', targets: "_all" }
             ],
-            error: function(xhr, error, code) {
-            console.log('Error:', error);
-            console.log('Code:', code);
-            console.log('Response:', xhr.responseText);
-        }
-            // language: {
-            //         url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Indonesian.json",
-            //         "lengthMenu": "Tampilkan _MENU_ entri per halaman",
-            //         "zeroRecords": "Tidak ditemukan data yang sesuai",
-            //         "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-            //         "infoEmpty": "Tidak ada data",
-            //         "infoFiltered": "(disaring dari _MAX_ total entri)",
-            //         "search": "Cari:",
-            //         "paginate": {
-            //             "first": "Pertama",
-            //             "last": "Terakhir",
-            //             "next": "Selanjutnya",
-            //             "previous": "Sebelumnya"
-            //         },
-            //         "processing": "Sedang memproses..."
-            //     }
+            drawCallback: function (settings) {
+                var data = table.rows().data().toArray();
+                console.log(1);
+
+                // Initialize sums
+                var totalPemasukan = 0;
+                var totalPengeluaran = 0;
+
+                // Calculate the sum of 'jumlah' based on 'status'
+                data.forEach(function(row) {
+                    var jumlah = parseInt(row.jumlah) || 0;
+                    if (row.status === 'Pemasukan') {
+                        totalPemasukan += jumlah;
+                    } else if (row.status === 'Pengeluaran') {
+                        totalPengeluaran += jumlah;
+                    }
+                });
+
+                // Display the sums in the appropriate elements
+                $('#total_pemasukan').text(totalPemasukan.toFixed(0)); // Format to 2 decimal places
+                $('#total_pengeluaran').text(totalPengeluaran.toFixed(0
+
+                ));
+            },
+            language: {
+                    "lengthMenu": "Tampilkan _MENU_ entri per halaman",
+                    "zeroRecords": "Tidak ditemukan data yang sesuai",
+                    "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                    "infoEmpty": "Tidak ada data",
+                    "infoFiltered": "(disaring dari _MAX_ total entri)",
+                    "search": "Cari:",
+                    "paginate": {
+                        "first": "Pertama",
+                        "last": "Terakhir",
+                        "next": "Selanjutnya",
+                        "previous": "Sebelumnya"
+                    },
+                    "processing": "Sedang memproses..."
+                }
+        });
+
+            // var button = document.getElementById("button")
+            // button.addEventListener("click", function(){
+            //     var data = table.rows().data().toArray();
+            //     $('#total').text(data[0].total_pemasukan);
+            //     console.log(data[0].total_pemasukan);
+            // })
+
+            // Apply date range filtering
+            $('#fromdate, #todate').on('change', function () {
+                table.draw();
             });
 
-        // Apply date range filtering
-        $('#min, #max').on('change', function () {
-            table.draw();
+            $('#dompet_filter').on('change', function () {
+                table.draw();
+            });
+
+            $('#kategori_filter').on('change', function () {
+                table.draw();
+            });
+
+            $('#status_filter').on('change', function () {
+                table.draw();
+            });
+    });
+</script>
+
+<script>
+    function resetForm() {
+        // Reset select elements
+        document.querySelectorAll('select').forEach(select => {
+            select.selectedIndex = 0;
+        });
+    }
+</script>
+
+<script>
+    // Get the modal
+    var modalJosh = document.getElementById("ModalJosh");
+
+    // Get the <span> element that closes the modal
+    var closeButton = document.getElementsByClassName("closeModal")[0];
+
+    // Get the submit button
+    var submitBtn = document.getElementById("submitBtn");
+
+    // Get the output div
+    var output = document.getElementById("output");
+
+     // When the user clicks the button, open the modal
+     function displayModal() {
+            modalJosh.style.display ="block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        closeButton.onclick = function() {
+            modalJosh.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modalJosh) {
+                modalJosh.style.display = "none";
+            }
+        }
+
+        // When the user clicks the submit button, display the form data
+        submitBtn.onclick = function() {
+            var purpose = document.querySelector('input[name="purpose"]:checked');
+            var saldoAwal = document.getElementById("SaldoAwal").value;
+            var deskripsi = document.getElementById("exampleFormControlInput1").value;
+            var tanggal = document.getElementById("tanggal1").value;
+            var dompet = document.getElementById("dompet1").value;
+            var kategori = document.getElementById("kategori1").value;
+            var file = document.getElementById("file").files[0];
+
+            var purposeValue = purpose ? purpose.value : "Not selected";
+            var fileName = file ? file.name : "No file chosen";
+
+            // output.innerHTML = `
+            //     <h3>Submitted Data:</h3>
+            //     <p><strong>Peruntukan:</strong> ${purposeValue}</p>
+            //     <p><strong>Nominal:</strong> Rp ${saldoAwal}</p>
+            //     <p><strong>Deskripsi:</strong> ${deskripsi}</p>
+            //     <p><strong>Tanggal:</strong> ${tanggal}</p>
+            //     <p><strong>Dompet:</strong> ${dompet}</p>
+            //     <p><strong>Kategori:</strong> ${kategori}</p>
+            //     <p><strong>Bukti:</strong> ${fileName}</p>
+            // `;
+
+            modalJosh.style.display = "none";
+        }
+
+        document.getElementById('file').addEventListener('change', function() {
+            var statusElement = document.getElementById('file-upload-status');
+            statusElement.textContent = 'File sedang diunggah...';
+            statusElement.classList.remove('uploaded');
+            statusElement.classList.add('uploading');
+
+        // Simulate file upload for demo purposes
+            setTimeout(function() {
+                statusElement.textContent = 'File telah diunggah.';
+                statusElement.classList.remove('uploading');
+                statusElement.classList.add('uploaded');
+            }, 2000); // Ganti dengan waktu unggah sebenarnya
         });
 
-        $('#ageSelection').on('change', function () {
-            // console.log($('#ageSelection').val());
-            table.draw();
+        document.getElementById('upload-form').addEventListener('submit', function() {
+            var statusElement = document.getElementById('file-upload-status');
+            statusElement.textContent = 'File sedang diunggah...';
+            statusElement.classList.remove('uploaded');
+            statusElement.classList.add('uploading');
         });
-    });
 </script>
 @endsection
