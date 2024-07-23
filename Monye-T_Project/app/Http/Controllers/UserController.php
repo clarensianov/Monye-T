@@ -14,10 +14,6 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    public function authDashboard(){
-
-    }
-
     public function loginindex(){
         return view('login');
     }
@@ -46,7 +42,7 @@ class UserController extends Controller
         if (Auth::attempt($login)) {
             $req->session()->regenerate();
 
-            return view('dashboard');            
+            return redirect('dashboard');
         }
 
         return back()->with('loginFailed', 'Gagal Login');
