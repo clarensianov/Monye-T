@@ -14,6 +14,10 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
+    public function authDashboard(){
+
+    }
+
     public function loginindex(){
         return view('login');
     }
@@ -41,16 +45,8 @@ class UserController extends Controller
 
         if (Auth::attempt($login)) {
             $req->session()->regenerate();
-            $user = auth()->user();
-            $dompetUser = User::find($user->user_id)->dompets;
-            $kategoriUser = User::find($user->user_id)->kategoris;
-            // Fetch wallets and categories only if needed
-            if (!empty($dompetUser) && !empty($kategoriUser)) {                
-                $data = compact('user', 'dompetUser', 'kategoriUser');
-            } else {
-                $data = compact('user');
-            }            
-            return view('dashboard', $data);            
+
+            return view('dashboard');            
         }
 
         return back()->with('loginFailed', 'Gagal Login');
@@ -111,7 +107,7 @@ class UserController extends Controller
             }
             
 
-            return redirect()->route('katapemulihan')->with('userData', auth()->user()->user_id);
+            return redirect()->route('katapemulihan');
         }
 
         dd('gagal');
@@ -132,16 +128,7 @@ class UserController extends Controller
         $user->kata_pemulihan = $req->input('katapemulihan');
         $user->save();
 
-        $user = auth()->user();
-        $dompetUser = User::find($user->user_id)->dompets;
-        $kategoriUser = User::find($user->user_id)->kategoris;
-        // Fetch wallets and categories only if needed
-        if (!empty($dompetUser) && !empty($kategoriUser)) {                
-            $data = compact('user', 'dompetUser', 'kategoriUser');
-        } else {
-            $data = compact('user');
-        }            
-        return view('dashboard', $data);
+        return redirect('dashboard');
     }
 
     public function lupasandi(Request $req){

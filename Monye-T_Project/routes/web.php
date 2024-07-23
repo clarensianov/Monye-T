@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DompetController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\PencatatanController;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::redirect('/', '/login');
-Route::redirect('/home','/dashboard');
+Route::redirect('/home','/dashboard')->name('dashboard')->middleware('auth');
 
 
 
@@ -53,15 +54,19 @@ Route::get('/dashboard', function(){
 })->name('dashboard')->middleware('auth');
 
 Route::post('/inputDompet', [DompetController::class, 'inputDompet'])->name('input_dompet');
+Route::post('/editDompet', [DompetController::class, 'editDompet'])->name('edit_dompet');
 
 
 //test
 Route::get('/testingaja', function(){return view('popup_Transaksi');});
-Route::post('/inputTx/{id}', [TransactionController::class, 'inputTransaction'])->name('input_transaction');
-Route::post('/editDompet', [DompetController::class, 'editDompet'])->name('edit_dompet');
+Route::post('/inputTx', [TransactionController::class, 'inputTransaction'])->name('input_transaction');
 
 Route::get('/pencatatan', [PencatatanController::class, 'index'])->name('pencatatan');
+Route::post('/pencatatan', [PencatatanController::class, 'fetchData'])->name('pencatatan.data');
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
 
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
