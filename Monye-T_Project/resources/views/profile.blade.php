@@ -155,19 +155,28 @@
         <img id="profile-image" src="{{ asset('images/profile-pic.png') }}" alt="Profile Picture">
     </div>
     <div class="profile-info">
-        <h1>Micheline Glenesia</h1>
-        <p>mimi123@gmail.com</p>
+        @php
+            $user = App\Models\User::find(auth()->user()->user_id)
+        @endphp
+        {{-- nama --}}
+        <h1>{{ auth()->user()->nama }}</h1>
+        {{-- email --}}
+        <p>{{ auth()->user()->email }}</p>
         <a href="#" id="change-profile-pic">Ubah Foto Profil</a>
         <input type="file" id="profile-pic-input" style="display:none;" accept="image/*">
-        <button class="logout-button"><i class="bi bi-box-arrow-right"></i> Keluar</button>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        <button class="logout-button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-right"></i> Keluar</button>
     </div>
     <div class="container">
-        <form class="edit-profile-form">
+        <form class="edit-profile-form" method="POST" action="{{ route('profile.update') }}">
+            @csrf
             <h2>Edit Profil</h2>
             <div class="form-group">
                 <label for="username">Username</label>
                 <div class="input-group">
-                    <input type="text" id="username" name="username" value="itsmimi_">
+                    <input type="text" id="username" name="username" value={{ auth()->user()->username }}>
                     <button type="button" class="edit-button">&#9998;</button>
                 </div>
             </div>
@@ -188,6 +197,7 @@
             </div>
             <button type="submit" class="submit-button">Simpan</button>
         </form>
+        @include('components.flash')
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

@@ -28,7 +28,7 @@ Route::get('/register', [UserController::class, 'registerindex'])->name('registe
 
 Route::post('/loginregister/login   ', [UserController::class, 'login']);
 Route::post('/loginregister/register', [UserController::class, 'register']);
-Route::post('/logout', [UserController::class, 'logout']);
+Route::post('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth');
 
 //tes
 Route::get('/logout1', [UserController::class, 'logout']);
@@ -63,6 +63,7 @@ Route::post('/inputTx', [TransactionController::class, 'inputTransaction'])->nam
 Route::get('/pencatatan', [PencatatanController::class, 'index'])->name('pencatatan');
 Route::post('/pencatatan', [PencatatanController::class, 'fetchData'])->name('pencatatan.data');
 
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index')->middleware('auth');
+Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 
 

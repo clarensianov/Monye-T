@@ -78,10 +78,10 @@
                 </li>
             </ul>
             <div>
-                <div class="loginButton d-flex justify-content-center align-items-center">
+                <a href="/profile" class="text-decoration-none loginButton d-flex justify-content-center align-items-center">
                     <img class="profilepic" src="{{ asset('../Assets/Navbar/default.png') }}" alt="">
                     <h2>{{ Auth::user()->username }}</h2>
-                </div>
+                </a>
             </div>
         </div>
     </header>
