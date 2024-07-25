@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use App\Models\Category;
 
 class PencatatanController extends Controller
 {
@@ -15,10 +16,12 @@ class PencatatanController extends Controller
         $user = Auth::user();
         $pencatatans = $user->pencatatans;
 
+        $categories = Category::all();
+
         // dd($pencatatans);
 
         // return view('pencatatan', compact('user', 'pencatatans'));
-        return view('pencatatan');
+        return view('pencatatan', ['categories' => $categories]);
     }
 
     // Untuk data table (View semua transaksi user)

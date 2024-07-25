@@ -366,5 +366,6 @@ console.log(1);
             table.draw();
         });
     });
+    document.querySelector('.TransaksiIcon').classList.add('active');
 </script>
 @endsection

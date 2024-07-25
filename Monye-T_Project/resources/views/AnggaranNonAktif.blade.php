@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anggaran Aktif</title>
-   <!-- bootstrap -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+@extends('components.navbar')
 
-   <!-- Bootstrap Icon -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css" rel="stylesheet">
-
-   <!-- google font -->
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
-    <!-- font awesome -->
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
-
-   <!-- Bootstrap Date Picker -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+@section('style')
 <style>
     *{
         margin: 0;
@@ -116,7 +98,9 @@
         border-radius: 10px;
     }
 </style>
-<body>
+@endsection
+
+@section('content')
     <div class="w-100 d-flex flex-column align-items-center">
         <div class="w-85 mt-4 text-black ">
             <h2>Anggaran Aktif</h2>
@@ -125,10 +109,10 @@
         <div class="text-black" style="width: 76%;">
             <div class="mt-4 d-flex justify-content-between w-75">
                 <div style="border-radius: 10px;" class="d-flex align-items-center bg-yellow-light px-2 py-2 ">
-                    <a style="width: 140px; border-radius: 5px; font-weight: 700;" href="" class="px-3 py-2 d-flex justify-content-center text-black text-decoration-none">
+                    <a href="{{route('AnggaranAktif')}}" style="width: 140px; border-radius: 5px; font-weight: 700;" href="" class="px-3 py-2 d-flex justify-content-center text-black text-decoration-none">
                         Aktif
                     </a>
-                    <a style="width: 140px; border-radius: 5px; font-weight: 700;" href="" class="px-3 py-2 bg-warning d-flex justify-content-center text-black text-decoration-none">
+                    <a style="width: 140px; border-radius: 5px; font-weight: 700;" class="px-3 py-2 bg-warning d-flex justify-content-center text-black text-decoration-none">
                         Tidak Aktif
                     </a>
                 </div>
@@ -140,7 +124,7 @@
                 </form>
             </div>                        
         </div>
-        <div class="text-black mt-4 d-flex flex-wrap" style="width: 76%; height:500px; column-gap: 100px; row-gap:50px;">
+        <div class="text-black mt-4 d-flex flex-wrap" style="width: 76%; height:500px; column-gap: 50px; row-gap:50px;">
             <div class="bg-card CardAnggaran">
                 <div class="d-flex align-items-center w-100 justify-content-evenly mt-3">
                     <div>
@@ -318,21 +302,9 @@
               </nav>
         </div>
     </div>
-</body>
-<!-- Bootstrap JS and dependencies -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<!-- Bootstrap Icons CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    @endsection
 
-<!-- Jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-
-<!-- Bootstrap Date Picker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+@section('script')
 <script>
     $(".search_input").on("click", function(){
         $(this).attr("placeholder", "");
@@ -344,5 +316,8 @@
             $(".search_input").css("caret-color", "transparent");
         }
     });
+
+    document.querySelector('.AnggaranIcon').classList.add('active');
+
 </script>
-</html>
+@endsection

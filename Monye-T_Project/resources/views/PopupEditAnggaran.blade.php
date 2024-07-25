@@ -45,18 +45,18 @@
     }
 </style>
     
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="1">
+<div class="modal fade" id="modalEditAnggaran" aria-hidden="true"  tabindex="1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content p-0" style="margin-top: -50px; border-radius: 35px; box-shadow: 0 4px 4px 0 #ffffff42;">
             <div class="d-flex justify-content-between align-items-center">
-              <h1 class="modal-title fs-5 bg-yellow-header" style="padding: 15px 50px;" id="exampleModalToggleLabel">Tambah Anggaran</h1>
+              <h1 class="modal-title fs-5 bg-yellow-header" style="padding: 15px 50px;" id="exampleModalToggleLabel">Edit Anggaran</h1>
               <button type="button" class="btn-close" style="margin-right: 30px;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="d-flex mt-3">
                 <form action="" class="w-100 d-flex flex-column w-100 align-items-center">
                 <div class="" style="width: 90%;">
-                    <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3">Masukkan Nama Anggaran Barumu</label>
-                    <input name="NamaAnggaran" type="text" class="w-100 px-3 py-2 border border-2" style="border-radius: 10px;" placeholder="Nama Anggaran Baru">
+                    <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3">Masukkan Nama Anggaran</label>
+                    <input name="NamaAnggaran" type="text" class="w-100 px-3 py-2 border border-2" style="border-radius: 10px;" placeholder="Edit Nama Anggaran">
                 </div>
                 <div class="" style="width: 90%;">
                     <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3 mt-3">Masukkan saldo untuk anggaranmu</label>
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="" style="width: 90%;">
-                    <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3 mt-3">Pilih kategori untuk anggaran barumu!</label>
+                    <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3 mt-3">Pilih kategori untuk anggaran!</label>
                     <select class="form-select px-3 py-2 border-dropdown" aria-label="Default select example">
                         <option selected>Open this select menu</option>
                         <option value="1">One</option>
