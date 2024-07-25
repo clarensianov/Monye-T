@@ -64,6 +64,21 @@ class TransactionController extends Controller
         }
         $dompet->save();
 
+        $user = auth()->user();
+        $budget_user = $user->budgets;        
+        if($req->tujuan == 'Pengeluaran'){
+            foreach ($budget_user as $budget) {
+                if ($budget->kategoris_id == $req->kategori && $budget->status == false){
+                    if($budget->tx_status == false){
+                        $budget->tx_status = true;                    
+                    }
+                    $budget->digunakan += $req->nominal;
+                    $budget->save();
+                    break;
+                }
+            }
+        }
+        
         return redirect()->route('dashboard')->with('success', 'Transaksi berhasil disimpan.');
     }
 }

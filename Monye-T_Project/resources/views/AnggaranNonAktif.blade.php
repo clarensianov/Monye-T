@@ -103,7 +103,7 @@
 @section('content')
     <div class="w-100 d-flex flex-column align-items-center">
         <div class="w-85 mt-4 text-black ">
-            <h2>Anggaran Aktif</h2>
+            <h2>Anggaran Tidak Aktif</h2>
         </div>
         <hr style="width:100%; height: 2px; z-index: -3; background-color: #0000004a;">
         <div class="text-black" style="width: 76%;">

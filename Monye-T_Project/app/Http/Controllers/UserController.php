@@ -14,10 +14,6 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    public function authDashboard(){
-
-    }
-
     public function loginindex(){
         return view('login');
     }

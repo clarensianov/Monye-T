@@ -111,7 +111,7 @@
                     <a style="width: 140px; border-radius: 5px; font-weight: 700;"  class="px-3 py-2 bg-warning d-flex justify-content-center text-black text-decoration-none">
                         Aktif
                     </a>
-                    <a style="width: 140px; border-radius: 5px; font-weight: 700;" href="{{route('AnggaranTidakAKtif')}}" class="px-3 py-2 d-flex justify-content-center text-black text-decoration-none">
+                    <a style="width: 140px; border-radius: 5px; font-weight: 700;" href="" class="px-3 py-2 d-flex justify-content-center text-black text-decoration-none">
                         Tidak Aktif
                     </a>
                 </div>
@@ -154,10 +154,10 @@
                     </div>
                 </div>
                 <div class="w-100 d-flex" style="border-top: 1px solid #00000055; height: 42px;">
-                    <a onclick="tampilkanPopupEdit()" class="w-50 d-flex align-items-center justify-content-center h-100" style="border-right: 1px solid #00000055;">
+                    <a href="" class="w-50 d-flex align-items-center justify-content-center h-100" style="border-right: 1px solid #00000055;">
                         <i class="text-black bi bi-pencil"></i>
                     </a>
-                    <a onclick="tampilkanPopupHapus()" class="w-50 d-flex align-items-center justify-content-center h-100">
+                    <a href="" class="w-50 d-flex align-items-center justify-content-center h-100">
                         <i class="text-black bi bi-trash3"></i>
                     </a>
                 </div>
@@ -280,7 +280,7 @@
                     </a>
                 </div>
             </div>
-            <a class="bg-white CardAnggaran CardTambah" onclick="ModalAnggaran()">
+            <a class="bg-white CardAnggaran" onclick="ModalAnggaran()">
                 <div class="d-flex align-items-center w-100 h-100 justify-content-evenly">
                     <i style="font-size: 120px; color:#5BBA6F;" class="bi bi-plus"></i>
                 </div>
