@@ -9,6 +9,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\Kategori;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +48,10 @@ Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('cha
 
 
 Route::get('/dashboard', function(){
+    $categories = Category::all();
+    return view('dashboard' , ['categories' => $categories]);
     return view('dashboard');
+
 })->name('dashboard')->middleware('auth');
 
 Route::post('/inputDompet', [DompetController::class, 'inputDompet'])->name('input_dompet');
@@ -63,10 +68,14 @@ Route::post('/pencatatan', [PencatatanController::class, 'fetchData'])->name('pe
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
 
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
 Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
 
-Route::get('/anggaran', [AnggaranController::class, 'index'])->name('anggaran')->middleware('auth');
-Route::get('/exanggaran', [AnggaranController::class, 'nonIndex'])->name('anggaran.non')->middleware('auth');
-Route::post('/anggaran', [AnggaranController::class, 'create'])->name('anggaran.create');
+Route::get('/AnggaranAktif' , function(){
+    $categories = Category::all();
+    return view('AnggaranAktif' , ['categories' => $categories]);
+})->name('AnggaranAktif');
+Route::get('/AnggaranTidakAKtif' , function(){
+    $categories = Category::all();
+    return view('AnggaranNonAktif' , ['categories' => $categories]);
+})->name('AnggaranTidakAKtif');

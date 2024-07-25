@@ -200,7 +200,9 @@
             justify-content: center;
 
         }
-
+        .bg-kuning{
+            background-color: #FEEE72;
+        }
         .tombolPencet {
             background-color: #FEEE72;
             width: 500px;
@@ -229,12 +231,12 @@
         }
 
 </style>
-<div>
 
-    <div id="ModalJosh" class="modal p-0 overflow-hidden">
+<div>
+    <div id="ModalJosh" class="modal p-0 overflow-hidden" >
 
       <!-- Modal content -->
-      <div class="modal-content p-0" style="scale: 0.9;">
+      <div class="modal-content p-0" style="scale: 0.9; margin-top:0;">
         <span class="closeModal">&times;</span>
         <div class="TransaksiBaru" style="width: 40%">
             <h1 class="">Transaksi Baru</h1>
@@ -309,13 +311,14 @@
                         {{-- kategori --}}
                         <div class="kategori select-container">
                             <h4>Kategori</h4>
-                            <div class="select-wrapper">
+                            <div class="select-wrapper gap-2 align-items-start flex-column">
                                 <select name="kategori" id="kategori1">
                                     <option value="">Pilih Kategori</option>
                                     @foreach ($kategoris as $kategori)
-                                        <option value={{ $kategori->kategori_id }}>{{ $kategori->nama_kategori }}</option>
+                                    <option value={{ $kategori->kategori_id }}>{{ $kategori->nama_kategori }}</option>
                                     @endforeach
                                 </select>
+                                <a id="buttonAddKategori" onclick="tampilkanKategori()" class=" border-0 py-2 px-4 rounded text-decoration-none text-black bg-kuning">+ Kategori</a>
                             </div>
                         </div>
                         <div class="tombol">
@@ -327,6 +330,66 @@
       </div>
     </div>
 </div>
+
+<div class="position-fixed w-100 top-0 modal" id="PopupKategori" aria-hidden="true" style="z-index:100001; display: none;">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupKategoriModalLabel">Kategori Baru</h5>
+                <button onclick="closePopupKategori()" type="button" class="btn-close buttonClosePopupKategori" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('categories.store') }}" method="POST">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="name" placeholder="Nama dompet baru" required>
+                        <select class="form-select" name="icon" required>
+                            <option value="https://img.icons8.com/ios-filled/50/000000/airplane.png">Plane</option>
+                            <option value="https://img.icons8.com/ios-filled/50/000000/backpack.png">Backpack</option>
+                            <option value="https://img.icons8.com/ios-filled/50/000000/money.png">Money</option>
+                        </select>
+                        <button class="btn btn-add" type="submit">Tambah</button>
+                    </div>
+                </form>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Kategori</th>
+                        <th>Ubah</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($categories as $category)
+                        <tr>
+                            <td>
+                                <span class="category-view">
+                                    <img src="{{ $category->icon }}" alt="icon" class="category-icon" width="24">
+                                    <span class="category-name">{{ $category->name }}</span>
+                                </span>
+                                <form class="edit-form d-none" action="{{ route('categories.update', $category->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="name" value="{{ $category->name }}" required>
+                                        <button class="btn btn-primary" type="submit">Update</button>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <button class="btn btn-edit toggle-edit-form">
+                                    <img src="https://img.icons8.com/ios-glyphs/30/000000/edit.png" alt="edit" width="24">
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@include('popup_Kategori')
 
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -412,4 +475,17 @@
             statusElement.classList.remove('uploaded');
             statusElement.classList.add('uploading');
         });
+
+
+        function tampilkanKategori(){
+            var popupKategori = document.getElementById("PopupKategori");
+            popupKategori.style.display = "block";
+            var popupTransaksi = document.getElementById("ModalJosh");
+            popupTransaksi.style.display = "none";
+        }
+
+        function closePopupKategori(){
+            var popupKategori = document.getElementById("PopupKategori");
+            popupKategori.style.display = "none";
+        }
     </script>
