@@ -50,6 +50,8 @@ Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('cha
 Route::get('/dashboard', function(){
     $categories = Category::all();
     return view('dashboard' , ['categories' => $categories]);
+    return view('dashboard');
+
 })->name('dashboard')->middleware('auth');
 
 Route::post('/inputDompet', [DompetController::class, 'inputDompet'])->name('input_dompet');
