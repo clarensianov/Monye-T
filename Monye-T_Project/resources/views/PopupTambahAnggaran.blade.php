@@ -45,9 +45,9 @@
     }
 </style>
     
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content" style="border-radius: 35px; box-shadow: 0 4px 4px 0 #ffffff42;">
+          <div class="modal-content p-0" style="margin-top: -50px; border-radius: 35px; box-shadow: 0 4px 4px 0 #ffffff42;">
             <div class="d-flex justify-content-between align-items-center">
               <h1 class="modal-title fs-5 bg-yellow-header" style="padding: 15px 50px;" id="exampleModalToggleLabel">Tambah Anggaran</h1>
               <button type="button" class="btn-close" style="margin-right: 30px;" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -113,9 +113,12 @@
             </div>
           </div>
         </div>
-    </div>
+</div>
     
 <script>
+    document.querySelector('.buttonAddKategori').addEventListener('click', function() {
+            console.log("tes");
+    });
     $(".input-group-append").click(function(){
         $(this).prev().focus();
     });
