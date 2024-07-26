@@ -218,7 +218,7 @@
             margin-top: 10px;
             color: #333;
             font-size: 14px;
-        }
+        }  
 
         .uploading {
             color: blue;
@@ -276,7 +276,7 @@
                             <div class="isiBukti">
                                 <input type="file" id="file" class="file-upload-input" name="bukti"/>
                                 <label for="file" class="file-upload-label">Upload File</label>
-                                {{-- <div id="file-upload-status" class="file-upload-status"></div> --}}
+                                <div id="file-upload-status" class="file-upload-status"></div>
                             </div>
                         </div>
                     </div>

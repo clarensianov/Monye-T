@@ -540,6 +540,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoryController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DompetController' => __DIR__ . '/../..' . '/app/Http/Controllers/DompetController.php',
         'App\\Http\\Controllers\\PencatatanController' => __DIR__ . '/../..' . '/app/Http/Controllers/PencatatanController.php',
@@ -557,6 +558,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\Budget' => __DIR__ . '/../..' . '/app/Models/Budget.php',
+        'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\Dompet' => __DIR__ . '/../..' . '/app/Models/Dompet.php',
         'App\\Models\\Grup' => __DIR__ . '/../..' . '/app/Models/Grup.php',
         'App\\Models\\Grup_User' => __DIR__ . '/../..' . '/app/Models/Grup_User.php',

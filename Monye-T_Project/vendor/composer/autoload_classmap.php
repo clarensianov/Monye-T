@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\CategoryController' => $baseDir . '/app/Http/Controllers/CategoryController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DompetController' => $baseDir . '/app/Http/Controllers/DompetController.php',
     'App\\Http\\Controllers\\PencatatanController' => $baseDir . '/app/Http/Controllers/PencatatanController.php',
@@ -25,6 +26,7 @@ return array(
     'App\\Http\\Middleware\\ValidateSignature' => $baseDir . '/app/Http/Middleware/ValidateSignature.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Models\\Budget' => $baseDir . '/app/Models/Budget.php',
+    'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Dompet' => $baseDir . '/app/Models/Dompet.php',
     'App\\Models\\Grup' => $baseDir . '/app/Models/Grup.php',
     'App\\Models\\Grup_User' => $baseDir . '/app/Models/Grup_User.php',
