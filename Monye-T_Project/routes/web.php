@@ -7,7 +7,11 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\PencatatanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Mail\DailyReminder;
+use App\Mail\ReminderMail;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,3 +74,18 @@ Route::put('/categories/{category}', [CategoryController::class, 'update'])->nam
 Route::get('/anggaran', [AnggaranController::class, 'index'])->name('anggaran')->middleware('auth');
 Route::get('/exanggaran', [AnggaranController::class, 'nonIndex'])->name('anggaran.non')->middleware('auth');
 Route::post('/anggaran', [AnggaranController::class, 'create'])->name('anggaran.create');
+
+// Tes untuk email remainder
+Route::get('/email', function(){
+    Mail::to('mrcllnjoshua@gmail.com')->send(new ReminderMail());
+});
+
+Route::get('/test-email/{time}', function ($time) {
+    $message = $time == 'morning' ? 'Tess Ayo semangat hari ini dan jangan lupa isi catatan keuanganmu!' : 'Selamat malam, ayo rekap semua keuangan mu hari ini!';
+
+    $users = User::all();
+    foreach ($users as $user) {
+        Mail::to($user->email)->send(new DailyReminder($message));
+    }
+    return 'Emails have been sent';
+});
