@@ -1,3 +1,4 @@
+@extends('components.navbar')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
             width: 85%;
         }
 
-        .profile-header {
+        .profile-image {
             top: -17px;
             background-color: #FEEE72;
             height: 150px;
@@ -22,9 +23,10 @@
             align-items: flex-end;
             justify-content: center;
             position: relative;
+            z-index: 1;
         }
 
-        .profile-header img {
+        .profile-image img {
             width: 200px;
             height: 200px;
             border-radius: 50%;
@@ -32,20 +34,26 @@
             position: absolute;
             bottom: -80%;
             background-color: rgb(255, 255, 255);
-            left: 15%;
+            left: 17%;
         }
 
+        .profile-image a#change-profile-pic{
+            position: absolute;
+            bottom: -90%;
+            left: 33.5%;
+        }
 
         .profile-info {
             text-align: left;
-            margin-top: 10px;
-            margin-left: 35%;
+            top: -705px;
+            margin-left: 30%;
             position: relative;
+            z-index: 10;
         }
 
         .profile-info h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 50px;
             font-weight: bold;
         }
 
@@ -76,8 +84,9 @@
         }
 
         .container {
-            margin-top: 5%;
+            margin-top: 10%;
             width: 50%;
+            z-index: 1;
         }
 
         .edit-profile-form h2 {
@@ -151,54 +160,63 @@
         </div>
     </div>
     <hr style="width:100%; height: 2px; z-index: -3; background-color: #0000004a;">
-    <div class="profile-header">
-        <img id="profile-image" src="{{ asset('images/profile-pic.png') }}" alt="Profile Picture">
-    </div>
-    <div class="profile-info">
-        @php
-            $user = App\Models\User::find(auth()->user()->user_id)
-        @endphp
-        {{-- nama --}}
-        <h1>{{ auth()->user()->nama }}</h1>
-        {{-- email --}}
-        <p>{{ auth()->user()->email }}</p>
-        <a href="#" id="change-profile-pic">Ubah Foto Profil</a>
-        <input type="file" id="profile-pic-input" style="display:none;" accept="image/*">
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-        <button class="logout-button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-right"></i> Keluar</button>
-    </div>
-    <div class="container">
-        <form class="edit-profile-form" method="POST" action="{{ route('profile.update') }}">
-            @csrf
-            <h2>Edit Profil</h2>
-            <div class="form-group">
-                <label for="username">Username</label>
-                <div class="input-group">
-                    <input type="text" id="username" name="username" value={{ auth()->user()->username }}>
-                    <button type="button" class="edit-button">&#9998;</button>
+    @php
+        $user = App\Models\User::find(auth()->user()->user_id)
+    @endphp
+
+    <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="profile-image">
+            <img id="profile-image" src="{{ asset($user->gambar_user)}}" alt="Profile Picture">
+            <a href="#" id="change-profile-pic">Ubah Foto Profil</a>
+            <input type="file" id="profile-pic-input" style="display:none;" accept="image/*" name="profile-image" class='form-control'>
+        </div>
+
+        <div class="container">
+                <h2>Edit Profil</h2>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-group">
+                        <input type="text" id="username" name="username" value={{ auth()->user()->username }}>
+                    </div>
                 </div>
-            </div>
-            <h2>Ubah Password</h2>
-            <div class="form-group">
-                <label for="current-password">Password sekarang</label>
-                <div class="input-group">
-                    <input type="password" id="current-password" name="current-password" placeholder="Masukkan password sekarang">
-                    <button type="button" class="toggle-password">&#128065;</button>
+                <h2>Ubah Password</h2>
+                <div class="form-group">
+                    <label for="current-password">Password sekarang</label>
+                    <div class="input-group">
+                        <input type="password" id="current-password" name="current-password" placeholder="Masukkan password sekarang">
+                        <button type="button" class="toggle-password">&#128065;</button>
+                        &nbsp;
+                        @error('current-password')
+                            <span class="text-danger"> {{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="new-password">Password baru</label>
-                <div class="input-group">
-                    <input type="password" id="new-password" name="new-password" placeholder="Masukkan password baru">
-                    <button type="button" class="toggle-password">&#128065;</button>
+                <div class="form-group">
+                    <label for="new-password">Password baru</label>
+                    <div class="input-group">
+                        <input type="password" id="new-password" name="new-password" placeholder="Masukkan password baru">
+                        <button type="button" class="toggle-password">&#128065;</button>
+                        @error('new-password')
+                            <span class="text-danger"> {{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
+                <button type="submit" class="submit-button">Simpan</button>
+            </form>
+
+            <div class="profile-info">
+                {{-- nama --}}
+                <h1>{{ auth()->user()->nama }}</h1>
+                {{-- email --}}
+                <p>{{ auth()->user()->email }}</p>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                <button class="logout-button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-right"></i> Keluar</button>
             </div>
-            <button type="submit" class="submit-button">Simpan</button>
-        </form>
-        @include('components.flash')
-    </div>
+            @include('components.flash')
+        </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const togglePasswordButtons = document.querySelectorAll('.toggle-password');
