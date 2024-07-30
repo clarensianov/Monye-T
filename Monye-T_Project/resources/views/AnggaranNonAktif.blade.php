@@ -109,7 +109,7 @@
         <div class="text-black" style="width: 76%;">
             <div class="mt-4 d-flex justify-content-between w-75">
                 <div style="border-radius: 10px;" class="d-flex align-items-center bg-yellow-light px-2 py-2 ">
-                    <a href="{{route('AnggaranAktif')}}" style="width: 140px; border-radius: 5px; font-weight: 700;" href="" class="px-3 py-2 d-flex justify-content-center text-black text-decoration-none">
+                    <a href="{{route('anggaran.index')}}" style="width: 140px; border-radius: 5px; font-weight: 700;" href="" class="px-3 py-2 d-flex justify-content-center text-black text-decoration-none">
                         Aktif
                     </a>
                     <a style="width: 140px; border-radius: 5px; font-weight: 700;" class="px-3 py-2 bg-warning d-flex justify-content-center text-black text-decoration-none">
@@ -124,163 +124,56 @@
                 </form>
             </div>                        
         </div>
-        <div class="text-black mt-4 d-flex flex-wrap" style="width: 76%; height:500px; column-gap: 50px; row-gap:50px;">
-            <div class="bg-card CardAnggaran">
-                <div class="d-flex align-items-center w-100 justify-content-evenly mt-3">
-                    <div>
-                        <img width="50" src="../Assets/Anggaran/Kategori.png" alt="">
-                    </div>
-                    <div>
-                        <div class="d-flex flex-column">
-                            <h4>Makanan</h4>
+        @php
+            $budgets = App\Models\User::find(auth()->user()->user_id)->budgets;
+            $cek = 1;            
+        @endphp
+        <div class="text-black mt-4 d-flex flex-wrap" style="width: 76%; height:500px; column-gap: 50px; row-gap:50px;">            
+            @foreach ($budgets as $budget)
+                @if ($budget->status == 1)
+                    @php
+                        $cek = 1;
+                    @endphp
+                    <div class="bg-card CardAnggaran">
+                        <div class="d-flex align-items-center w-100 justify-content-evenly mt-3">
                             <div>
-                                <div>
-                                    <i class="bi bi-calendar-week"></i>
-                                    <span class="borderTanggal tanggalStart">12/12/2021</span>
-                                    <i class="bi bi-arrow-right"></i>
-                                    <span class="borderTanggal tanggalEnd">12/12/2021</span>
+                                <img width="50" src="../Assets/Anggaran/Kategori.png" alt="">
+                            </div>
+                            <div>
+                                <div class="d-flex flex-column">
+                                    <h4>{{ $budget->nama_budget }}</h4>
+                                    <div>
+                                        <div>
+                                            <i class="bi bi-calendar-week"></i>
+                                            <span class="borderTanggal tanggalStart">{{ $budget->tanggal_pembuatan }}</span>
+                                            <i class="bi bi-arrow-right"></i>
+                                            <span class="borderTanggal tanggalEnd">{{ $budget->tanggal_berakhir }}</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="mt-3 d-flex w-100 justify-content-between px-4">
-                    <div class="w-50" style="margin-left: 10px;">
-                        <p class="m-0 w-50" style="font-weight: 600;">Terpakai</p>
-                        <p class="text-yellow-terpakai" style="font-weight: 600;">Rp. 1.500.000</p>
-                    </div>
-                    <div class="w-50" style="margin-left:35px;">
-                        <p class="m-0" style="font-weight: 600;">Dari</p>
-                        <p style="font-weight: 600;">Rp. 2.500.000</p>
-                    </div>
-                </div>
-                <div class="w-100 d-flex" style="border-top: 1px solid #00000055; height: 42px;">
-                    <a href="" class="w-50 d-flex align-items-center justify-content-center h-100" style="border-right: 1px solid #00000055;">
-                        <i class="text-black bi bi-pencil"></i>
-                    </a>
-                    <a href="" class="w-50 d-flex align-items-center justify-content-center h-100">
-                        <i class="text-black bi bi-trash3"></i>
-                    </a>
-                </div>
-            </div>
-
-            
-
-            <div class="bg-card CardAnggaran">
-                <div class="d-flex align-items-center w-100 justify-content-evenly mt-3">
-                    <div>
-                        <img width="50" src="../Assets/Anggaran/Kategori.png" alt="">
-                    </div>
-                    <div>
-                        <div class="d-flex flex-column">
-                            <h4>Makanan</h4>
-                            <div>
-                                <div>
-                                    <i class="bi bi-calendar-week"></i>
-                                    <span class="borderTanggal tanggalStart">12/12/2021</span>
-                                    <i class="bi bi-arrow-right"></i>
-                                    <span class="borderTanggal tanggalEnd">12/12/2021</span>
-                                </div>
+                        <div class="mt-3 d-flex w-100 justify-content-between px-4">
+                            <div class="w-50" style="margin-left: 10px;">
+                                <p class="m-0 w-50" style="font-weight: 600;">Terpakai</p>
+                                <p class="text-yellow-terpakai" style="font-weight: 600;">{{ $budget->digunakan }}</p>
+                            </div>
+                            <div class="w-50" style="margin-left:35px;">
+                                <p class="m-0" style="font-weight: 600;">Dari</p>
+                                <p style="font-weight: 600;">{{ $budget->jumlah }}</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="mt-3 d-flex w-100 justify-content-between px-4">
-                    <div class="w-50" style="margin-left: 10px;">
-                        <p class="m-0 w-50" style="font-weight: 600;">Terpakai</p>
-                        <p class="text-yellow-terpakai" style="font-weight: 600;">Rp. 1.500.000</p>
-                    </div>
-                    <div class="w-50" style="margin-left:35px;">
-                        <p class="m-0" style="font-weight: 600;">Dari</p>
-                        <p style="font-weight: 600;">Rp. 2.500.000</p>
-                    </div>
-                </div>
-                <div class="w-100 d-flex" style="border-top: 1px solid #00000055; height: 42px;">
-                    <a href="" class="w-50 d-flex align-items-center justify-content-center h-100" style="border-right: 1px solid #00000055;">
-                        <i class="text-black bi bi-pencil"></i>
-                    </a>
-                    <a href="" class="w-50 d-flex align-items-center justify-content-center h-100">
-                        <i class="text-black bi bi-trash3"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="bg-card CardAnggaran">
-                <div class="d-flex align-items-center w-100 justify-content-evenly mt-3">
-                    <div>
-                        <img width="50" src="../Assets/Anggaran/Kategori.png" alt="">
-                    </div>
-                    <div>
-                        <div class="d-flex flex-column">
-                            <h4>Makanan</h4>
-                            <div>
-                                <div>
-                                    <i class="bi bi-calendar-week"></i>
-                                    <span class="borderTanggal tanggalStart">12/12/2021</span>
-                                    <i class="bi bi-arrow-right"></i>
-                                    <span class="borderTanggal tanggalEnd">12/12/2021</span>
-                                </div>
-                            </div>
+                        <div class="w-100 d-flex" style="border-top: 1px solid #00000055; height: 42px;">
+                            {{-- <a onclick="tampilkanPopupEdit()" class="w-50 d-flex align-items-center justify-content-center h-100" style="border-right: 1px solid #00000055;">
+                                <i class="text-black bi bi-pencil"></i>
+                            </a> --}}
+                            <a onclick="tampilkanPopupHapus('{{ $budget->budget_id }}')" class="w-100 d-flex align-items-center justify-content-center h-100">
+                                <i class="text-black bi bi-trash3"></i>
+                            </a>
                         </div>
                     </div>
-                </div>
-                <div class="mt-3 d-flex w-100 justify-content-between px-4">
-                    <div class="w-50" style="margin-left: 10px;">
-                        <p class="m-0 w-50" style="font-weight: 600;">Terpakai</p>
-                        <p class="text-yellow-terpakai" style="font-weight: 600;">Rp. 1.500.000</p>
-                    </div>
-                    <div class="w-50" style="margin-left:35px;">
-                        <p class="m-0" style="font-weight: 600;">Dari</p>
-                        <p style="font-weight: 600;">Rp. 2.500.000</p>
-                    </div>
-                </div>
-                <div class="w-100 d-flex" style="border-top: 1px solid #00000055; height: 42px;">
-                    <a href="" class="w-50 d-flex align-items-center justify-content-center h-100" style="border-right: 1px solid #00000055;">
-                        <i class="text-black bi bi-pencil"></i>
-                    </a>
-                    <a href="" class="w-50 d-flex align-items-center justify-content-center h-100">
-                        <i class="text-black bi bi-trash3"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="bg-card CardAnggaran">
-                <div class="d-flex align-items-center w-100 justify-content-evenly mt-3">
-                    <div>
-                        <img width="50" src="../Assets/Anggaran/Kategori.png" alt="">
-                    </div>
-                    <div>
-                        <div class="d-flex flex-column">
-                            <h4>Makanan</h4>
-                            <div>
-                                <div>
-                                    <i class="bi bi-calendar-week"></i>
-                                    <span class="borderTanggal tanggalStart">12/12/2021</span>
-                                    <i class="bi bi-arrow-right"></i>
-                                    <span class="borderTanggal tanggalEnd">12/12/2021</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-3 d-flex w-100 justify-content-between px-4">
-                    <div class="w-50" style="margin-left: 10px;">
-                        <p class="m-0 w-50" style="font-weight: 600;">Terpakai</p>
-                        <p class="text-yellow-terpakai" style="font-weight: 600;">Rp. 1.500.000</p>
-                    </div>
-                    <div class="w-50" style="margin-left:35px;">
-                        <p class="m-0" style="font-weight: 600;">Dari</p>
-                        <p style="font-weight: 600;">Rp. 2.500.000</p>
-                    </div>
-                </div>
-                <div class="w-100 d-flex" style="border-top: 1px solid #00000055; height: 42px;">
-                    <a href="" class="w-50 d-flex align-items-center justify-content-center h-100" style="border-right: 1px solid #00000055;">
-                        <i class="text-black bi bi-pencil"></i>
-                    </a>
-                    <a href="" class="w-50 d-flex align-items-center justify-content-center h-100">
-                        <i class="text-black bi bi-trash3"></i>
-                    </a>
-                </div>
-            </div>
+                @endif                
+            @endforeach
         </div>
         <div class="text-black mt-4 d-flex flex-wrap justify-content-end" style="width: 76%; column-gap: 100px; row-gap:50px;">
             <nav aria-label="Page navigation example">
@@ -302,6 +195,10 @@
               </nav>
         </div>
     </div>
+    <div class="position-absolute" style="z-index: 1000000;">
+        @include('popupEditAnggaran')
+        @include('popupHapusAnggaran')
+    </div>
     @endsection
 
 @section('script')
@@ -316,6 +213,16 @@
             $(".search_input").css("caret-color", "transparent");
         }
     });
+
+    
+    function tampilkanPopupEdit(){
+        $('#modalEditAnggaran').modal('show');
+    }
+
+    function tampilkanPopupHapus(dor){
+        document.getElementById('budgetId').value = dor;
+        $('#modalHapusAnggaran').modal('show');
+    }
 
     document.querySelector('.AnggaranIcon').classList.add('active');
 

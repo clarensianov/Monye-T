@@ -53,10 +53,12 @@
               <button type="button" class="btn-close" style="margin-right: 30px;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="d-flex mt-3">
-                <form action="" class="w-100 d-flex flex-column w-100 align-items-center">
+                <form action="{{ route('anggaran.edit') }}" class="w-100 d-flex flex-column w-100 align-items-center" method="POST">
+                    @method('PUT')
+                    @csrf                    
                 <div class="" style="width: 90%;">
                     <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3">Masukkan Nama Anggaran</label>
-                    <input name="NamaAnggaran" type="text" class="w-100 px-3 py-2 border border-2" style="border-radius: 10px;" placeholder="Edit Nama Anggaran">
+                    <input name="NamaAnggaran" type="text" class="w-100 px-3 py-2 border border-2" style="border-radius: 10px;" placeholder={{ $budget->nama_budget }}>
                 </div>
                 <div class="" style="width: 90%;">
                     <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3 mt-3">Masukkan saldo untuk anggaranmu</label>
@@ -66,26 +68,44 @@
                                 Rp
                             </span>
                         </span>
-                        <input class="w-100 px-3 py-2 inputNumber" type="number">
+                        <input class="w-100 px-3 py-2 inputNumber" type="number" name="saldo" placeholder={{ $budget->jumlah }}>
                     </div>
                 </div>
-                <div class="" style="width: 90%;">
-                    <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3 mt-3">Pilih kategori untuk anggaran!</label>
-                    <select class="form-select px-3 py-2 border-dropdown" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>                      
-                </div>
+                @if ($budget->tx_status == 0)
+                    @php                                            
+                        $budgets = App\Models\User::find(auth()->user()->user_id)->budgets;
+                        $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;
+                    @endphp
+                    <div class="" style="width: 90%;">
+                        <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3 mt-3">Pilih kategori untuk anggaran!</label>
+                        <select class="form-select px-3 py-2 border-dropdown" aria-label="Default select example" name="kategori">
+                            <option selected value="">Open this select menu</option>
+                            @foreach ($kategoris as $kategori)
+                                @php
+                                    $cekKategori = 1;
+                                @endphp
+                                @foreach ($budgets as $budget)
+                                    @if ($budget->kategoris_id == $kategori->kategori_id && $budget->status == 0)
+                                        @php
+                                            $cekKategori = 0;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if ($cekKategori == 1)
+                                    <option value="{{ $kategori->kategori_id }}">{{ $kategori->nama_kategori }}</option>
+                                @endif
+                            @endforeach
+                        </select>                      
+                    </div>
+                @endif
                 <div style="width: 90%;" class="mt-3 d-flex flex-column justify-content-between">
                     <label style="font-size: 18px;">Pilih Jangka waktu Anggaranmu!</label>
                     <div class="d-flex w-100 justify-content-between">
-                        <div class="" style="width: 100%;">
+                        {{-- <div class="" style="width: 100%;">
                             <div class="d-flex flex-column w-100 justify-content-end">
                                 <label for="" style="font-size: 15px;">Mulai</label>
                                 <div class="d-flex">
-                                    <input placeholder="1 Jan 2024" style="width: 85%;" class="px-3 py-2 input-tanggal" type="text" id="fromdate">
+                                    <input style="width: 85%;" class="px-3 py-2 input-tanggal" type="date" id="fromdate" placeholder={{ $budget->tanggal_pembuatan }}>
                                     <span class="input-group-append">
                                         <span class="calendar-logo input-group-text h-100 d-block">
                                         <i class="fa fa-calendar"></i>
@@ -93,12 +113,12 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="" style="width: 100%;">
                             <div class="d-flex flex-column w-100 justify-content-end">
                                 <label for="" style="font-size: 15px;">Berakhir</label>
                                 <div class="d-flex">
-                                    <input placeholder="1 Jan 2024" style="width: 85%;" class="px-3 py-2 input-tanggal" type="text" id="todate">
+                                    <input style="width: 85%;" class="px-3 py-2 input-tanggal" type="date" id="todate" name="tanggal_berakhir">
                                     <span class="input-group-append">
                                         <span class="calendar-logo input-group-text h-100 d-block">
                                         <i class="fa fa-calendar"></i>
@@ -120,7 +140,7 @@
                                 <p class="m-0" style="font-weight: 500; color: #EC0D0D;">Email/Username Anda Sudah Terdaftar!</p>
                             </div>
                         </div>
-                        <button type="submit" class="btn" style="padding: 15px 100px; background-color: #FEEE72; font-weight:600;">Tambah</button>
+                        <button type="submit" name="budget_id" value="{{ $budget->budget_id }}" class="btn" style="padding: 15px 100px; background-color: #FEEE72; font-weight:600;">Ubah</button>
                     </div>
                 </div>
             </form>

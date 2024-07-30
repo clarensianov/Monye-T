@@ -19,8 +19,13 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center gap-5 mt-3 p-3">
-                <button type="button" class="btn " style="width: 200px; border-radius: 10px; background-color: #FEEE72;">Batal</button>
-                <button type="button" class="btn btn-danger" style="width: 200px; border-radius: 10px;">Hapus</button>
+                <form action="{{ route('anggaran.destroy') }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="budget_id" id="budgetId" value="">
+                    <button type="button" class="btn " style="width: 200px; border-radius: 10px; background-color: #FEEE72;">Batal</button>
+                    <button type="submit" class="btn btn-danger" style="width: 200px; border-radius: 10px;">Hapus</button>
+                </form>
             </div>
           </div>
         </div>
