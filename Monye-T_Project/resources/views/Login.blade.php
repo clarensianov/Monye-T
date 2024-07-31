@@ -106,6 +106,12 @@
     #myAlert{
         scale: 2;
     }
+
+    .Gambar-BG{
+        background-image: url("../assets/Login/WelcomeImage.png");
+        background-size: cover;
+        background-position: center;
+    }
 </style>
 <body>
     @if (session('success_pass'))
@@ -122,8 +128,8 @@
         <div class=" w-75 bg-swhite container-field corner-radius d-flex align-items-center">
             <div class="w-100 h-100">
                 <div class="row h-100 ">
-                    <div class="col-5 d-flex align-items-center bg-warning justify-content-center" style="border-radius: 30px 0 0 30px;">
-                        <h1 class="text-white">Belum Ada Ide</h1>
+                    <div class="Gambar-BG col-5 d-flex align-items-center justify-content-center" style="border-radius: 30px 0 0 30px;">
+                        
                     </div>
                     <div class="col">
                         <div class=" flex-column d-flex justify-content-center align-items-center h-85 w-100">
