@@ -59,11 +59,6 @@
         background-color: #fbd4545b;
     }
 
-    .graph {
-        height: 300px;
-
-        background-color: #000000;
-    }
 
     body {
         background-color: #EEEEEE;
@@ -86,6 +81,9 @@
         color: #EC0D0D;
         font-weight: 700;
         font-style: italic;
+    }
+    .cardAnggaranEnd{
+        border-left: 5px #FEEE72 solid;
     }
 </style>
 @endsection
@@ -196,8 +194,8 @@
     </div>
     <br>
     <br>
-    <div class="w-85 d-flex justify-content-between">
-        <div class="w-50">
+    <div class=" d-flex justify-content-between" style="width: 85%;">
+        <div class="w-50" style="margin-right: 200px;">
         <h3 class="boldFont">Riwayat</h3>
             <div class="historyCard mt-2 w-85 d-flex align-items-center justify-content-between">
                 <div class="d-flex flex-row gap-3 align-items-center">
@@ -251,12 +249,24 @@
             </div>
             
         </div>
-        <div class="w-50">
+        <div style="width: 50%">
             <div class="w-85">
                 <h3 class="boldFont">Anggaran Yang Akan Berakhir</h3>
-
-                <div class="graph mt-4">
-
+                <div class="mt-2 w-85 d-flex align-items-center justify-content-between">
+                    <div class="d-flex flex-row align-items-center cardAnggaranEnd">
+                        Tes
+                    </div>
+                    <div class="historyCard d-flex flex-column justify-content-center align-items-end" style="width: 70%;">
+                        <div class="d-flex align-items-center gap-3">
+                            <img width="60" height="60" src="{{asset('../assets/Dashboard/IconKategori.png')}}" alt="">
+                            <h5 style="font-weight: 600;">Makanan</h5>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 ">
+                            <img width="25" height="25" src="{{asset('../assets/Dashboard/DownArrow.png')}}" alt="">
+                            <h5 class="DecreaseNumber mb-1">Rp 100.000</h5>
+                        </div>
+                        <p class="m-0" style="font-weight: 600;">12 Agustus 2024</p>
+                    </div>
                 </div>
             </div>
         </div>

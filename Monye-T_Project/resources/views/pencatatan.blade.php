@@ -154,7 +154,7 @@
                     <div>
                         <p class="mb-1" style="color: #0000008e; font-weight: 600;">Dari</p>
                         <div class="d-flex flex-row">
-                            <input placeholder="Dari Tanggal" class="p-2 input-tanggal" type="text" id="fromdate">
+                            <input placeholder="Dari Tanggal" class="p-2 input-tanggal" type="text" id="DariTanggal">
                             <span class="input-group-append">
                                 <span class="calendar-logo input-group-text h-100 d-block">
                                 <i class="fa fa-calendar"></i>
@@ -165,7 +165,7 @@
                     <div>
                         <p class="mb-1" style="color: #0000008e; font-weight: 600;">Sampai</p>
                         <div class="d-flex flex-row">
-                            <input placeholder="Sampai Tanggal" class="p-2 input-tanggal" type="text" id="todate">
+                            <input placeholder="Sampai Tanggal" class="p-2 input-tanggal" type="text" id="SampeTanggal">
                             <span class="input-group-append">
                                 <span class="calendar-logo input-group-text h-100 d-block">
                                 <i class="fa fa-calendar"></i>
@@ -229,19 +229,6 @@
 @endsection
 
 @section('script')
-<!-- Bootstrap JS and dependencies -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<!-- Bootstrap Icons CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-
-<!-- Jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-
-<!-- Bootstrap Date Picker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 {{-- Data Table AJAX Requirements --}}
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
@@ -275,7 +262,7 @@ $(".descLimit").each(function(){
     };
 
     // Show only day for selected month
-    $('#fromdate').datepicker({
+    $('#DariTanggal').datepicker({
         // format: "dd MM yyyy",
         format: 'yyyy-mm-dd',
         todayHighlight: true,
@@ -286,11 +273,11 @@ $(".descLimit").each(function(){
     }).on('changeDate', function (selected) {
         var minDate = new Date(selected.date.valueOf());
         minDate = moment(minDate).format('YYYY-MM-DD');
-        $('#fromdate').val(minDate);
-        $('#todate').datepicker('setStartDate', minDate);
+        $('#DariTanggal').val(minDate);
+        $('#SampeTanggal').datepicker('setStartDate', minDate);
     });
 
-    $('#todate').datepicker({
+    $('#SampeTanggal').datepicker({
         // format: "dd MM yyyy",
         format: 'yyyy-mm-dd',
         todayHighlight: true,
@@ -301,12 +288,10 @@ $(".descLimit").each(function(){
     }).on('changeDate', function (selected) {
         var maxDate = new Date(selected.date.valueOf());
         maxDate = moment(maxDate).format('YYYY-MM-DD');
-        $('#todate').val(maxDate);
-        $('#fromdate').datepicker('setEndDate', maxDate);
+        $('#SampeTanggal').val(maxDate);
+        $('#DariTanggal').datepicker('setEndDate', maxDate);
     });
-</script>
 
-<script type="text/javascript">
  $(document).ready(function() {
         var dompet_filter = $('#dompet_filter').val();
         var kategori_filter = $('#kategori_filter').val();
@@ -323,8 +308,8 @@ $(".descLimit").each(function(){
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: function(d) {
-                    d.fromdate = $('#fromdate').val();
-                    d.todate = $('#todate').val();
+                    d.fromdate = $('#DariTanggal').val();
+                    d.todate = $('#SampeTanggal').val();
                     d.dompet_filter = $('#dompet_filter').val();
                     d.kategori_filter = $('#kategori_filter').val();
                     d.status_filter = $('#status_filter').val();
@@ -395,7 +380,7 @@ $(".descLimit").each(function(){
             // })
 
             // Apply date range filtering
-            $('#fromdate, #todate').on('change', function () {
+            $('#DariTanggal, #SampeTanggal').on('change', function () {
                 table.draw();
             });
 
