@@ -70,19 +70,11 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index
 Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 
 
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
-Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+Route::post('/kategori', [CategoryController::class, 'store'])->name('kategori.create');
+Route::put('/kategori', [CategoryController::class, 'update'])->name('kategori.update');
 
-Route::get('/anggaran', [AnggaranController::class, 'index'])->name('anggaran')->middleware('auth');
-Route::get('/exanggaran', [AnggaranController::class, 'nonIndex'])->name('anggaran.non')->middleware('auth');
 Route::post('/anggaran', [AnggaranController::class, 'create'])->name('anggaran.create');
-
-Route::get('/AnggaranAktif' , function(){
-    $categories = Category::all();
-    return view('AnggaranAktif' , ['categories' => $categories]);
-})->name('AnggaranAktif');
-Route::get('/AnggaranTidakAKtif' , function(){
-    $categories = Category::all();
-    return view('AnggaranNonAktif' , ['categories' => $categories]);
-})->name('AnggaranTidakAKtif');
+Route::put('/anggaran', [AnggaranController::class, 'edit'])->name('anggaran.edit');
+Route::delete('/anggaran', [AnggaranController::class, 'destroy'])->name('anggaran.destroy');
+Route::get('/anggaran-aktif' , [AnggaranController::class, 'index'])->name('anggaran.index')->middleware('auth');
+Route::get('/anggaran-non-aktif' , [AnggaranController::class, 'nonIndex'])->name('anggaran.nonIndex')->middleware('auth');

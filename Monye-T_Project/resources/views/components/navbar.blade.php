@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('AnggaranAktif')}}" class="nav-link AnggaranIcon">
+                    <a href="{{route('anggaran.index')}}" class="nav-link AnggaranIcon">
                         <div class="icon-wrap">
                             <i class="bi bi-database"></i>
                         </div>

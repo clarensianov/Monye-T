@@ -69,6 +69,7 @@
             
                     @php
                         $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;
+                        $budgets = App\Models\User::find(auth()->user()->user_id)->budgets;
                     @endphp
             
                     <div class="mb-3" style="width: 90%;">
@@ -76,7 +77,19 @@
                         <select class="form-select" aria-label="Pilih Kategori" name="kategori">
                             <option value="" selected>Pilih kategori...</option>
                             @foreach ($kategoris as $kategori)
-                                <option value="{{ $kategori->kategori_id }}">{{ $kategori->nama_kategori }}</option>
+                                @php
+                                    $cekKategori = 1;
+                                @endphp
+                                @foreach ($budgets as $budget)
+                                    @if ($budget->kategoris_id == $kategori->kategori_id && $budget->status == 0)
+                                        @php
+                                            $cekKategori = 0;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if ($cekKategori == 1)
+                                    <option value="{{ $kategori->kategori_id }}">{{ $kategori->nama_kategori }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>

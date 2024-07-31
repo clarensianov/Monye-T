@@ -295,7 +295,7 @@
                         {{-- dompet --}}
                         @php
                             $dompets = App\Models\User::find(auth()->user()->user_id)->dompets;
-                            $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;
+                            $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;                            
                         @endphp
                         <div class="dompet select-container">
                             <h4>Dompet</h4>
@@ -314,7 +314,7 @@
                             <div class="select-wrapper gap-2 align-items-start flex-column">
                                 <select name="kategori" id="kategori1">
                                     <option value="">Pilih Kategori</option>
-                                    @foreach ($kategoris as $kategori)
+                                    @foreach ($kategoris as $kategori)                                    
                                     <option value={{ $kategori->kategori_id }}>{{ $kategori->nama_kategori }}</option>
                                     @endforeach
                                 </select>
@@ -339,15 +339,10 @@
                 <button onclick="closePopupKategori()" type="button" class="btn-close buttonClosePopupKategori" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('categories.store') }}" method="POST">
+                <form action="{{ route('kategori.create') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="name" placeholder="Nama dompet baru" required>
-                        <select class="form-select" name="icon" required>
-                            <option value="https://img.icons8.com/ios-filled/50/000000/airplane.png">Plane</option>
-                            <option value="https://img.icons8.com/ios-filled/50/000000/backpack.png">Backpack</option>
-                            <option value="https://img.icons8.com/ios-filled/50/000000/money.png">Money</option>
-                        </select>
+                        <input type="text" class="form-control" name="name" placeholder="Nama kategori baru" required>
                         <button class="btn btn-add" type="submit">Tambah</button>
                     </div>
                 </form>
@@ -359,19 +354,21 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($categories as $category)
+                    @php
+                        $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;
+                    @endphp
+                    @foreach ($kategoris as $kategori)
                         <tr>
                             <td>
-                                <span class="category-view">
-                                    <img src="{{ $category->icon }}" alt="icon" class="category-icon" width="24">
-                                    <span class="category-name">{{ $category->name }}</span>
+                                <span class="category-view">                                    
+                                    <span class="category-name">{{ $kategori->nama_kategori }}</span>
                                 </span>
-                                <form class="edit-form d-none" action="{{ route('categories.update', $category->id) }}" method="POST">
+                                <form class="edit-form d-none" action="{{ route('kategori.update') }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="name" value="{{ $category->name }}" required>
-                                        <button class="btn btn-primary" type="submit">Update</button>
+                                        <input type="text" class="form-control" name="nama_kategori" value="{{ $kategori->nama_kategori }}" required>
+                                        <button class="btn btn-primary" name="kategori_id" value="{{ $kategori->kategori_id }}" type="submit">Update</button>
                                     </div>
                                 </form>
                             </td>
