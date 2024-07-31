@@ -31,24 +31,23 @@
             height: 200px;
             border-radius: 50%;
             border: 5px solid rgb(224, 224, 224);
-            position: absolute;
-            bottom: -80%;
+            /* position: absolute;
+            bottom: -80%; */
             background-color: rgb(255, 255, 255);
-            left: 17%;
+            /* left: 17%; */
         }
 
-        .profile-image a#change-profile-pic{
+        /* .profile-image a#change-profile-pic{
             position: absolute;
             bottom: -90%;
-            left: 33.5%;
-        }
+            left: 34.5%;
+        } */
 
         .profile-info {
             text-align: left;
-            top: -705px;
-            margin-left: 30%;
+            /* margin-left: 30%;
             position: relative;
-            z-index: 10;
+            z-index: 10; */
         }
 
         .profile-info h1 {
@@ -71,7 +70,6 @@
 
         .logout-button {
             margin-right: 5%;
-            position: absolute;
             top: 0;
             right: 0;
             background-color: transparent;
@@ -84,13 +82,14 @@
         }
 
         .container {
-            margin-top: 10%;
+            margin-top: 20%;
+            bottom: 30px;
             width: 50%;
             z-index: 1;
         }
 
         .edit-profile-form h2 {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: #333;
         }
 
@@ -166,13 +165,27 @@
 
     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="profile-image">
-            <img id="profile-image" src="{{ asset($user->gambar_user)}}" alt="Profile Picture">
-            <a href="#" id="change-profile-pic">Ubah Foto Profil</a>
-            <input type="file" id="profile-pic-input" style="display:none;" accept="image/*" name="profile-image" class='form-control'>
+        <div class="profile-image w-100">
+            <div style="margin-left: 150px; top: 150px;" class="profile-items w-100 position-relative d-flex gap-5 align-items-center justify-content-around">
+                <div class="d-flex gap-5">
+                    <img id="profile-image" style="" src="{{ asset($user->gambar_user)}}" alt="Profile Picture">
+                    <div class="profile-info mt-5 d-flex flex-column">
+                        {{-- nama --}}
+                        <h1>{{ auth()->user()->nama }}</h1>
+                        {{-- email --}}
+                        <p>{{ auth()->user()->email }}</p>
+                        <a class="text-decoration-underline" id="change-profile-pic">Ubah Foto Profil</a>
+                    </div>
+                </div>
+                <a href="{{route('logout1')}}" class="logout-button d-flex gap-2 text-decoration-none align-items-center" style="position: relative; left: 120px;"><i class     ="bi bi-box-arrow-right"></i>Keluar</a>
+                <input type="file" id="profile-pic-input" style="display:none;" accept="image/*" name="profile-image" class='form-control'>
+            </div>
+            <div>
+
+            </div>
         </div>
 
-        <div class="container">
+        <div class="container" style="margin-top: 120px">
                 <h2>Edit Profil</h2>
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -205,20 +218,10 @@
                 <button type="submit" class="submit-button">Simpan</button>
             </form>
 
-            <div class="profile-info">
-                {{-- nama --}}
-                <h1>{{ auth()->user()->nama }}</h1>
-                {{-- email --}}
-                <p>{{ auth()->user()->email }}</p>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-                <button class="logout-button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-right"></i> Keluar</button>
-            </div>
+
             @include('components.flash')
         </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
             const togglePasswordButtons = document.querySelectorAll('.toggle-password');
             const changeProfilePicLink = document.getElementById('change-profile-pic');
             const profilePicInput = document.getElementById('profile-pic-input');
@@ -253,7 +256,6 @@
                     reader.readAsDataURL(file);
                 }
             });
-        });
     </script>
 </body>
 </html>

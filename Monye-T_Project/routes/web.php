@@ -34,7 +34,7 @@ Route::post('/loginregister/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth');
 
 //tes
-Route::get('/logout1', [UserController::class, 'logout']);
+Route::get('/logout1', [UserController::class, 'logout'])->name('logout1');
 
 Route::get('/loginregister/register/katapemulihan', function (){return view('katapemulihan');})->name('katapemulihan')->middleware('auth');
 Route::put('/loginregister/register/katapemulihan/{id}', [UserController::class, 'katapemulihan'])->name('create_katapemulihan');
