@@ -51,9 +51,9 @@ Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('cha
 
 
 Route::get('/dashboard', function(){
-    // Take all user's dompet (function found in user model)
-    // $dompets = Auth::user()->dompets;
-    // dd($dompets);
+    $categories = Category::all();
+    return view('dashboard' , ['categories' => $categories]);
+
 
     // return view('dashboard', compact('dompets'));
     return view('dashboard');

@@ -45,12 +45,13 @@
     }
 </style>
     
+
 <div class="modal fade" id="modalEditAnggaran" aria-hidden="true"  tabindex="1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content p-0" style="margin-top: -50px; border-radius: 35px; box-shadow: 0 4px 4px 0 #ffffff42;">
+        <div class="modal-content p-0" style="margin-top: -50px; border-radius: 35px; box-shadow: 0 4px 4px 0 #ffffff42;">
             <div class="d-flex justify-content-between align-items-center">
-              <h1 class="modal-title fs-5 bg-yellow-header" style="padding: 15px 50px;" id="exampleModalToggleLabel">Edit Anggaran</h1>
-              <button type="button" class="btn-close" style="margin-right: 30px;" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h1 class="modal-title fs-5 bg-yellow-header" style="padding: 15px 50px;" id="exampleModalToggleLabel">Edit Anggaran</h1>
+            <button type="button" class="btn-close" style="margin-right: 30px;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="d-flex mt-3">
                 <form action="{{ route('anggaran.edit') }}" class="w-100 d-flex flex-column w-100 align-items-center" method="POST">
@@ -145,9 +146,10 @@
                 </div>
             </form>
             </div>
-          </div>
+        </div>
         </div>
 </div>
+
     
 <script>
     document.querySelector('.buttonAddKategori').addEventListener('click', function() {

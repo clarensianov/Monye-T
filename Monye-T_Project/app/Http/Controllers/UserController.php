@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\ResponseFormatter;
 use App\Models\Dompet;
 use App\Models\Kategori;
+use App\Models\Budget;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -102,6 +103,15 @@ class UserController extends Controller
                 ]);
             }
             
+            Budget::create([
+                'users_id' => auth()->user()->user_id,
+                'kategoris_id' => null,
+                'nama_budget' => null,
+                'jumlah' => null,
+                'tanggal_pembuatan' => now(),
+                'tanggal_berakhir' => now()
+            ]);
+
 
             return redirect()->route('katapemulihan');
         }

@@ -132,7 +132,7 @@
         @endphp
         <div class="text-black mt-4 d-flex flex-wrap" style="width: 76%; height:500px; column-gap: 50px; row-gap:50px;">
             @foreach ($budgets as $budget)
-                @if ($budget->status == 0)
+                @if ($budget->status == 0 && $budget->kategoris_id != null)
                     @php
                         $cek = 1;
                     @endphp
@@ -165,20 +165,20 @@
                                 <p style="font-weight: 600;">{{ $budget->jumlah }}</p>
                             </div>
                         </div>
-                        <div class="w-100 d-flex" style="border-top: 1px solid #00000055; height: 42px;">
+                        <div class="w-100 d-flex" style="border-top: 1px solid #00000055; height: 42px;">                            
                             <a onclick="tampilkanPopupEdit('{{ $budget->budget_id }}')" class="w-50 d-flex align-items-center justify-content-center h-100" style="border-right: 1px solid #00000055;">
                                 <i class="text-black bi bi-pencil"></i>
                             </a>
                             <a onclick="tampilkanPopupHapus('{{ $budget->budget_id }}')" class="w-50 d-flex align-items-center justify-content-center h-100">
                                 <i class="text-black bi bi-trash3"></i>
-                            </a>
+                            </a>                                                                            
                         </div>
                     </div>
                 @endif                
             @endforeach
-            @if ($cek == 0)
+            <!-- @if ($cek == 0)
                 <p>tidak ada anggaran</p>
-            @endif      
+            @endif       -->
             <a class="bg-white CardAnggaran CardTambah" onclick="ModalAnggaran()">
                 <div class="d-flex align-items-center w-100 h-100 justify-content-evenly">
                     <i style="font-size: 120px; color:#5BBA6F;" class="bi bi-plus"></i>
