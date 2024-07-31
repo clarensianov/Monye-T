@@ -168,7 +168,11 @@
         <div class="profile-image w-100">
             <div style="margin-left: 150px; top: 150px;" class="profile-items w-100 position-relative d-flex gap-5 align-items-center justify-content-around">
                 <div class="d-flex gap-5">
-                    <img id="profile-image" style="" src="{{ asset($user->gambar_user)}}" alt="Profile Picture">
+                    @if($user->gambar_user)
+                        <img id="profile-image" src="{{ asset($user->gambar_user) }}" alt="Profile Picture">
+                    @else
+                        <img id="profile-image" src="{{ asset('Assets/navbar/default.png') }}" alt="Default Profile Picture">
+                    @endif
                     <div class="profile-info mt-5 d-flex flex-column">
                         {{-- nama --}}
                         <h1>{{ auth()->user()->nama }}</h1>

@@ -7,7 +7,7 @@ use App\Models\Kategori;
 use Illuminate\Validation\ValidationException;
 
 class CategoryController extends Controller
-{    
+{
     public function store(Request $req)
     {
         try{
@@ -32,12 +32,12 @@ class CategoryController extends Controller
             'users_id' => auth()->user()->user_id,
             'nama_kategori' => $req->name
         ]);
-        
-        return with('success', 'Kategori baru berhasil ditambahkan');
+
+        return back()->with('success', 'Kategori baru berhasil ditambahkan');
     }
 
     public function update(Request $req)
-    {        
+    {
         $kategori = Kategori::findOrFail($req->kategori_id);
 
         if($req->nama_kategori){
@@ -46,7 +46,7 @@ class CategoryController extends Controller
 
         $kategori->save();
 
-        return with('success', 'Kategori berhasil diupdate');
+        return back()->with('success', 'Kategori berhasil diupdate');
     }
 }
 

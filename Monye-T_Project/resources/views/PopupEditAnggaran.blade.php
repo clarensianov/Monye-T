@@ -44,7 +44,6 @@
         border: 2px solid #222222;
     }
 </style>
-    
 
 <div class="modal fade" id="modalEditAnggaran" aria-hidden="true"  tabindex="1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -55,11 +54,11 @@
             </div>
             <div class="d-flex mt-3">
                 <form action="{{ route('anggaran.edit') }}" class="w-100 d-flex flex-column w-100 align-items-center" method="POST">
-                    @method('PUT')
                     @csrf                    
+                    @method('PUT')
                 <div class="" style="width: 90%;">
                     <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3">Masukkan Nama Anggaran</label>
-                    <input name="NamaAnggaran" type="text" class="w-100 px-3 py-2 border border-2" style="border-radius: 10px;" placeholder={{ $budget->nama_budget }}>
+                    <input name="NamaAnggaran" type="text" class="w-100 px-3 py-2 border border-2" style="border-radius: 10px;">
                 </div>
                 <div class="" style="width: 90%;">
                     <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3 mt-3">Masukkan saldo untuk anggaranmu</label>
@@ -69,18 +68,17 @@
                                 Rp
                             </span>
                         </span>
-                        <input class="w-100 px-3 py-2 inputNumber" type="number" name="saldo" placeholder={{ $budget->jumlah }}>
+                        <input class="w-100 px-3 py-2 inputNumber" type="number" name="saldo">
                     </div>
-                </div>
-                @if ($budget->tx_status == 0)
+                </div>                
                     @php                                            
                         $budgets = App\Models\User::find(auth()->user()->user_id)->budgets;
                         $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;
                     @endphp
-                    <div class="" style="width: 90%;">
-                        <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3 mt-3">Pilih kategori untuk anggaran!</label>
+                    <div class="element-specific-to-status-0" style="width: 90%; display:none;">
+                        <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3 mt-3" id="kategori-now"></label>
                         <select class="form-select px-3 py-2 border-dropdown" aria-label="Default select example" name="kategori">
-                            <option selected value="">Open this select menu</option>
+                            <option selected value="">Pilih kategori - jika ingin mengubah</option>
                             @foreach ($kategoris as $kategori)
                                 @php
                                     $cekKategori = 1;
@@ -97,8 +95,7 @@
                                 @endif
                             @endforeach
                         </select>                      
-                    </div>
-                @endif
+                    </div>            
                 <div style="width: 90%;" class="mt-3 d-flex flex-column justify-content-between">
                     <label style="font-size: 18px;">Pilih Jangka waktu Anggaranmu!</label>
                     <div class="d-flex w-100 justify-content-between">
@@ -141,7 +138,8 @@
                                 <p class="m-0" style="font-weight: 500; color: #EC0D0D;">Email/Username Anda Sudah Terdaftar!</p>
                             </div>
                         </div>
-                        <button type="submit" name="budget_id" value="{{ $budget->budget_id }}" class="btn" style="padding: 15px 100px; background-color: #FEEE72; font-weight:600;">Ubah</button>
+                        <input type="hidden" name="budget_id" id="budgetIdInput" value="{{ $budget->budget_id }}">
+                        <button type="submit" class="btn" style="padding: 15px 100px; background-color: #FEEE72; font-weight:600;">Ubah</button>
                     </div>
                 </div>
             </form>

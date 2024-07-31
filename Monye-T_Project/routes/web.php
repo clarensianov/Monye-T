@@ -73,8 +73,6 @@ Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->nam
 Route::post('/kategori', [CategoryController::class, 'store'])->name('kategori.create');
 Route::put('/kategori', [CategoryController::class, 'update'])->name('kategori.update');
 
-Route::post('/anggaran', [AnggaranController::class, 'create'])->name('anggaran.create');
-
 // Tes untuk email remainder
 Route::get('/email', function(){
     Mail::to('mrcllnjoshua@gmail.com')->send(new ReminderMail());
@@ -90,6 +88,8 @@ Route::get('/test-email/{time}', function ($time) {
     return 'Emails have been sent';
 });
 
+Route::get('/budget/{id}/edit', [AnggaranController::class, 'budgetData']);
+Route::post('/anggaran', [AnggaranController::class, 'create'])->name('anggaran.create');
 Route::put('/anggaran', [AnggaranController::class, 'edit'])->name('anggaran.edit');
 Route::delete('/anggaran', [AnggaranController::class, 'destroy'])->name('anggaran.destroy');
 Route::get('/anggaran-aktif' , [AnggaranController::class, 'index'])->name('anggaran.index')->middleware('auth');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Budget;
+use App\Models\Kategori;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -73,7 +74,7 @@ class AnggaranController extends Controller
         return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil dibuat.');
     }
 
-    public function edit(Request $req){
+    public function edit(Request $req){        
         try{
             $req->validate([                
                 'saldo' => 'numeric',
@@ -85,7 +86,6 @@ class AnggaranController extends Controller
         }
         
         $budget = Budget::findOrFail($req->budget_id);
-
         if($req->NamaAnggaran){
             $budget->nama_budget = $req->NamaAnggaran;
         }
@@ -119,6 +119,19 @@ class AnggaranController extends Controller
         
         return back()->with('success', 'Anggaran berhasil dihapus.');
     }
+
+    public function budgetData($id)
+    {
+        $budget = Budget::find($id);
+
+        if (!$budget) {
+            return response()->json(['error' => 'Budget not found'], 404);
+        }        
+        // session()->flash('budgetKategori', $budget->kategoris_id);
+        $kategori = Kategori::find($budget->kategoris_id);
+        return response()->json([$budget, $kategori]);
+    }
+
 
 
 }

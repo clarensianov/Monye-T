@@ -25,6 +25,10 @@
         }
     </style>
     </head>
+
+@php
+    $user = App\Models\User::find(auth()->user()->user_id)
+@endphp
 <body>
     <header class="position-fixed top-0">
         <div class="d-flex flex-column flex-shrink-0 sidebar-wrap">
@@ -71,7 +75,11 @@
             </ul>
             <div>
                 <a href="{{route('profile.index')}}" class="text-decoration-none loginButton d-flex justify-content-center align-items-center">
-                    <img class="profilepic" src="{{ asset('../Assets/Navbar/default.png') }}" alt="">
+                    @if($user->gambar_user)
+                        <img width="50" height="50" style="border-radius: 100%" id="profilepic" src="{{ asset($user->gambar_user) }}" alt="Profile Picture">
+                    @else
+                        <img class="profilepic" src="{{ asset('../Assets/Navbar/default.png') }}" alt="">
+                    @endif
                     <h2>{{ Auth::user()->username }}</h2>
                 </a>
             </div>
