@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('budgets', function (Blueprint $table) {
             $table->bigIncrements('budget_id');
             $table->bigInteger('users_id');
-            $table->bigInteger('kategoris_id');
-            $table->string('nama_budget');
-            $table->bigInteger('jumlah');
+            $table->bigInteger('kategoris_id')->nullable();
+            $table->string('nama_budget')->nullable();
+            $table->bigInteger('jumlah')->nullable();
             $table->string('tanggal_pembuatan');
             $table->string('tanggal_berakhir');            
             $table->timestamps();

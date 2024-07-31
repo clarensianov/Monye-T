@@ -13,9 +13,10 @@
     }
 
     .historyCard {
-        background-color: #D9D9D9;
-        padding: 10px;
-        height: 70px;
+        background-color: #FDFCF7;
+        border: 0.8px solid #00000040;
+        border-radius: 15px;
+        padding: 15px;
     }
 
     .dompetCard {
@@ -75,6 +76,16 @@
 
     .Dashboard {
         scale: 0.9
+    }
+    .IncreaseNumber{
+        color: #24572F;
+        font-weight: 700;
+        font-style: italic;
+    }
+    .DecreaseNumber{
+        color: #EC0D0D;
+        font-weight: 700;
+        font-style: italic;
     }
 </style>
 @endsection
@@ -188,31 +199,61 @@
     <div class="w-85 d-flex justify-content-between">
         <div class="w-50">
         <h3 class="boldFont">Riwayat</h3>
-            <div class="historyCard w-85 mt-3">
-
+            <div class="historyCard mt-2 w-85 d-flex align-items-center justify-content-between">
+                <div class="d-flex flex-row gap-3 align-items-center">
+                    <img width="60" height="60" src="{{asset('../assets/Dashboard/IconKategori.png')}}" alt="">
+                    <div>
+                        <h5 style="font-weight: 600;">Makanan</h5>
+                        <h5 style="font-weight: 300;">BCA</h5>
+                    </div>
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-end">
+                    <div class="d-flex align-items-center gap-2 ">
+                        <img width="25" height="25" src="{{asset('../assets/Dashboard/UpArrow.png')}}" alt="">
+                        <h5 class="IncreaseNumber mb-1">Rp 100.000</h5>
+                    </div>
+                    <p class="m-0" style="font-weight: 600;">12 Agustus 2024</p>
+                </div>
             </div>
-            <div class="historyCard w-85 mt-3">
 
+            <div class="historyCard mt-2 w-85 d-flex align-items-center justify-content-between">
+                <div class="d-flex flex-row gap-3 align-items-center">
+                    <img width="60" height="60" src="{{asset('../assets/Dashboard/IconKategori.png')}}" alt="">
+                    <div>
+                        <h5 style="font-weight: 600;">Makanan</h5>
+                        <h5 style="font-weight: 300;">BCA</h5>
+                    </div>
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-end">
+                    <div class="d-flex align-items-center gap-2 ">
+                        <img width="25" height="25" src="{{asset('../assets/Dashboard/UpArrow.png')}}" alt="">
+                        <h5 class="IncreaseNumber mb-1">Rp 100.000</h5>
+                    </div>
+                    <p class="m-0" style="font-weight: 600;">12 Agustus 2024</p>
+                </div>
             </div>
-            <div class="historyCard w-85 mt-3">
 
+            <div class="historyCard mt-2 w-85 d-flex align-items-center justify-content-between">
+                <div class="d-flex flex-row gap-3 align-items-center">
+                    <img width="60" height="60" src="{{asset('../assets/Dashboard/IconKategori.png')}}" alt="">
+                    <div>
+                        <h5 style="font-weight: 600;">Makanan</h5>
+                        <h5 style="font-weight: 300;">BCA</h5>
+                    </div>
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-end">
+                    <div class="d-flex align-items-center gap-2 ">
+                        <img width="25" height="25" src="{{asset('../assets/Dashboard/DownArrow.png')}}" alt="">
+                        <h5 class="DecreaseNumber mb-1">Rp 100.000</h5>
+                    </div>
+                    <p class="m-0" style="font-weight: 600;">12 Agustus 2024</p>
+                </div>
             </div>
-            <div class="historyCard w-85 mt-3">
-
-            </div>
+            
         </div>
         <div class="w-50">
             <div class="w-85">
-                <div class="d-flex justify-content-between">
-                    <h3 class="boldFont">Rekap</h3>
-                    <div class="dropdown">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    </div>
-                </div>
+                <h3 class="boldFont">Anggaran Yang Akan Berakhir</h3>
 
                 <div class="graph mt-4">
 

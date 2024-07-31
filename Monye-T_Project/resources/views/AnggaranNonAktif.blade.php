@@ -130,7 +130,7 @@
         @endphp
         <div class="text-black mt-4 d-flex flex-wrap" style="width: 76%; height:500px; column-gap: 50px; row-gap:50px;">            
             @foreach ($budgets as $budget)
-                @if ($budget->status == 1)
+                @if ($budget->status == 1 && $budget->kategoris_id != null)
                     @php
                         $cek = 1;
                     @endphp
