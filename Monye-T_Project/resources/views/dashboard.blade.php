@@ -100,8 +100,7 @@
                 <p class="TextField-title">Masukkan saldo awal dompet barumu!</p>
                 <div class="flex">
                     <span class="currency" aria-hidden="true">Rp</span>
-                    <input type="text" class="text-field-saldo" id="SaldoAwal" name="saldoAwal" placeholder="Saldo Awal Dompet Baru"
-                        name="saldoAwal">
+                    <input type="text" class="text-field-saldo" id="SaldoAwal" name="saldoAwal" placeholder="Saldo Awal Dompet Baru" name="saldoAwal">
                 </div>
             </div>
 
@@ -224,6 +223,7 @@
     @include('components.flash')
 </div>
 
+
 <script src="{{ asset('/popup/popup.js') }}"></script>
 
 <script>
@@ -259,5 +259,16 @@
             }
         }
     }
+
+    
+
+
+    document.querySelector('.HomeIcon').classList.add('active');
+
+    $(document).ready(function() {
+            $('#buttonAddKategori').click(function() {
+                $('#PopupKategori').style.display = "block";
+            });
+    });
 </script>
 @endsection

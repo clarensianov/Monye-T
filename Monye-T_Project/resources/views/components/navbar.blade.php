@@ -45,7 +45,7 @@
             </div>
             <ul style="padding: 10px;" class="nav nav-pills flex-column mb-auto mt-3 beforehover">
                 <li class="nav-item">
-                    <a href="/dashboard" class="nav-link active" aria-current="page">
+                    <a href="/dashboard" class="nav-link HomeIcon" aria-current="page">
                         <div class="icon-wrap">
                             <i class="fas fa-home"></i>
                         </div>
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link">
+                    <a href="{{route('anggaran.index')}}" class="nav-link AnggaranIcon">
                         <div class="icon-wrap">
                             <i class="bi bi-database"></i>
                         </div>
@@ -61,38 +61,42 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('pencatatan') }}" class="nav-link">
+                    <a href="{{ route('pencatatan') }}" class="nav-link TransaksiIcon">
                         <div class="icon-wrap">
                             <i class="bi bi-cash"></i>
                         </div>
                         <span class="">Transaksi</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#" class="nav-link">
-                        <div class="icon-wrap">
-                            <i class="bi bi-people"></i>
-                        </div>
-                        <span class="">Grup</span>
-                    </a>
-                </li>
             </ul>
             <div>
-                <div class="loginButton d-flex justify-content-center align-items-center">
+                <a href="{{route('profile.index')}}" class="text-decoration-none loginButton d-flex justify-content-center align-items-center">
                     <img class="profilepic" src="{{ asset('../Assets/Navbar/default.png') }}" alt="">
                     <h2>{{ Auth::user()->username }}</h2>
-                </div>
+                </a>
             </div>
         </div>
     </header>
+    <div class="position-absolute " style="z-index: 100000;">
+        @include('PopupTambahAnggaran')
+    </div>
+    <div class="position-absolute" style="z-index: 100;">
+        @include('popup_Transaksi')
+    </div>
     @yield('content')
-    @include('popup_Transaksi')
-
 </body>
 <!-- Bootstrap JS and dependencies -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <!-- Bootstrap Icons CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+<!-- Jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- Bootstrap Date Picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 @yield('script')
+
 </html>

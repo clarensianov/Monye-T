@@ -411,6 +411,7 @@ $(".descLimit").each(function(){
                 table.draw();
             });
     });
+    document.querySelector('.TransaksiIcon').classList.add('active');
 </script>
 
 <script>

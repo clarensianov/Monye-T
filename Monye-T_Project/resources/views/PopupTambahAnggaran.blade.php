@@ -45,9 +45,9 @@
     }
 </style>
     
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content" style="border-radius: 35px; box-shadow: 0 4px 4px 0 #ffffff42;">
+          <div class="modal-content p-0" style="margin-top: -50px; border-radius: 35px; box-shadow: 0 4px 4px 0 #ffffff42;">
             <div class="d-flex justify-content-between align-items-center">
               <h1 class="modal-title fs-5 bg-yellow-header" style="padding: 15px 50px;" id="exampleModalToggleLabel">Tambah Anggaran</h1>
               <button type="button" class="btn-close" style="margin-right: 30px;" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -69,6 +69,7 @@
             
                     @php
                         $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;
+                        $budgets = App\Models\User::find(auth()->user()->user_id)->budgets;
                     @endphp
             
                     <div class="mb-3" style="width: 90%;">
@@ -76,7 +77,19 @@
                         <select class="form-select" aria-label="Pilih Kategori" name="kategori">
                             <option value="" selected>Pilih kategori...</option>
                             @foreach ($kategoris as $kategori)
-                                <option value="{{ $kategori->kategori_id }}">{{ $kategori->nama_kategori }}</option>
+                                @php
+                                    $cekKategori = 1;
+                                @endphp
+                                @foreach ($budgets as $budget)
+                                    @if ($budget->kategoris_id == $kategori->kategori_id && $budget->status == 0)
+                                        @php
+                                            $cekKategori = 0;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if ($cekKategori == 1)
+                                    <option value="{{ $kategori->kategori_id }}">{{ $kategori->nama_kategori }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
@@ -113,9 +126,12 @@
             </div>
           </div>
         </div>
-    </div>
+</div>
     
 <script>
+    document.querySelector('.buttonAddKategori').addEventListener('click', function() {
+            console.log("tes");
+    });
     $(".input-group-append").click(function(){
         $(this).prev().focus();
     });

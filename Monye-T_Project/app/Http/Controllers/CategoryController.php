@@ -3,41 +3,50 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Kategori;
+use Illuminate\Validation\ValidationException;
 
 class CategoryController extends Controller
-{
-    public function index()
+{    
+    public function store(Request $req)
     {
-        $categories = Category::all();
-        return view('popup_Kategori', compact('categories'));
+        try{
+            $req->validate([
+                'name' => 'required'
+            ], [
+                'name.required' => 'Nama kategori harus diisi!'
+            ]);
+        }catch(ValidationException $e){
+            return back()->withErrors($e->errors())->withInput();
+        }
+
+        $kategoris = auth()->user()->kategoris;
+
+        foreach ($kategoris as $kategori) {
+            if($kategori->nama_kategori == $req->name){
+                return back()->withErrors('Nama kategori harus unik!')->withInput();
+            }
+        }
+
+        Kategori::create([
+            'users_id' => auth()->user()->user_id,
+            'nama_kategori' => $req->name
+        ]);
+        
+        return with('success', 'Kategori baru berhasil ditambahkan');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'icon' => 'required|string',
-        ]);
+    public function update(Request $req)
+    {        
+        $kategori = Kategori::findOrFail($req->kategori_id);
 
-        Category::create([
-            'name' => $request->name,
-            'icon' => $request->icon,
-        ]);
+        if($req->nama_kategori){
+            $kategori->nama_kategori = $req->nama_kategori;
+        }
 
-        return redirect()->back();
-    }
+        $kategori->save();
 
-    public function update(Request $request, Category $category)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        $category->update([
-            'name' => $request->name,
-        ]);
-
-        return redirect()->back();
+        return with('success', 'Kategori berhasil diupdate');
     }
 }
 

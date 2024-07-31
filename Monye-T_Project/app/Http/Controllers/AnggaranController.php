@@ -70,7 +70,54 @@ class AnggaranController extends Controller
             'tanggal_berakhir' => $req->tanggal_berakhir
         ]);
 
-        return redirect()->route('anggaran')->with('success', 'Anggaran berhasil dibuat.');
+        return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil dibuat.');
+    }
+
+    public function edit(Request $req){
+        try{
+            $req->validate([                
+                'saldo' => 'numeric',
+            ], [
+                'saldo.numeric' => 'Harap isi saldo dengan numeric'
+            ]);
+        }catch(ValidationException $e){
+            return back()->withErrors($e->errors())->withInput();
+        }
+        
+        $budget = Budget::findOrFail($req->budget_id);
+
+        if($req->NamaAnggaran){
+            $budget->nama_budget = $req->NamaAnggaran;
+        }
+        
+        if($req->saldo){
+            $budget->jumlah = $req->saldo;
+        }
+
+        //HARUS DISESUAIKAN LAGI
+        if($req->kategori){
+            $budget->kategoris_id = $req->kategori;
+        }
+
+        if($req->tanggal_berakhir){           
+            $tanggalBerakhirReq = Carbon::parse($req->tanggal_berakhir);
+            $tanggalBerakhirBudget = Carbon::parse($budget->tanggal_berakhir); 
+            if($tanggalBerakhirReq < $tanggalBerakhirBudget){
+                return back()->withErrors('Tanggal berakhir harus masuk akal!')->withInput();
+            }
+            $budget->tanggal_berakhir = $req->tanggal_berakhir;
+        }
+
+        $budget->save();
+
+        return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil diubah.');
+    }
+
+    public function destroy(Request $req){
+        $budget = Budget::findOrFail($req->budget_id);
+        $budget->delete();
+        
+        return back()->with('success', 'Anggaran berhasil dihapus.');
     }
 
 

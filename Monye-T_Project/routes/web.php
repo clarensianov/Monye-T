@@ -13,6 +13,8 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Models\Kategori;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +52,10 @@ Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('cha
 
 
 Route::get('/dashboard', function(){
+    $categories = Category::all();
+    return view('dashboard' , ['categories' => $categories]);
     return view('dashboard');
+
 })->name('dashboard')->middleware('auth');
 
 Route::post('/inputDompet', [DompetController::class, 'inputDompet'])->name('input_dompet');
@@ -67,12 +72,9 @@ Route::post('/pencatatan', [PencatatanController::class, 'fetchData'])->name('pe
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
 
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
-Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+Route::post('/kategori', [CategoryController::class, 'store'])->name('kategori.create');
+Route::put('/kategori', [CategoryController::class, 'update'])->name('kategori.update');
 
-Route::get('/anggaran', [AnggaranController::class, 'index'])->name('anggaran')->middleware('auth');
-Route::get('/exanggaran', [AnggaranController::class, 'nonIndex'])->name('anggaran.non')->middleware('auth');
 Route::post('/anggaran', [AnggaranController::class, 'create'])->name('anggaran.create');
 
 // Tes untuk email remainder
@@ -89,3 +91,8 @@ Route::get('/test-email/{time}', function ($time) {
     }
     return 'Emails have been sent';
 });
+
+Route::put('/anggaran', [AnggaranController::class, 'edit'])->name('anggaran.edit');
+Route::delete('/anggaran', [AnggaranController::class, 'destroy'])->name('anggaran.destroy');
+Route::get('/anggaran-aktif' , [AnggaranController::class, 'index'])->name('anggaran.index')->middleware('auth');
+Route::get('/anggaran-non-aktif' , [AnggaranController::class, 'nonIndex'])->name('anggaran.nonIndex')->middleware('auth');
