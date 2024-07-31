@@ -13,7 +13,6 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use App\Models\Kategori;
 use App\Models\Category;
 
 /*
@@ -36,10 +35,10 @@ Route::get('/register', [UserController::class, 'registerindex'])->name('registe
 
 Route::post('/loginregister/login   ', [UserController::class, 'login']);
 Route::post('/loginregister/register', [UserController::class, 'register']);
-Route::post('/logout', [UserController::class, 'logout']);
+Route::post('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth');
 
 //tes
-Route::get('/logout1', [UserController::class, 'logout']);
+Route::get('/logout1', [UserController::class, 'logout'])->name('logout1');
 
 Route::get('/loginregister/register/katapemulihan', function (){return view('katapemulihan');})->name('katapemulihan')->middleware('auth');
 Route::put('/loginregister/register/katapemulihan/{id}', [UserController::class, 'katapemulihan'])->name('create_katapemulihan');
@@ -52,10 +51,12 @@ Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('cha
 
 
 Route::get('/dashboard', function(){
-    $categories = Category::all();
-    return view('dashboard' , ['categories' => $categories]);
-    return view('dashboard');
+    // Take all user's dompet (function found in user model)
+    // $dompets = Auth::user()->dompets;
+    // dd($dompets);
 
+    // return view('dashboard', compact('dompets'));
+    return view('dashboard');
 })->name('dashboard')->middleware('auth');
 
 Route::post('/inputDompet', [DompetController::class, 'inputDompet'])->name('input_dompet');
@@ -69,7 +70,8 @@ Route::post('/inputTx', [TransactionController::class, 'inputTransaction'])->nam
 Route::get('/pencatatan', [PencatatanController::class, 'index'])->name('pencatatan');
 Route::post('/pencatatan', [PencatatanController::class, 'fetchData'])->name('pencatatan.data');
 
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index')->middleware('auth');
+Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 
 
 Route::post('/kategori', [CategoryController::class, 'store'])->name('kategori.create');
