@@ -7,7 +7,11 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\PencatatanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Mail\DailyReminder;
+use App\Mail\ReminderMail;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 
@@ -74,6 +78,22 @@ Route::post('/kategori', [CategoryController::class, 'store'])->name('kategori.c
 Route::put('/kategori', [CategoryController::class, 'update'])->name('kategori.update');
 
 Route::post('/anggaran', [AnggaranController::class, 'create'])->name('anggaran.create');
+
+// Tes untuk email remainder
+Route::get('/email', function(){
+    Mail::to('mrcllnjoshua@gmail.com')->send(new ReminderMail());
+});
+
+Route::get('/test-email/{time}', function ($time) {
+    $message = $time == 'morning' ? 'Tess Ayo semangat hari ini dan jangan lupa isi catatan keuanganmu!' : 'Selamat malamA, ayo rekap semua keuangan mu hari ini!';
+
+    $users = User::all();
+    foreach ($users as $user) {
+        Mail::to($user->email)->send(new DailyReminder($message));
+    }
+    return 'Emails have been sent';
+});
+
 Route::put('/anggaran', [AnggaranController::class, 'edit'])->name('anggaran.edit');
 Route::delete('/anggaran', [AnggaranController::class, 'destroy'])->name('anggaran.destroy');
 Route::get('/anggaran-aktif' , [AnggaranController::class, 'index'])->name('anggaran.index')->middleware('auth');
