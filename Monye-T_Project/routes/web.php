@@ -81,7 +81,7 @@ Route::get('/email', function(){
 });
 
 Route::get('/test-email/{time}', function ($time) {
-    $message = $time == 'morning' ? 'Tess Ayo semangat hari ini dan jangan lupa isi catatan keuanganmu!' : 'Selamat malam, ayo rekap semua keuangan mu hari ini!';
+    $message = $time == 'morning' ? 'Tess Ayo semangat hari ini dan jangan lupa isi catatan keuanganmu!' : 'Selamat malamA, ayo rekap semua keuangan mu hari ini!';
 
     $users = User::all();
     foreach ($users as $user) {

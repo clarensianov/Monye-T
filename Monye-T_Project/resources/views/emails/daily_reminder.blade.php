@@ -4,6 +4,6 @@
 {{ $message }}
 
 Thanks,<br>
-Monyet <br>
-Aplikasi Catatan Keuanganmu!
+Monye-T <br>
+Aplikasi Pencatatan Keuanganmu!
 @endcomponent
