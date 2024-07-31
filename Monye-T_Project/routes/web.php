@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
+use App\Models\Budget;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,8 +52,12 @@ Route::put('/inputsandi/{id}', [UserController::class, 'inputsandi'])->name('cha
 
 
 Route::get('/dashboard', function(){
-    $categories = Category::all();
-    return view('dashboard' , ['categories' => $categories]);
+    $categories = Category::get();
+    $budgets = Budget::where('users_id', Auth::user()->user_id)->get();
+    $budgets = $budgets->where('status', 0);
+    $budgets = $budgets->sortByDesc('tanggal_berakhir');
+    $budgets = $budgets->take(2);
+    return view('dashboard' , ['categories' => $categories, 'budgets' => $budgets]);
 })->name('dashboard')->middleware('auth');
 
 Route::post('/inputDompet', [DompetController::class, 'inputDompet'])->name('input_dompet');
