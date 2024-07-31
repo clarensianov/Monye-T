@@ -100,9 +100,6 @@
 @endsection
 
 @section('content')
-    {{-- @php
-        $budget = App\Models\Budget::find()
-    @endphp --}}
     <div class="w-100 d-flex flex-column align-items-center">
         <div class="w-85 mt-4 text-black ">
             <h2>Anggaran Aktif</h2>
@@ -231,9 +228,36 @@
         $('#exampleModalToggle').modal('show');
     }
 
-    function tampilkanPopupEdit(dor){
-        document.getElementById('budgetId').value = dor;
-        $('#modalEditAnggaran').modal('show');
+    function tampilkanPopupEdit(budgetId){
+        $.ajax({
+            url: `/budget/${budgetId}/edit`,
+            type: 'GET',
+            success: function(data) {
+                // Mengakses budget dan kategori dari array numerik
+                var budget = data[0];
+                var kategori = data[1];
+
+                // Isi modal dengan data yang diperoleh
+                $('#modalEditAnggaran').find('input[name="NamaAnggaran"]').val(budget.nama_budget);
+                $('#modalEditAnggaran').find('input[name="saldo"]').val(budget.jumlah);
+                document.getElementById('kategori-now').innerText = "Kategori saat ini: " + kategori.nama_kategori + " - Terpilih dari dropdown";
+                $('#modalEditAnggaran').find('input[name="budget_id"]').val(budget.budget_id);
+
+                // Periksa nilai tx_status dari budget
+                if (budget.tx_status == 0) {
+                    // Tampilkan elemen tertentu jika tx_status == 0
+                    $('#modalEditAnggaran').find('.element-specific-to-status-0').show();
+                } else {
+                    // Sembunyikan elemen tersebut jika tx_status != 0
+                    $('#modalEditAnggaran').find('.element-specific-to-status-0').hide();
+                }
+                $('#modalEditAnggaran').modal('show');
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Terjadi kesalahan saat mengambil data anggaran');
+            }
+        });
     }
 
     function tampilkanPopupHapus(dor){
