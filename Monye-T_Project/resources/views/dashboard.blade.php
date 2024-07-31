@@ -85,6 +85,9 @@
     .cardAnggaranEnd{
         border-left: 5px #FEEE72 solid;
     }
+    .text-yellow-terpakai{
+        color: #FBD354;    
+    }
 </style>
 @endsection
 
@@ -249,25 +252,42 @@
             </div>
             
         </div>
-        <div style="width: 50%">
+        <div style="width: 50%;">
             <div class="w-85">
                 <h3 class="boldFont">Anggaran Yang Akan Berakhir</h3>
-                <div class="mt-2 w-85 d-flex align-items-center justify-content-between">
-                    <div class="d-flex flex-row align-items-center cardAnggaranEnd">
-                        Tes
-                    </div>
-                    <div class="historyCard d-flex flex-column justify-content-center align-items-end" style="width: 70%;">
-                        <div class="d-flex align-items-center gap-3">
-                            <img width="60" height="60" src="{{asset('../assets/Dashboard/IconKategori.png')}}" alt="">
-                            <h5 style="font-weight: 600;">Makanan</h5>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 ">
-                            <img width="25" height="25" src="{{asset('../assets/Dashboard/DownArrow.png')}}" alt="">
-                            <h5 class="DecreaseNumber mb-1">Rp 100.000</h5>
-                        </div>
-                        <p class="m-0" style="font-weight: 600;">12 Agustus 2024</p>
-                    </div>
-                </div>
+                @if (count($budgets) == 0)
+                    <div class="d-flex w-100 align-items-center justify-content-center text-secondary" style="margin-top: 100px;">
+                        <h3>Tidak Ada Anggaran</h3>
+                    </div> 
+                @else
+                    @foreach ($budgets as $budget)
+                        @if($budget->jumlah != null)
+                            <div class="cardAnggaranEnd mt-3 h-100 d-flex align-items-start justify-content-between">
+                                <div style="width: 50%; margin-left: 10px;" class="d-flex h-100 flex-row align-items-start mt-3">
+                                    <i class="bi bi-calendar-week"></i>
+                                    <p style="font-weight: 700; margin-left: 5px;">{{ \Carbon\Carbon::parse($budget->tanggal_berakhir)->format('d M Y') }}</p>
+                                </div>
+                                <div class="historyCard d-flex flex-column justify-content-center w-100">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img width="40" height="40" src="{{asset('../assets/Dashboard/IconKategori.png')}}" alt="">
+                                        <h5 style="font-weight: 600;" class="m-0">{{$budget->nama_budget}}</h5>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2 mt-2">
+                                        <div class="w-50" style="margin-left: 10px;">
+                                            <p class="m-0 w-50" style="font-weight: 600;">Terpakai</p>
+                                            <p class="text-yellow-terpakai m-0" style="font-weight: 600;">Rp. {{$budget->digunakan}}</p>
+                                        </div>
+                                        <div class="w-50" style="margin-left:35px;">
+                                            <p class="m-0" style="font-weight: 600;">Dari</p>
+                                            <p class="m-0" style="font-weight: 600;">Rp. {{$budget->jumlah}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                @endif
+            
             </div>
         </div>
     </div>
