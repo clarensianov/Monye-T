@@ -41,7 +41,8 @@ class TransactionController extends Controller
         if ($req->hasFile('bukti')) {
             $file = $req->file('bukti');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('uploads', $filename);
+            // Menyimpan file ke disk 'public'
+            $path = $file->storeAs('uploads', $filename, 'public');
         }
 
         Pencatatan::create([
