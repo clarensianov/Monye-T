@@ -34,7 +34,7 @@
         <div class="d-flex flex-column flex-shrink-0 sidebar-wrap">
             <a style="padding: 10px;" href="/" class="mt-5 text-decoration-none logo-wrap">
                 <div class="d-flex justify-content-center">
-                    <img src="{{ asset('../assets/navbar/LOGO.png') }}" alt="">
+                    <img width="60" src="{{ asset('../assets/navbar/logo_monyet.png') }}" alt="">
                 </div>
                 <h2 class="m-0">Monye-T</h2>
             </a>

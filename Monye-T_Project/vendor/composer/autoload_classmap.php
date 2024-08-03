@@ -6,8 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\SendDailyReminder' => $baseDir . '/app/Console/Commands/SendDailyReminder.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\AnggaranController' => $baseDir . '/app/Http/Controllers/AnggaranController.php',
     'App\\Http\\Controllers\\CategoryController' => $baseDir . '/app/Http/Controllers/CategoryController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DompetController' => $baseDir . '/app/Http/Controllers/DompetController.php',
@@ -25,6 +27,9 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\ValidateSignature' => $baseDir . '/app/Http/Middleware/ValidateSignature.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Mail\\DailyReminder' => $baseDir . '/app/Mail/DailyReminder.php',
+    'App\\Mail\\HelloMail' => $baseDir . '/app/Mail/HelloMail.php',
+    'App\\Mail\\ReminderMail' => $baseDir . '/app/Mail/ReminderMail.php',
     'App\\Models\\Budget' => $baseDir . '/app/Models/Budget.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Dompet' => $baseDir . '/app/Models/Dompet.php',
