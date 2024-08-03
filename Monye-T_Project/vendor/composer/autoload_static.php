@@ -538,8 +538,10 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\SendDailyReminder' => __DIR__ . '/../..' . '/app/Console/Commands/SendDailyReminder.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AnggaranController' => __DIR__ . '/../..' . '/app/Http/Controllers/AnggaranController.php',
         'App\\Http\\Controllers\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoryController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DompetController' => __DIR__ . '/../..' . '/app/Http/Controllers/DompetController.php',
@@ -557,6 +559,9 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Mail\\DailyReminder' => __DIR__ . '/../..' . '/app/Mail/DailyReminder.php',
+        'App\\Mail\\HelloMail' => __DIR__ . '/../..' . '/app/Mail/HelloMail.php',
+        'App\\Mail\\ReminderMail' => __DIR__ . '/../..' . '/app/Mail/ReminderMail.php',
         'App\\Models\\Budget' => __DIR__ . '/../..' . '/app/Models/Budget.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\Dompet' => __DIR__ . '/../..' . '/app/Models/Dompet.php',

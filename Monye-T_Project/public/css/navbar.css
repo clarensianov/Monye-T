@@ -10,9 +10,9 @@
 .sidebar-wrap:hover {
   width: 280px;
 }
-.sidebar-wrap:hover .logo-wrap img {
+/* .sidebar-wrap:hover .logo-wrap img {
     visibility: hidden;
-}
+} */
 .sidebar-wrap:hover .loginButton h2{
     display: block;
 }
