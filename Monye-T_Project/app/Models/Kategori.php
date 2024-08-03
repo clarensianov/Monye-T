@@ -16,7 +16,7 @@ class Kategori extends Model
 
     protected $fillable = [
         'users_id',
-        'nama_kategori'
+        'nama_kategori',
     ];
 
     public function users(): BelongsTo{

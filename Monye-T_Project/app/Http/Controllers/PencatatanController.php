@@ -150,7 +150,7 @@ class PencatatanController extends Controller
             }
         }
 
-        return redirect()->route('dashboard')->with('success', 'Transaksi berhasil disimpan.');
+        return back()->with('success', 'Transaksi berhasil disimpan.');
     }
 
 

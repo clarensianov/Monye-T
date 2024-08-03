@@ -110,7 +110,8 @@ class UserController extends Controller
                 'nama_budget' => null,
                 'jumlah' => null,
                 'tanggal_pembuatan' => now(),
-                'tanggal_berakhir' => now()
+                'tanggal_berakhir' => now(),
+                'status' => 1
             ]);
 
 

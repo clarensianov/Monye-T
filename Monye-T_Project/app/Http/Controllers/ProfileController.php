@@ -37,41 +37,30 @@ class ProfileController extends Controller
         ]);
 
         // Update Username
-        if ($req->filled('username')) {
-            $user->username = $req->input('username');
+        if ($req->username != null) {
+            $user->username = $req->username;
         }
 
-        // Validate password fields only if password fields are present
-        $passwordUpdated = false;
-        // $cekPassword = false;
-        if ($req->filled('current-password') || $req->filled('new-password')) {
-            // Validate & Update password
-            if ($req->filled('current-password') && $req->filled('new-password')) {
-                if (!Hash::check($req->input('current-password'), $user->password)) {
-                    // $cekPassword = true;
-                    return redirect()->route('profile.index')->with('error', 'Password sekarang yang Anda masukkan salah! Coba lagi!');
-                }
-                $user->password = Hash::make($req->input('new-password'));
-                $passwordUpdated = true;
+        // Validate & Update password
+        if ($req->filled('current-password') && $req->filled('new-password')) {
+            // dd(1);
+            if (!Hash::check($req->input('current-password'), $user->password)) {
+                return redirect()->route('profile.index')->with('error', 'Password sekarang yang Anda masukkan salah! Coba lagi!');
             }
+            $user->password = Hash::make($req->input('new-password'));
         }
+
         if ($req->hasFile('profile-image')) {
             $file = $req->file('profile-image');
             $file = $req->file('profile-image')->move('profile-image',$req->file('profile-image')->getClientOriginalName());
             $user->gambar_user = $file;
         }
 
-        // dd($req);
+
 
         $user->save();
 
         return redirect()->route('profile.index')->with('success', 'Perubahan berhasil disimpan!');
-
-        // if ($passwordUpdated) {
-        //     return redirect()->route('profile.index')->with('success', 'Akun berhasil diperbaharui!');
-        // } else {
-        //     return redirect()->route('profile.index')->with('success', 'Username berhasil diperbaharui!');
-        // }
 
     }
 

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('budgets', function (Blueprint $table) {
-            $table->integer('tx_count');
+            $table->integer('tx_count')->default(0);
 
             $table->dropColumn('tx_status');
         });
@@ -26,7 +26,7 @@ return new class extends Migration
         Schema::table('budgets', function (Blueprint $table) {
             $table->dropColumn('tx_status');
 
-            $table->integer('tx_count');
+            $table->integer('tx_count')->default(0);
         });
     }
 };
