@@ -44,7 +44,7 @@
         border: 2px solid #222222;
     }
 </style>
-    
+
 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content p-0" style="margin-top: -50px; border-radius: 35px; box-shadow: 0 4px 4px 0 #ffffff42;">
@@ -66,12 +66,12 @@
                             <input name="saldo" class="form-control" type="number" step="0.01">
                         </div>
                     </div>
-            
+
                     @php
                         $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;
                         $budgets = App\Models\User::find(auth()->user()->user_id)->budgets;
                     @endphp
-            
+
                     <div class="mb-3" style="width: 90%;">
                         <label style="font-size: 18px;" for="kategori">Pilih kategori untuk anggaran barumu!</label>
                         <select class="form-select" aria-label="Pilih Kategori" name="kategori">
@@ -88,7 +88,9 @@
                                     @endif
                                 @endforeach
                                 @if ($cekKategori == 1)
-                                    <option value="{{ $kategori->kategori_id }}">{{ $kategori->nama_kategori }}</option>
+                                    @if ($kategori->nama_kategori != 'Pendapatan' && $kategori->nama_kategori != "Penyesuaian")
+                                        <option value={{ $kategori->kategori_id }}>{{ $kategori->nama_kategori }}</option>
+                                    @endif
                                 @endif
                             @endforeach
                         </select>
@@ -106,7 +108,7 @@
                             </div>
                         </div>
                     </div>
-            
+
                     <div style="width: 90%; margin: 20px 0" class="d-flex flex-column align-items-center">
                         @if ($errors->any())
                             <div class="d-flex flex-row gap-2 mt-2 mb-3">
@@ -115,8 +117,8 @@
                                         <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
                                     </svg>
                                 </div>
-                                <div>                                
-                                    <p class="m-0" style="font-weight: 500; color: #EC0D0D;">{{ $errors->first() }}</p>                                
+                                <div>
+                                    <p class="m-0" style="font-weight: 500; color: #EC0D0D;">{{ $errors->first() }}</p>
                                 </div>
                             </div>
                         @endif
@@ -127,7 +129,7 @@
           </div>
         </div>
 </div>
-    
+
 <script>
     document.querySelector('.buttonAddKategori').addEventListener('click', function() {
             console.log("tes");

@@ -330,7 +330,13 @@ $(".descLimit").each(function(){
                 { data: 'nama_kategori', name: 'nama_kategori' },
                 { data: 'deskripsi', name: 'deskripsi' },
                 { data: 'status', name: 'status' },
-                { data: 'jumlah', name: 'jumlah' },
+                {
+                    data: 'jumlah',
+                    name: 'jumlah',
+                    render: function(data, type, row) {
+                        return formatRupiah(data);
+                    }
+                },
                 { data: 'action', name: 'action', orderable: false },
             ],
             order: [[0, 'desc']],
@@ -358,8 +364,8 @@ $(".descLimit").each(function(){
                 });
 
                 // Display the sums in the appropriate elements
-                $('#total_pemasukan').text(totalPemasukan.toFixed(0)); // Format to 2 decimal places
-                $('#total_pengeluaran').text(totalPengeluaran.toFixed(0));
+                $('#total_pemasukan').text(formatRupiah(totalPemasukan.toFixed(0))); // Format to 2 decimal places
+                $('#total_pengeluaran').text(formatRupiah(totalPengeluaran.toFixed(0)));
             },
             language: {
                     "lengthMenu": "Tampilkan _MENU_ entri",
@@ -411,6 +417,19 @@ $(".descLimit").each(function(){
 </script>
 
 <script>
+    function formatRupiah(angka) {
+        var number_string = angka.toString(),
+            sisa = number_string.length % 3,
+            rupiah = number_string.substr(0, sisa),
+            ribuan = number_string.substr(sisa).match(/\d{3}/g);
+
+        if (ribuan) {
+            var separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        return 'Rp ' + rupiah;
+    }
     function resetForm() {
         const event = new Event('change');
         // Reset select elements

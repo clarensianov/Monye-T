@@ -55,7 +55,7 @@ Route::get('/dashboard', function(){
     $categories = Category::get();
     $budgets = Budget::where('users_id', Auth::user()->user_id)->get();
     $budgets = $budgets->where('status', 0);
-    $budgets = $budgets->sortByDesc('tanggal_berakhir');
+    $budgets = $budgets->sortBy('tanggal_berakhir');
     $budgets = $budgets->take(2);
     return view('dashboard' , ['categories' => $categories, 'budgets' => $budgets]);
 })->name('dashboard')->middleware('auth');

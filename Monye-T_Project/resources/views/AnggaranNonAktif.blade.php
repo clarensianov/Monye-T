@@ -116,12 +116,12 @@
                         Tidak Aktif
                     </a>
                 </div>
-                <form class="d-flex" role="search">
+                {{-- <form class="d-flex" role="search">
                     <div class="searchbar">
                         <input class="search_input" type="text" name="" placeholder="Cari Anggaran..">
                         <button href="#" class="btn search_icon"><i class="fas fa-search"></i></button>
                     </div>
-                </form>
+                </form> --}}
             </div>
         </div>
         @php
@@ -176,7 +176,7 @@
             @endforeach
         </div>
         <div class="text-black mt-4 d-flex flex-wrap justify-content-end" style="width: 76%; column-gap: 100px; row-gap:50px;">
-            <nav aria-label="Page navigation example">
+            {{-- <nav aria-label="Page navigation example">
                 <ul class="pagination gap-3">
                   <li class="page-item">
                     <a class="page-link border-0 paginationText" href="#" aria-label="Previous">
@@ -192,7 +192,8 @@
                     </a>
                   </li>
                 </ul>
-              </nav>
+              </nav> --}}
+              @include('components.flash')
         </div>
     </div>
     <div class="position-absolute" style="z-index: 1000000;">

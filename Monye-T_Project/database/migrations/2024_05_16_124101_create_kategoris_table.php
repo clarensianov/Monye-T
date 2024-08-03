@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('users_id');
             $table->string('nama_kategori');
             $table->timestamps();
-                    
+
             $table->unique(['users_id', 'nama_kategori']);
         });
     }

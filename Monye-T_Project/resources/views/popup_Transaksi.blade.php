@@ -323,7 +323,9 @@
                                 <select name="kategori" id="kategori1">
                                     <option value="">Pilih Kategori</option>
                                     @foreach ($kategoris as $kategori)
-                                    <option value={{ $kategori->kategori_id }}>{{ $kategori->nama_kategori }}</option>
+                                        @if ($kategori->nama_kategori != "Penyesuaian")
+                                            <option value={{ $kategori->kategori_id }}>{{ $kategori->nama_kategori }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 <a id="buttonAddKategori" onclick="tampilkanKategori()" class=" border-0 py-2 px-4 rounded text-decoration-none text-black bg-kuning">+ Kategori</a>
