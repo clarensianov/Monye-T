@@ -229,6 +229,10 @@
 
     @include('popup_Transaksi')
 
+    <div class="position-absolute" style="z-index: 1000000;">
+        @include('PopupHapusAnggaran')
+    </div>
+
 @endsection
 
 @section('script')
@@ -295,6 +299,7 @@ $(".descLimit").each(function(){
         $('#DariTanggal').datepicker('setEndDate', maxDate);
     });
 
+// Data Tables
  $(document).ready(function() {
         var dompet_filter = $('#dompet_filter').val();
         var kategori_filter = $('#kategori_filter').val();
@@ -302,6 +307,7 @@ $(".descLimit").each(function(){
 
         // Initialize DataTable
         var table = $('#tbl_list').DataTable({
+            dom: 'lrtip',
             processing: true,
             serverSide: true,
             ajax: {
@@ -336,7 +342,6 @@ $(".descLimit").each(function(){
             ],
             drawCallback: function (settings) {
                 var data = table.rows().data().toArray();
-                console.log(1);
 
                 // Initialize sums
                 var totalPemasukan = 0;
@@ -354,12 +359,10 @@ $(".descLimit").each(function(){
 
                 // Display the sums in the appropriate elements
                 $('#total_pemasukan').text(totalPemasukan.toFixed(0)); // Format to 2 decimal places
-                $('#total_pengeluaran').text(totalPengeluaran.toFixed(0
-
-                ));
+                $('#total_pengeluaran').text(totalPengeluaran.toFixed(0));
             },
             language: {
-                    "lengthMenu": "Tampilkan _MENU_ entri per halaman",
+                    "lengthMenu": "Tampilkan _MENU_ entri",
                     "zeroRecords": "Tidak ditemukan data yang sesuai",
                     "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
                     "infoEmpty": "Tidak ada data",
@@ -375,12 +378,17 @@ $(".descLimit").each(function(){
                 }
         });
 
-            // var button = document.getElementById("button")
-            // button.addEventListener("click", function(){
-            //     var data = table.rows().data().toArray();
-            //     $('#total').text(data[0].total_pemasukan);
-            //     console.log(data[0].total_pemasukan);
-            // })
+        // Get the row data to be displayed in edit modal
+            $('#tbl_list tbody').on('click', '.btn_edit_transaksi', function() {
+                var data = table.row($(this).closest('tr')).data();
+                displayModalEdit(data);
+            });
+
+            $('#tbl_list tbody').on('click', '.btn_delete_transaksi', function() {
+                var data = table.row($(this).closest('tr')).data();
+                tampilkanPopupHapus(data.pencatatan_id);
+            });
+
 
             // Apply date range filtering
             $('#DariTanggal, #SampeTanggal').on('change', function () {
@@ -404,10 +412,16 @@ $(".descLimit").each(function(){
 
 <script>
     function resetForm() {
+        const event = new Event('change');
         // Reset select elements
         document.querySelectorAll('select').forEach(select => {
             select.selectedIndex = 0;
+            select.dispatchEvent(event);
         });
+
+        document.querySelectorAll('input[type="text"]').forEach(input => {
+        input.value = '';
+});
     }
 </script>
 
@@ -424,20 +438,77 @@ $(".descLimit").each(function(){
     // Get the output div
     var output = document.getElementById("output");
 
-     // When the user clicks the button, open the modal
-     function displayModal() {
+     // When the user clicks the button, open the edit modal
+        function displayModalEdit(data) {
             modalJosh.style.display ="block";
+
+            var form = document.getElementById("form_transaksi");
+            form.action = '{{route("edit_transaction")}}';
+
+            // Change method to put
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', '_method');
+            hiddenInput.setAttribute('value', 'PUT');
+            form.appendChild(hiddenInput);
+
+            // Set Judul Pop Up & Button ke Edit
+            document.getElementById("judul_popup").innerText = "Edit Transaksi"
+            document.getElementById("submitBtn").innerText = "Edit Transaksi"
+
+            var id_input = document.createElement('input');
+            id_input.setAttribute('type', 'hidden');
+            id_input.setAttribute('name', 'pencatatan_id');
+            id_input.setAttribute('value', data.pencatatan_id);
+            form.appendChild(id_input);
+
+            var purpose = document.querySelector('input[name="tujuan"][value="'+ data.status +'"]');
+            var saldoAwal = document.getElementById("SaldoAwal");
+            var deskripsi = document.getElementById("exampleFormControlInput1");
+            var tanggal = document.getElementById("tanggal1");
+            var dompet = document.getElementById("dompet1");
+            var kategori = document.getElementById("kategori1");
+            var file = document.getElementById("file").files[0];
+
+            purpose.checked = true;
+            saldoAwal.value = data.jumlah;
+            deskripsi.value = data.deskripsi;
+            tanggal.value = data.tanggal;
+            dompet.value = data.dompets_id;
+            kategori.value = data.kategoris_id;
+
+            setImagePreview(data.bukti);
+        }
+
+        // Set ImagePreview
+        function setImagePreview(imagePath) {
+            var imageUrl = '{{ asset("uploads/" . ":path") }}'.replace(':path', imagePath);
+            $('#imagePreview').attr('src', imageUrl).show();
         }
 
         // When the user clicks on <span> (x), close the modal
         closeButton.onclick = function() {
             modalJosh.style.display = "none";
+
+            var form = document.getElementById("form_transaksi");
+
+            form.reset();
+
+            var imageUrl = "";
+            $('#imagePreview').attr('src', imageUrl);
         }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modalJosh) {
                 modalJosh.style.display = "none";
+
+                var form = document.getElementById("form_transaksi");
+
+                form.reset();
+
+                var imageUrl = "";
+                $('#imagePreview').attr('src', imageUrl);
             }
         }
 
@@ -454,16 +525,8 @@ $(".descLimit").each(function(){
             var purposeValue = purpose ? purpose.value : "Not selected";
             var fileName = file ? file.name : "No file chosen";
 
-            // output.innerHTML = `
-            //     <h3>Submitted Data:</h3>
-            //     <p><strong>Peruntukan:</strong> ${purposeValue}</p>
-            //     <p><strong>Nominal:</strong> Rp ${saldoAwal}</p>
-            //     <p><strong>Deskripsi:</strong> ${deskripsi}</p>
-            //     <p><strong>Tanggal:</strong> ${tanggal}</p>
-            //     <p><strong>Dompet:</strong> ${dompet}</p>
-            //     <p><strong>Kategori:</strong> ${kategori}</p>
-            //     <p><strong>Bukti:</strong> ${fileName}</p>
-            // `;
+            var form = document.getElementById("form_transaksi");
+
 
             modalJosh.style.display = "none";
         }
@@ -488,5 +551,18 @@ $(".descLimit").each(function(){
             statusElement.classList.remove('uploaded');
             statusElement.classList.add('uploading');
         });
+
+        function tampilkanPopupHapus(dor){
+            document.getElementById('pencatatan_id').value = dor;
+            document.getElementById('judul_popup_hapus').innerText = "Hapus Transaksi";
+            document.getElementById('narasi_popup_hapus').innerText = "Apakah Anda Yakin Ingin Menghapus Transaksi Ini?";
+            $('#modalHapusAnggaranTransaksi').modal('show');
+
+            document.getElementById('form_hapus_anggaran_transaksi').action = '{{route("delete_transaction")}}';
+
+            document.getElementById("btn_batal").addEventListener("click", function () {
+                $('#modalHapusAnggaranTransaksi').modal('hide');
+            });
+        }
 </script>
 @endsection

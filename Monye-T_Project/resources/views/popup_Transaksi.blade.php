@@ -220,7 +220,7 @@
             margin-top: 10px;
             color: #333;
             font-size: 14px;
-        }  
+        }
 
         .uploading {
             color: blue;
@@ -230,19 +230,24 @@
             color: green;
         }
 
+        #imagePreview {
+            width: 100%;
+            height: auto;
+        }
+
 </style>
 
 <div>
-    <div id="ModalJosh" class="modal p-0 overflow-hidden" >
+    <div id="ModalJosh" class="modal p-0 overflow-hidden">
 
       <!-- Modal content -->
       <div class="modal-content p-0" style="scale: 0.9; margin-top:0;">
         <span class="closeModal">&times;</span>
         <div class="TransaksiBaru" style="width: 40%">
-            <h1 class="">Transaksi Baru</h1>
+            <h1 id="judul_popup" class="">Transaksi Baru</h1>
         </div>
         <!-- wrap columns in a row -->
-        <form action="{{ route('input_transaction')}}" method="POST" enctype="multipart/form-data">
+        <form action="" id="form_transaksi" method="POST" enctype="multipart/form-data">
             <div class="row p-4" id="transaksiForm">
                     @csrf
                     <!-- left column -->
@@ -261,7 +266,7 @@
                             <div class="field-group">
                                 <div class="flex">
                                 <span class="currency" aria-hidden="true">Rp</span>
-                                <input type="number" class="text-field-saldo" id="SaldoAwal" placeholder="Saldo Awal Dompet Baru" name="nominal">
+                                <input type="number" class="text-field-saldo" id="SaldoAwal" placeholder="Isi Nominal Transaksi" name="nominal">
                                 </div>
                             </div>
                         </div>
@@ -269,7 +274,7 @@
                         <div class="deskripsi">
                             <h4>Deskripsi (Opsional)</h4>
                             <div class="isiDeskripsi">
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Isi Deskripsi disini" name="deskripsi">
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Isi Deskripsi di sini" name="deskripsi">
                             </div>
                         </div>
                         {{-- bukti --}}
@@ -277,7 +282,10 @@
                             <h4>Bukti (Opsional)</h4>
                             <div class="isiBukti">
                                 <input type="file" id="file" class="file-upload-input" name="bukti"/>
-                                <label for="file" class="file-upload-label">Upload File</label>
+                                <label for="file" class="file-upload-label">
+                                    <img id="imagePreview" src="" alt="Unggah File" style="display: block">
+                                </label>
+                                {{-- <input type="hidden" id="imagePath" name="imagePath"> --}}
                                 <div id="file-upload-status" class="file-upload-status"></div>
                             </div>
                         </div>
@@ -295,7 +303,7 @@
                         {{-- dompet --}}
                         @php
                             $dompets = App\Models\User::find(auth()->user()->user_id)->dompets;
-                            $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;                            
+                            $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;
                         @endphp
                         <div class="dompet select-container">
                             <h4>Dompet</h4>
@@ -314,7 +322,7 @@
                             <div class="select-wrapper gap-2 align-items-start flex-column">
                                 <select name="kategori" id="kategori1">
                                     <option value="">Pilih Kategori</option>
-                                    @foreach ($kategoris as $kategori)                                    
+                                    @foreach ($kategoris as $kategori)
                                     <option value={{ $kategori->kategori_id }}>{{ $kategori->nama_kategori }}</option>
                                     @endforeach
                                 </select>
@@ -360,7 +368,7 @@
                     @foreach ($kategoris as $kategori)
                         <tr>
                             <td>
-                                <span class="category-view">                                    
+                                <span class="category-view">
                                     <span class="category-name">{{ $kategori->nama_kategori }}</span>
                                 </span>
                                 <form class="edit-form d-none" action="{{ route('kategori.update') }}" method="POST">
@@ -393,6 +401,7 @@
 
     <script>
 
+
         // Get the modal
         var modalJosh = document.getElementById("ModalJosh");
 
@@ -408,20 +417,48 @@
         // Get the output div
         var output = document.getElementById("output");
 
+        // TODO: PROBLEM!!! kalau usernya klik transaksi di dashboard, bakal show edit transaksi popup (routenya ke edit_transaction)
+        // Trus kalau sebelum popupnya ditutup usernya klik tambah transaksi, tampilannya jadi tambah transaksi pop up tapi routenya masih tetap edit
         // When the user clicks the button, open the modal
         btnJosh.onclick = function() {
             modalJosh.style.display ="block";
+
+            // Set Judul Pop Up & Button ke Tambah
+            document.getElementById("judul_popup").innerText = "Transaksi Baru"
+            document.getElementById("submitBtn").innerText = "Tambah Transaksi"
+
+            var form = document.getElementById("form_transaksi");
+            form.action = '{{route("input_transaction")}}';
+
+            form.reset();
+
+            var imageUrl = "";
+            $('#imagePreview').attr('src', imageUrl);
         }
 
         // When the user clicks on <span> (x), close the modal
         closeButton.onclick = function() {
             modalJosh.style.display = "none";
+
+            var form = document.getElementById("form_transaksi");
+
+            form.reset();
+
+            var imageUrl = "";
+            $('#imagePreview').attr('src', imageUrl);
         }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modalJosh) {
                 modalJosh.style.display = "none";
+
+                var form = document.getElementById("form_transaksi");
+
+                form.reset();
+
+                var imageUrl = "";
+                $('#imagePreview').attr('src', imageUrl);
             }
         }
 

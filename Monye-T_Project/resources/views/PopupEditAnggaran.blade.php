@@ -54,7 +54,7 @@
             </div>
             <div class="d-flex mt-3">
                 <form action="{{ route('anggaran.edit') }}" class="w-100 d-flex flex-column w-100 align-items-center" method="POST">
-                    @csrf                    
+                    @csrf
                     @method('PUT')
                 <div class="" style="width: 90%;">
                     <label style="font-size: 18px;" for="NamaAnggaran" class="mb-3">Masukkan Nama Anggaran</label>
@@ -70,8 +70,8 @@
                         </span>
                         <input class="w-100 px-3 py-2 inputNumber" type="number" name="saldo">
                     </div>
-                </div>                
-                    @php                                            
+                </div>
+                    @php
                         $budgets = App\Models\User::find(auth()->user()->user_id)->budgets;
                         $kategoris = App\Models\User::find(auth()->user()->user_id)->kategoris;
                     @endphp
@@ -94,8 +94,8 @@
                                     <option value="{{ $kategori->kategori_id }}">{{ $kategori->nama_kategori }}</option>
                                 @endif
                             @endforeach
-                        </select>                      
-                    </div>            
+                        </select>
+                    </div>
                 <div style="width: 90%;" class="mt-3 d-flex flex-column justify-content-between">
                     <label style="font-size: 18px;">Pilih Jangka waktu Anggaranmu!</label>
                     <div class="d-flex w-100 justify-content-between">
@@ -148,7 +148,7 @@
         </div>
 </div>
 
-    
+
 <script>
     document.querySelector('.buttonAddKategori').addEventListener('click', function() {
             console.log("tes");

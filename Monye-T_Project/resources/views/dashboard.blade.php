@@ -86,7 +86,7 @@
         border-left: 5px #FEEE72 solid;
     }
     .text-yellow-terpakai{
-        color: #FBD354;    
+        color: #FBD354;
     }
 </style>
 @endsection
@@ -130,7 +130,7 @@
         <div class="header">
             <h1 class="header-title">Edit Dompet</h1>
         </div>
-        <form action="{{ route('edit_dompet') }}" method="POST">            
+        <form action="{{ route('edit_dompet') }}" method="POST">
             @csrf
             <input type="text" class="text-field" id="DompetID" name="DompetID" hidden>
 
@@ -200,57 +200,48 @@
     <div class=" d-flex justify-content-between" style="width: 85%;">
         <div class="w-50" style="margin-right: 200px;">
         <h3 class="boldFont">Riwayat</h3>
-            <div class="historyCard mt-2 w-85 d-flex align-items-center justify-content-between">
-                <div class="d-flex flex-row gap-3 align-items-center">
-                    <img width="60" height="60" src="{{asset('../assets/Dashboard/IconKategori.png')}}" alt="">
-                    <div>
-                        <h5 style="font-weight: 600;">Makanan</h5>
-                        <h5 style="font-weight: 300;">BCA</h5>
-                    </div>
-                </div>
-                <div class="d-flex flex-column justify-content-center align-items-end">
-                    <div class="d-flex align-items-center gap-2 ">
-                        <img width="25" height="25" src="{{asset('../assets/Dashboard/UpArrow.png')}}" alt="">
-                        <h5 class="IncreaseNumber mb-1">Rp 100.000</h5>
-                    </div>
-                    <p class="m-0" style="font-weight: 600;">12 Agustus 2024</p>
-                </div>
-            </div>
 
-            <div class="historyCard mt-2 w-85 d-flex align-items-center justify-content-between">
-                <div class="d-flex flex-row gap-3 align-items-center">
-                    <img width="60" height="60" src="{{asset('../assets/Dashboard/IconKategori.png')}}" alt="">
-                    <div>
-                        <h5 style="font-weight: 600;">Makanan</h5>
-                        <h5 style="font-weight: 300;">BCA</h5>
-                    </div>
-                </div>
-                <div class="d-flex flex-column justify-content-center align-items-end">
-                    <div class="d-flex align-items-center gap-2 ">
-                        <img width="25" height="25" src="{{asset('../assets/Dashboard/UpArrow.png')}}" alt="">
-                        <h5 class="IncreaseNumber mb-1">Rp 100.000</h5>
-                    </div>
-                    <p class="m-0" style="font-weight: 600;">12 Agustus 2024</p>
-                </div>
-            </div>
+        @php
+            $pencatatans = auth()->user()->pencatatans()->orderBy('tanggal', 'desc')->take(3)->get();
+        @endphp
 
-            <div class="historyCard mt-2 w-85 d-flex align-items-center justify-content-between">
-                <div class="d-flex flex-row gap-3 align-items-center">
-                    <img width="60" height="60" src="{{asset('../assets/Dashboard/IconKategori.png')}}" alt="">
-                    <div>
-                        <h5 style="font-weight: 600;">Makanan</h5>
-                        <h5 style="font-weight: 300;">BCA</h5>
+        @if (count($pencatatans) != 0)
+            @foreach ($pencatatans as $pencatatan)
+                @php
+                    $kategori = App\Models\Kategori::findOrFail($pencatatan->kategoris_id);
+                    $dompet = App\Models\Dompet::findOrFail($pencatatan->dompets_id);
+                @endphp
+
+                <div class="historyCard mt-2 w-85 d-flex align-items-center justify-content-between">
+                    <div class="d-flex flex-row gap-3 align-items-center">
+                        {{-- TODO:ini gambarnya belum sesuai kategori -> dibikin if else --}}
+                        <img width="60" height="60" src="{{asset('../assets/Dashboard/IconKategori.png')}}" alt="">
+                        <div>
+                            <h5 style="font-weight: 600;">{{ $kategori->nama_kategori }}</h5>
+                            <h5 style="font-weight: 300;">{{ $dompet->nama_dompet }}</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-end">
+                        <div class="d-flex align-items-center gap-2 ">
+                            @if ($pencatatan->status == "Pemasukan")
+                                <img width="25" height="25" src="{{asset('../assets/Dashboard/UpArrow.png')}}" alt="">
+                            @else
+                                <img width="25" height="25" src="{{asset('../assets/Dashboard/DownArrow.png')}}" alt="">
+                            @endif
+                            <h5 class="IncreaseNumber mb-1">{{ $pencatatan->jumlah }}</h5>
+                        </div>
+                        <p class="m-0" style="font-weight: 600;">{{ $pencatatan->tanggal }}</p>
                     </div>
                 </div>
-                <div class="d-flex flex-column justify-content-center align-items-end">
-                    <div class="d-flex align-items-center gap-2 ">
-                        <img width="25" height="25" src="{{asset('../assets/Dashboard/DownArrow.png')}}" alt="">
-                        <h5 class="DecreaseNumber mb-1">Rp 100.000</h5>
-                    </div>
-                    <p class="m-0" style="font-weight: 600;">12 Agustus 2024</p>
-                </div>
+            @endforeach
+        @else
+            <div class="d-flex w-100 align-items-center justify-content-center text-secondary" style="margin-top: 100px;">
+                <h3>Tidak Ada Riwayat</h3>
             </div>
-            
+        @endif
+
+
+
         </div>
         <div style="width: 50%;">
             <div class="w-85">
@@ -258,7 +249,7 @@
                 @if (count($budgets) == 0)
                     <div class="d-flex w-100 align-items-center justify-content-center text-secondary" style="margin-top: 100px;">
                         <h3>Tidak Ada Anggaran</h3>
-                    </div> 
+                    </div>
                 @else
                     @foreach ($budgets as $budget)
                         @if($budget->jumlah != null)
@@ -287,11 +278,12 @@
                         @endif
                     @endforeach
                 @endif
-            
+
             </div>
         </div>
     </div>
     @include('components.flash')
+    @include('popup_Transaksi')
 </div>
 
 
@@ -331,9 +323,6 @@
         }
     }
 
-    
-
-
     document.querySelector('.HomeIcon').classList.add('active');
 
     $(document).ready(function() {
@@ -341,5 +330,6 @@
                 $('#PopupKategori').style.display = "block";
             });
     });
-</script>
+
+    </script>
 @endsection

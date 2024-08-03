@@ -14,7 +14,7 @@ class AnggaranController extends Controller
         $user = auth()->user();
         $budget_user = $user->budgets;
         $today = Carbon::today();
-        
+
         foreach ($budget_user as $budget) {
             if($budget->status == false){
                 if($budget->tanggal_berakhir < $today){
@@ -50,10 +50,10 @@ class AnggaranController extends Controller
         }catch(ValidationException $e){
             return back()->withErrors($e->errors())->withInput();
         }
-        
+
         $user = auth()->user();
         $budget_user = $user->budgets;
-        
+
         foreach ($budget_user as $budget) {
             if($budget->kategoris_id == $req->kategori && $budget->tanggal_berakhir >= $req->tanggal_pembuatan){
                 if($budget->status == false){
@@ -74,9 +74,9 @@ class AnggaranController extends Controller
         return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil dibuat.');
     }
 
-    public function edit(Request $req){        
+    public function edit(Request $req){
         try{
-            $req->validate([                
+            $req->validate([
                 'saldo' => 'numeric',
             ], [
                 'saldo.numeric' => 'Harap isi saldo dengan numeric'
@@ -84,12 +84,12 @@ class AnggaranController extends Controller
         }catch(ValidationException $e){
             return back()->withErrors($e->errors())->withInput();
         }
-        
+
         $budget = Budget::findOrFail($req->budget_id);
         if($req->NamaAnggaran){
             $budget->nama_budget = $req->NamaAnggaran;
         }
-        
+
         if($req->saldo){
             $budget->jumlah = $req->saldo;
         }
@@ -99,24 +99,51 @@ class AnggaranController extends Controller
             $budget->kategoris_id = $req->kategori;
         }
 
-        if($req->tanggal_berakhir){           
+        if($req->tanggal_berakhir){
             $tanggalBerakhirReq = Carbon::parse($req->tanggal_berakhir);
-            $tanggalBerakhirBudget = Carbon::parse($budget->tanggal_berakhir); 
+            $tanggalBerakhirBudget = Carbon::parse($budget->tanggal_berakhir);
             if($tanggalBerakhirReq < $tanggalBerakhirBudget){
                 return back()->withErrors('Tanggal berakhir harus masuk akal!')->withInput();
             }
             $budget->tanggal_berakhir = $req->tanggal_berakhir;
         }
 
+        [$budget->tx_count, $budget->digunakan] = $this->updateDigunakanBudget($budget);
+
         $budget->save();
 
         return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil diubah.');
     }
 
+    private function updateDigunakanBudget($budget)
+    {
+        $kategori = Kategori::findOrFail($budget->kategoris_id);
+        $tx_count = 0;
+        $digunakan = 0;
+
+        foreach($kategori->pencatatans as $pencatatan)
+        {
+            if($pencatatan->tanggal >= $budget->tanggal_pembuatan && $pencatatan->tanggal <= $budget->tanggal_berakhir)
+            {
+                $tx_count += 1;
+                $digunakan += $pencatatan->jumlah;
+            }
+        }
+
+        return [$tx_count, $digunakan];
+    }
+
     public function destroy(Request $req){
         $budget = Budget::findOrFail($req->budget_id);
+
+        // Kalau udah ada transaksi, gbs dihapus
+        if($budget->tx_count > 0)
+        {
+            return back()->with('error', 'Anggaran tidak dapat dihapus karena telah memiliki transaksi.');
+        }
+
         $budget->delete();
-        
+
         return back()->with('success', 'Anggaran berhasil dihapus.');
     }
 
@@ -126,12 +153,9 @@ class AnggaranController extends Controller
 
         if (!$budget) {
             return response()->json(['error' => 'Budget not found'], 404);
-        }        
+        }
         // session()->flash('budgetKategori', $budget->kategoris_id);
         $kategori = Kategori::find($budget->kategoris_id);
         return response()->json([$budget, $kategori]);
     }
-
-
-
 }

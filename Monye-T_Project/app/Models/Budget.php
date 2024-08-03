@@ -28,5 +28,5 @@ class Budget extends Model
 
     public function kategoris(): BelongsTo{
         return $this->belongsTo(Kategori::class, 'kategoris_id', 'kategori_id');
-    }    
+    }
 }

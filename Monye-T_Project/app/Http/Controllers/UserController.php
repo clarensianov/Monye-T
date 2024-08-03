@@ -30,7 +30,7 @@ class UserController extends Controller
             ], [
                 'email.required' => 'Email wajib diisi',
                 'password.required' => 'Password wajib diisi'
-            ]);            
+            ]);
         }catch(ValidationException $e){
             return back()->withErrors($e->errors())->withInput();
         }
@@ -38,7 +38,7 @@ class UserController extends Controller
         $login = [
             'email' => $req->email,
             'password' => $req->password
-        ];        
+        ];
 
         if (Auth::attempt($login)) {
             $req->session()->regenerate();
@@ -85,8 +85,9 @@ class UserController extends Controller
             'password' => $req->password
         ];
 
-        $kategoris = ['Pendapatan','Makanan', 'Iuran', 'Hiburan', 
-        'Pendidikan', 'Kesehatan', 'Transportasi'];
+        $kategoris = ['Pendapatan','Makanan', 'Iuran', 'Hiburan',
+        'Pendidikan', 'Kesehatan', 'Transportasi', 'Penyesuaian'];
+        // Penyesuaian itu kalau saldo dompetnya diedit, jadi selisihnya dicatat sebagai penyesuaian
 
         if (Auth::attempt($login)) {
             $req->session()->regenerate();
@@ -94,7 +95,7 @@ class UserController extends Controller
                 'users_id' => auth()->user()->user_id,
                 'nama_dompet' => 'Utama',
                 'jumlah_uang' => 0
-            ]);            
+            ]);
 
             foreach ($kategoris as $kategori) {
                 Kategori::create([
@@ -102,7 +103,7 @@ class UserController extends Controller
                     'nama_kategori' => $kategori
                 ]);
             }
-            
+
             Budget::create([
                 'users_id' => auth()->user()->user_id,
                 'kategoris_id' => null,
@@ -119,7 +120,7 @@ class UserController extends Controller
         dd('gagal');
     }
 
-    public function katapemulihan(Request $req, $id){        
+    public function katapemulihan(Request $req, $id){
         try{
             $req->validate([
                 'katapemulihan' => 'required'
@@ -143,17 +144,17 @@ class UserController extends Controller
                 'email' => 'required',
                 'katapemulihan' => 'required'
             ],[
-                'email.required' => 'Email wajib diisi',                
+                'email.required' => 'Email wajib diisi',
                 'katapemulihan.required' => 'Kata Pemulihan wajib diisi'
             ]);
-        }catch(ValidationException $e){                        
+        }catch(ValidationException $e){
             return back()->withErrors($e->errors())->withInput();
         }
 
-        $user = User::where('email', $req->email)->where('kata_pemulihan', $req->katapemulihan)->first();        
-        if($user){                    
+        $user = User::where('email', $req->email)->where('kata_pemulihan', $req->katapemulihan)->first();
+        if($user){
             return redirect('/inputsandi')->with('user', $user->user_id);
-        }        
+        }
 
         return back()->with('error', 'Email/Kata pemulihan tidak tersedia ataupun cocok');
     }
@@ -171,7 +172,7 @@ class UserController extends Controller
         }catch(ValidationException $e){
             return back()->with('user', $id)->withErrors($e->errors())->withInput();
         }
-        
+
         $user = User::find($id);
 
         if($user){

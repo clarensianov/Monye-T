@@ -66,7 +66,9 @@ Route::post('/editDompet', [DompetController::class, 'editDompet'])->name('edit_
 
 //test
 Route::get('/testingaja', function(){return view('popup_Transaksi');});
-Route::post('/inputTx', [TransactionController::class, 'inputTransaction'])->name('input_transaction');
+Route::post('/inputTx', [PencatatanController::class, 'inputTransaction'])->name('input_transaction');
+Route::put('/editTransaction', [PencatatanController::class, 'editTransaction'])->name('edit_transaction');
+Route::delete('/deleteTransaction', [PencatatanController::class, 'deleteTransaction'])->name('delete_transaction');
 
 Route::get('/pencatatan', [PencatatanController::class, 'index'])->name('pencatatan');
 Route::post('/pencatatan', [PencatatanController::class, 'fetchData'])->name('pencatatan.data');

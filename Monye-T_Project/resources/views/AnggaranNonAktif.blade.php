@@ -34,7 +34,7 @@
     .searchbar:hover > .search_input::placeholder{
         color: #222222;
     }
-    
+
     .search_input{
         color: #222222;
         border: 0;
@@ -79,7 +79,7 @@
         background-color: #ff00002f;
     }
     .text-yellow-terpakai{
-        color: #FBD354;    
+        color: #FBD354;
     }
     .paginationBox{
         padding: 1px 4px;
@@ -122,13 +122,13 @@
                         <button href="#" class="btn search_icon"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
-            </div>                        
+            </div>
         </div>
         @php
             $budgets = App\Models\User::find(auth()->user()->user_id)->budgets;
-            $cek = 1;            
+            $cek = 1;
         @endphp
-        <div class="text-black mt-4 d-flex flex-wrap" style="width: 76%; height:500px; column-gap: 50px; row-gap:50px;">            
+        <div class="text-black mt-4 d-flex flex-wrap" style="width: 76%; height:500px; column-gap: 50px; row-gap:50px;">
             @foreach ($budgets as $budget)
                 @if ($budget->status == 1 && $budget->kategoris_id != null)
                     @php
@@ -172,7 +172,7 @@
                             </a>
                         </div>
                     </div>
-                @endif                
+                @endif
             @endforeach
         </div>
         <div class="text-black mt-4 d-flex flex-wrap justify-content-end" style="width: 76%; column-gap: 100px; row-gap:50px;">
@@ -214,14 +214,18 @@
         }
     });
 
-    
+    document.getElementById("btn_batal").addEventListener("click", function () {
+        $('#modalHapusAnggaranTransaksi').modal('hide');
+    });
+
     function tampilkanPopupEdit(){
         $('#modalEditAnggaran').modal('show');
     }
 
     function tampilkanPopupHapus(dor){
         document.getElementById('budgetId').value = dor;
-        $('#modalHapusAnggaran').modal('show');
+        document.getElementById('form_hapus_anggaran_transaksi').action = '{{route("anggaran.destroy")}}';
+        $('#modalHapusAnggaranTransaksi').modal('show');
     }
 
     document.querySelector('.AnggaranIcon').classList.add('active');

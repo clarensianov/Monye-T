@@ -34,7 +34,7 @@
     .searchbar:hover > .search_input::placeholder{
         color: #222222;
     }
-    
+
     .search_input{
         color: #222222;
         border: 0;
@@ -77,7 +77,7 @@
         background-color: #ff00002f;
     }
     .text-yellow-terpakai{
-        color: #FBD354;    
+        color: #FBD354;
     }
     .paginationBox{
         padding: 1px 4px;
@@ -94,7 +94,7 @@
         color: #000000;
         box-shadow: 0px 4px 4px 0px #0000003f;
         border-radius: 10px;
-    
+
     }
 </style>
 @endsection
@@ -121,7 +121,7 @@
                         <button href="#" class="btn search_icon"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
-            </div>                        
+            </div>
         </div>
         @php
             $budgets = App\Models\User::find(auth()->user()->user_id)->budgets;
@@ -162,16 +162,16 @@
                                 <p style="font-weight: 600;">{{ $budget->jumlah }}</p>
                             </div>
                         </div>
-                        <div class="w-100 d-flex" style="border-top: 1px solid #00000055; height: 42px;">                            
+                        <div class="w-100 d-flex" style="border-top: 1px solid #00000055; height: 42px;">
                             <a onclick="tampilkanPopupEdit('{{ $budget->budget_id }}')" class="w-50 d-flex align-items-center justify-content-center h-100" style="border-right: 1px solid #00000055;">
                                 <i class="text-black bi bi-pencil"></i>
                             </a>
                             <a onclick="tampilkanPopupHapus('{{ $budget->budget_id }}')" class="w-50 d-flex align-items-center justify-content-center h-100">
                                 <i class="text-black bi bi-trash3"></i>
-                            </a>                                                                            
+                            </a>
                         </div>
                     </div>
-                @endif                
+                @endif
             @endforeach
             <!-- @if ($cek == 0)
                 <p>tidak ada anggaran</p>
@@ -182,7 +182,7 @@
                 </div>
             </a>
         </div>
-        
+
         <div class="text-black mt-4 d-flex flex-wrap justify-content-end" style="width: 76%; column-gap: 100px; row-gap:50px;">
             <nav aria-label="Page navigation example">
                 <ul class="pagination gap-3">
@@ -224,6 +224,10 @@
         }
     });
 
+    document.getElementById("btn_batal").addEventListener("click", function () {
+        $('#modalHapusAnggaranTransaksi').modal('hide');
+    });
+
     function ModalAnggaran(){
         $('#exampleModalToggle').modal('show');
     }
@@ -262,7 +266,8 @@
 
     function tampilkanPopupHapus(dor){
         document.getElementById('budgetId').value = dor;
-        $('#modalHapusAnggaran').modal('show');
+        document.getElementById('form_hapus_anggaran_transaksi').action = '{{route("anggaran.destroy")}}';
+        $('#modalHapusAnggaranTransaksi').modal('show');
     }
 
     document.querySelector('.AnggaranIcon').classList.add('active');
