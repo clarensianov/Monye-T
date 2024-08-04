@@ -68,7 +68,7 @@ class AnggaranController extends Controller
         $status = false;
         foreach ($pencatatan_user as $pencatatan) {
             if($pencatatan->tanggal >= $req->tanggal_pembuatan && $pencatatan->tanggal <= $req->tanggal_berakhir){
-                if($pencatatan->kategoris_id == $req->kategori){
+                if($pencatatan->kategoris_id == $req->kategori && $pencatatan->status == "Pengeluaran"){
                     $digunakan += $pencatatan->jumlah;
                     $tx_count += 1;
                     $status = false;
