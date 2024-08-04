@@ -156,11 +156,11 @@
                         <div class="mt-3 d-flex w-100 justify-content-between px-4">
                             <div class="w-50" style="margin-left: 10px;">
                                 <p class="m-0 w-50" style="font-weight: 600;">Terpakai</p>
-                                <p class="text-yellow-terpakai" style="font-weight: 600;">{{ $budget->digunakan }}</p>
+                                <p class="nominal_uang text-yellow-terpakai" style="font-weight: 600;">{{ $budget->digunakan }}</p>
                             </div>
                             <div class="w-50" style="margin-left:35px;">
                                 <p class="m-0" style="font-weight: 600;">Dari</p>
-                                <p style="font-weight: 600;">{{ $budget->jumlah }}</p>
+                                <p class="nominal_uang" style="font-weight: 600;">{{ $budget->jumlah }}</p>
                             </div>
                         </div>
                         <div class="w-100 d-flex" style="border-top: 1px solid #00000055; height: 42px;">
@@ -231,5 +231,26 @@
 
     document.querySelector('.AnggaranIcon').classList.add('active');
 
+    function formatRupiah(angka) {
+        var number_string = angka.toString(),
+            sisa = number_string.length % 3,
+            rupiah = number_string.substr(0, sisa),
+            ribuan = number_string.substr(sisa).match(/\d{3}/g);
+
+        if (ribuan) {
+            var separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        return 'Rp ' + rupiah;
+    }
+
+    $(document).ready(function() {
+            console.log(1);
+            $(".nominal_uang").each(function() {
+                var amount = $(this).text();
+                $(this).text(formatRupiah(amount));
+            });
+    });
 </script>
 @endsection

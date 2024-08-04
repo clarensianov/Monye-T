@@ -188,7 +188,7 @@
                     <div class="dompetList dompetCard YellowMore d-flex align-items-center p-3">
                         <div>
                             <h3 class="namaDompet" style="font-weight: 700;">{{ $dompet->nama_dompet }}</h3>
-                            <h5 class="nominal saldoDompet" style="font-weight: 400;" class="mt-3">{{ $dompet->jumlah_uang }}</h5>
+                            <h5 class="nominal_uang saldoDompet" style="font-weight: 400;" class="mt-3">{{ $dompet->jumlah_uang }}</h5>
                         </div>
                     </div>
                 </a>
@@ -228,7 +228,7 @@
                             @else
                                 <img width="25" height="25" src="{{asset('../assets/Dashboard/DownArrow.png')}}" alt="">
                             @endif
-                            <h5 class="nominal IncreaseNumber mb-1">{{ $pencatatan->jumlah }}</h5>
+                            <h5 class="nominal_uang IncreaseNumber mb-1">{{ $pencatatan->jumlah }}</h5>
                         </div>
                         <p class="m-0" style="font-weight: 600;">{{ $pencatatan->tanggal }}</p>
                     </div>
@@ -266,11 +266,11 @@
                                     <div class="d-flex align-items-center gap-2 mt-2">
                                         <div class="w-50" style="margin-left: 10px;">
                                             <p class="m-0 w-50" style="font-weight: 600;">Terpakai</p>
-                                            <p class="nominal text-yellow-terpakai m-0" style="font-weight: 600;">{{$budget->digunakan}}</p>
+                                            <p class="nominal_uang text-yellow-terpakai m-0" style="font-weight: 600;">{{$budget->digunakan}}</p>
                                         </div>
                                         <div class="w-50" style="margin-left:35px;">
                                             <p class="m-0" style="font-weight: 600;">Dari</p>
-                                            <p class="nominal m-0" style="font-weight: 600;">{{$budget->jumlah}}</p>
+                                            <p class="nominal_uang m-0" style="font-weight: 600;">{{$budget->jumlah}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -332,7 +332,7 @@
             });
 
             console.log(1);
-            $(".nominal").each(function() {
+            $(".nominal_uang").each(function() {
                 var amount = $(this).text();
                 $(this).text(formatRupiah(amount));
             });
