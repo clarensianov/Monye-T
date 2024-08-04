@@ -15,6 +15,10 @@
             width: 85%;
         }
 
+        body {
+            background-color: #FDFCF7;
+        }
+
         .profile-image {
             top: -17px;
             background-color: #FEEE72;
@@ -153,12 +157,12 @@
     </style>
 </head>
 <body>
-    <div class="w-100 d-flex mt-4 flex-column align-items-center">
+    {{-- <div class="w-100 d-flex mt-4 flex-column align-items-center">
         <div class="w-85 text-black ">
             <h2>Profil</h2>
         </div>
-    </div>
-    <hr style="width:100%; height: 2px; z-index: -3; background-color: #0000004a;">
+    </div> --}}
+    {{-- <hr style="width:100%; height: 2px; z-index: -3; background-color: #0000004a;"> --}}
     @php
         $user = App\Models\User::find(auth()->user()->user_id)
     @endphp

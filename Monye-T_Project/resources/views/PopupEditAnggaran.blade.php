@@ -118,20 +118,19 @@
                             <div class="d-flex flex-column w-100 justify-content-end">
                                 <label for="" style="font-size: 15px;">Berakhir</label>
                                 <div class="d-flex">
-                                    <input style="width: 85%;" class="px-3 py-2 input-tanggal" type="date" id="todate" name="tanggal_berakhir">
-                                    <span class="input-group-append">
-                                        <span class="calendar-logo input-group-text h-100 d-block">
+                                    <input style="width: 100%;" class="px-3 py-2 input-tanggal" type="date" id="todate" name="tanggal_berakhir">
+                                    {{-- <span class="input-group-append"> --}}
+                                        {{-- <span class="calendar-logo input-group-text h-100 d-block">
                                         <i class="fa fa-calendar"></i>
-                                        </span>
-                                    </span>
+                                        </span> --}}
+                                    {{-- </span> --}}
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div style="width: 90%; margin: 20px 0" class="d-flex flex-column align-items-center">
-
-                        <input type="hidden" name="budget_id" id="budgetIdInput" value="{{ $budget->budget_id }}">
+                        <input type="hidden" name="budget_id" id="budgetIdInput" value="">
                         <button type="submit" class="btn" style="padding: 15px 100px; background-color: #FEEE72; font-weight:600;">Ubah</button>
                     </div>
                 </div>

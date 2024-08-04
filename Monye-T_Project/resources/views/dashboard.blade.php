@@ -13,7 +13,7 @@
     }
 
     .historyCard {
-        background-color: #FDFCF7;
+        background-color: #ffffff;
         border: 0.8px solid #00000040;
         border-radius: 15px;
         padding: 15px;
@@ -61,7 +61,7 @@
 
 
     body {
-        background-color: #EEEEEE;
+        background-color: #FDFCF7;
     }
 
     .boldFont {
@@ -188,7 +188,7 @@
                     <div class="dompetList dompetCard YellowMore d-flex align-items-center p-3">
                         <div>
                             <h3 class="namaDompet" style="font-weight: 700;">{{ $dompet->nama_dompet }}</h3>
-                            <h5 class="saldoDompet" style="font-weight: 400;" class="mt-3">Rp {{ $dompet->jumlah_uang }}</h5>
+                            <h5 class="nominal saldoDompet" style="font-weight: 400;" class="mt-3">{{ $dompet->jumlah_uang }}</h5>
                         </div>
                     </div>
                 </a>
@@ -199,10 +199,10 @@
     <br>
     <div class=" d-flex justify-content-between" style="width: 85%;">
         <div class="w-50" style="margin-right: 200px;">
-        <h3 class="boldFont">Riwayat</h3>
+        <h3 class="boldFont">Riwayat Transaksi</h3>
 
         @php
-            $pencatatans = auth()->user()->pencatatans()->orderBy('tanggal', 'desc')->take(3)->get();
+            $pencatatans = auth()->user()->pencatatans()->orderBy('tanggal', 'desc')->orderBy('pencatatan_id', 'desc')->take(3)->get();
         @endphp
 
         @if (count($pencatatans) != 0)
@@ -228,7 +228,7 @@
                             @else
                                 <img width="25" height="25" src="{{asset('../assets/Dashboard/DownArrow.png')}}" alt="">
                             @endif
-                            <h5 class="IncreaseNumber mb-1">{{ $pencatatan->jumlah }}</h5>
+                            <h5 class="nominal IncreaseNumber mb-1">{{ $pencatatan->jumlah }}</h5>
                         </div>
                         <p class="m-0" style="font-weight: 600;">{{ $pencatatan->tanggal }}</p>
                     </div>
@@ -266,11 +266,11 @@
                                     <div class="d-flex align-items-center gap-2 mt-2">
                                         <div class="w-50" style="margin-left: 10px;">
                                             <p class="m-0 w-50" style="font-weight: 600;">Terpakai</p>
-                                            <p class="text-yellow-terpakai m-0" style="font-weight: 600;">Rp. {{$budget->digunakan}}</p>
+                                            <p class="nominal text-yellow-terpakai m-0" style="font-weight: 600;">{{$budget->digunakan}}</p>
                                         </div>
                                         <div class="w-50" style="margin-left:35px;">
                                             <p class="m-0" style="font-weight: 600;">Dari</p>
-                                            <p class="m-0" style="font-weight: 600;">Rp. {{$budget->jumlah}}</p>
+                                            <p class="nominal m-0" style="font-weight: 600;">{{$budget->jumlah}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -288,6 +288,7 @@
 
 
 <script src="{{ asset('/popup/popup.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
 
@@ -329,7 +330,27 @@
             $('#buttonAddKategori').click(function() {
                 $('#PopupKategori').style.display = "block";
             });
+
+            console.log(1);
+            $(".nominal").each(function() {
+                var amount = $(this).text();
+                $(this).text(formatRupiah(amount));
+            });
     });
+
+    function formatRupiah(angka) {
+        var number_string = angka.toString(),
+            sisa = number_string.length % 3,
+            rupiah = number_string.substr(0, sisa),
+            ribuan = number_string.substr(sisa).match(/\d{3}/g);
+
+        if (ribuan) {
+            var separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        return 'Rp ' + rupiah;
+    }
 
     </script>
 @endsection
