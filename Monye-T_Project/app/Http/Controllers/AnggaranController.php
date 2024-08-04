@@ -62,13 +62,30 @@ class AnggaranController extends Controller
             }
         }
 
+        $pencatatan_user = $user->pencatatans;
+        $digunakan = 0;
+        $tx_count = 0;
+        $status = false;
+        foreach ($pencatatan_user as $pencatatan) {
+            if($pencatatan->tanggal >= $req->tanggal_pembuatan && $pencatatan->tanggal <= $req->tanggal_berakhir){
+                if($pencatatan->kategoris_id == $req->kategoris_id){
+                    $digunakan += $pencatatan->jumlah;
+                    $tx_count += 1;
+                    $status = true;
+                }
+            }
+        }
+
         Budget::create([
             'users_id' => $user->user_id,
             'kategoris_id' => $req->kategori,
             'nama_budget' => $req->NamaAnggaran,
             'jumlah' => $req->saldo,
             'tanggal_pembuatan' => $req->tanggal_pembuatan,
-            'tanggal_berakhir' => $req->tanggal_berakhir
+            'tanggal_berakhir' => $req->tanggal_berakhir,
+            'status' => $status,
+            'digunakan' => $digunakan,
+            'tx_count' => $tx_count
         ]);
 
         return redirect()->route('anggaran.index')->with('success', 'Anggaran berhasil dibuat.');

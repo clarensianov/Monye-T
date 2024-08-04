@@ -19,7 +19,9 @@ class Budget extends Model
         'jumlah',
         'tanggal_pembuatan',
         'tanggal_berakhir',
-        'digunakan'
+        'digunakan',
+        'tx_count',
+        'status'
     ];
 
     public function users(): BelongsTo{
