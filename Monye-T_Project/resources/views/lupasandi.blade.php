@@ -102,11 +102,14 @@
             <div class="w-100 h-100">
                 <div class="row h-100 ">
                     <div class="Gambar-BG col-5 d-flex align-items-center justify-content-center" style="border-radius: 30px 0 0 30px; height: 100%;">
-                        
+
                     </div>
                     <div class="col">
                         <div class=" flex-column d-flex justify-content-center align-items-center h-100 w-100">
-                            <h1 class="text-sblack font-weight-bold">Logo</h1>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img width="60" src="{{ asset('../assets/navbar/logo_monyet.png') }}" alt="">
+                                <h1 class="text-sblack font-weight-bold" style="margin-left: 15px; margin-top: 20px">Monye-T</h1>
+                            </div>
                             <h2 class="mt-5">Lupa Kata Sandi?</h2>
                             <p>Jangan Khawatir! Kami akan membantu anda</p>
                             <div class="w-65">
@@ -147,10 +150,10 @@
                                         </div>
                                         <div>
                                             <p class="text-serror m-0" style="font-weight: 500;">Email/Username Anda Sudah Terdaftar!</p>
-                                        </div>                                    
+                                        </div>
                                         </div> --}}
                                     </div>
-                                    
+
 
                                     <!-- <div class="d-flex flex-row gap-2 mt-2">
                                         <div class="d-flex align-items-center">
@@ -160,7 +163,7 @@
                                         </div>
                                         <div>
                                             <p class="text-serror m-0" style="font-weight: 500;">Email/Username Anda Sudah Terdaftar!</p>
-                                        </div>                                    
+                                        </div>
                                     </div>  -->
 
                                     <div>
@@ -174,7 +177,7 @@
                                             <div>
                                                 <p class="text-danger m-0" style="font-weight: 500;">{{ session('error') }}</p>
                                             </div>
-                                        </div>   
+                                        </div>
                                         @endif
                                         <div style="box-shadow: 0 2px 2px 0 #00000025;" class="NextButton become-pointer d-flex align-items-center justify-content-center yellow-button border-0 w-100 mt-3 text-brown font-weight-700 button-layout">Selanjutnya</div>
                                         <button style="box-shadow: 0 2px 2px 0 #00000025;" type="submit" class="d-none yellow-button border-0 w-100 mt-3 text-brown font-weight-700 button-layout">Check</button>
@@ -190,7 +193,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>
@@ -236,6 +239,6 @@
             }
         });
     });
-    
+
 </script>
 </html>

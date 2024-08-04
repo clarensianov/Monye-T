@@ -114,18 +114,21 @@
 @if (session('success_pass'))
         <div class="alert alert-warning" role="alert">
             {{ session('success_pass') }}
-        </div>>                                    
+        </div>>
     @endif
     <div class="w-100 vh-100 Yellow d-flex justify-content-center align-items-center">
         <div class=" w-75 bg-swhite container-field corner-radius d-flex align-items-center">
             <div class="w-100 h-100">
                 <div class="row h-100 ">
                     <div class="Gambar-BG col-5 d-flex align-items-center justify-content-center" style="border-radius: 30px 0 0 30px; height: 100%;">
-                        
+
                     </div>
                     <div class="col">
                         <div class=" flex-column d-flex justify-content-center align-items-center h-85 w-100">
-                            <h1 class="text-sblack font-weight-bold">Logo</h1>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img width="60" src="{{ asset('../assets/navbar/logo_monyet.png') }}" alt="">
+                                <h1 class="text-sblack font-weight-bold" style="margin-left: 15px; margin-top: 20px">Monye-T</h1>
+                            </div>
                             <div class="d-flex flex-row gap-8 mt-4 w-50 justify-content-center">
                                 <a href="/register" class="text-decoration-none">
                                     <div class="Daftar col d-flex justify-content-center become-pointer">
@@ -137,11 +140,11 @@
                                         <h2 class="text-not-on-select">Masuk</h2>
                                     </div>
                                 </a>
-                            </div>  
+                            </div>
 
-                            <!-- Daftar -->                
+                            <!-- Daftar -->
                             <div class="DaftarArea w-100 d-flex flex-column align-items-center">
-                                <p class="font-14 mt-2 font-weight-light">Mari bergabung dan ambil kendali atas keuangan Anda!</p>                                
+                                <p class="font-14 mt-2 font-weight-light">Mari bergabung dan ambil kendali atas keuangan Anda!</p>
                                 <div class="w-65 top-0">
                                     <form action="/loginregister/register" method="POST">
                                         @csrf
@@ -149,7 +152,7 @@
                                             <div class="d-flex flex-row w-100 justify-content-between">
                                                 <div class="d-flex flex-column w-45">
                                                     <label for="NamaDepan">Nama depan</label>
-                                                    <input type="text" class="p-2-5 form-control" id="NamaDepan" placeholder="Nama Depan"  name="namaDepan" value="{{ Session::get('namaDepan') }}">    
+                                                    <input type="text" class="p-2-5 form-control" id="NamaDepan" placeholder="Nama Depan"  name="namaDepan" value="{{ Session::get('namaDepan') }}">
                                                     <div class="d-flex flex-row">
                                                     &nbsp;
                                                     @error('namaDepan')
@@ -204,7 +207,7 @@
                                                     @error('password')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-                                                </div>  
+                                                </div>
                                             </div>
                                         </div>
                                         @if (session('registerFailed'))
@@ -217,9 +220,9 @@
                                                 <div>
                                                     <p class="text-danger m-0" style="font-weight: 500;">{{ session('registerFailed') }}</p>
                                                 </div>
-                                            </div>                                    
+                                            </div>
                                         @endif
-                                        <div class="w-100">                                            
+                                        <div class="w-100">
                                             <button style="box-shadow: 0 2px 2px 0 #00000025;" type="submit" class="yellow-button border-0 w-100 mt-3 text-brown font-weight-700 button-layout">Daftar</button>
                                         </div>
                                     </form>
@@ -236,7 +239,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
-        
+
         $(".eye-toggle").click(function(){
             $("#show_eye").toggleClass("d-none");
             $("#hide_eye").toggleClass("d-none");

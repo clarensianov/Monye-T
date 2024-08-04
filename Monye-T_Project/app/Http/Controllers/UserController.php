@@ -104,21 +104,8 @@ class UserController extends Controller
                 ]);
             }
 
-            // Budget::create([
-            //     'users_id' => auth()->user()->user_id,
-            //     'kategoris_id' => null,
-            //     'nama_budget' => null,
-            //     'jumlah' => null,
-            //     'tanggal_pembuatan' => now(),
-            //     'tanggal_berakhir' => now(),
-            //     'status' => 1
-            // ]);
-
-
             return redirect()->route('katapemulihan');
         }
-
-        dd('gagal');
     }
 
     public function katapemulihan(Request $req, $id){

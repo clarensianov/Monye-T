@@ -129,11 +129,14 @@
             <div class="w-100 h-100">
                 <div class="row h-100 ">
                     <div class="Gambar-BG col-5 d-flex align-items-center justify-content-center" style="border-radius: 30px 0 0 30px;">
-                        
+
                     </div>
                     <div class="col">
                         <div class=" flex-column d-flex justify-content-center align-items-center h-85 w-100">
-                            <h1 class="text-sblack font-weight-bold">Logo</h1>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img width="60" src="{{ asset('../assets/navbar/logo_monyet.png') }}" alt="">
+                                <h1 class="text-sblack font-weight-bold" style="margin-left: 15px; margin-top: 20px">Monye-T</h1>
+                            </div>
                             <div class="d-flex flex-row gap-8 mt-4 w-50 justify-content-center">
                                 <a href="/register" class="text-decoration-none">
                                     <div class="Daftar col d-flex justify-content-center become-pointer">
@@ -145,7 +148,7 @@
                                         <h2 class="text-on-select">Masuk</h2>
                                     </div>
                                 </a>
-                            </div>                            
+                            </div>
 
                             <!-- Masuk -->
                             <div class="MasukArea w-100 d-flex flex-column align-items-center">

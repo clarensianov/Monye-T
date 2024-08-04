@@ -96,20 +96,23 @@
         background-position: center;
     }
 </style>
-<body>    
+<body>
     <div class="w-100 vh-100 Yellow d-flex justify-content-center align-items-center">
-        <div class=" w-75 bg-swhite container-field corner-radius d-flex align-items-center">            
+        <div class=" w-75 bg-swhite container-field corner-radius d-flex align-items-center">
             <div class="w-100 h-100">
                 <div class="row h-100 ">
                     <div class="Gambar-BG col-5 d-flex align-items-center justify-content-center" style="border-radius: 30px 0 0 30px; height: 100%;">
-                        
+
                     </div>
                     <div class="col h-85">
                         <div class=" flex-column d-flex justify-content-center align-items-center h-100 w-100">
-                            <h1 class="text-sblack font-weight-bold">Logo</h1>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img width="60" src="{{ asset('../assets/navbar/logo_monyet.png') }}" alt="">
+                                <h1 class="text-sblack font-weight-bold" style="margin-left: 15px; margin-top: 20px">Monye-T</h1>
+                            </div>
                             <h2 class="mt-5">Buat Kata Pemulihan Anda!</h2>
                             <p>Autentikasi Untuk Mengganti Kata Sandi Anda</p>
-                            <div class="w-65">            
+                            <div class="w-65">
                                 <form action="{{ route('create_katapemulihan', auth()->user()->user_id) }}" method="POST">
                                     @method('PUT')
                                     @csrf

@@ -102,26 +102,29 @@
             <div class="w-100 h-100">
                 <div class="row h-100 ">
                 <div class="Gambar-BG col-5 d-flex align-items-center justify-content-center" style="border-radius: 30px 0 0 30px; height: 100%;">
-                        
+
                         </div>
                     <div class="col">
                         <div class=" flex-column d-flex justify-content-center align-items-center h-100 w-100">
-                            <h1 class="text-sblack font-weight-bold">Logo</h1>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img width="60" src="{{ asset('../assets/navbar/logo_monyet.png') }}" alt="">
+                                <h1 class="text-sblack font-weight-bold" style="margin-left: 15px; margin-top: 20px">Monye-T</h1>
+                            </div>
                             <h2 class="mt-5">Lupa Kata Sandi?</h2>
                             <p>Jangan Khawatir! Kami akan membantu anda</p>
                             <div class="w-65">
                             <form action="{{ route('change_password', Session::get('user')) }}" method="POST">
-                                @method('PUT')                        
+                                @method('PUT')
                                 @csrf
                                     <div class="form-3 d-flex flex-column mt-3">
                                         <label for="KataSandiBaru">Kata Sandi Baru</label>
                                         <div class="password-box d-flex">
-                                            <input type="password" class="p-2-5 form-control" id="KataSandiBaru" placeholder="Masukkan kata sandi baru" name="password">                                            
-                                        </div>                                        
+                                            <input type="password" class="p-2-5 form-control" id="KataSandiBaru" placeholder="Masukkan kata sandi baru" name="password">
+                                        </div>
 
                                         <label class="mt-3" for="KonfirmasiKataSandi">Konfirmasi Kata Sandi</label>
                                         <div class="password-box d-flex">
-                                            <input type="password" class="p-2-5 form-control" id="KonfirmasiKataSandi" placeholder="Masukkan kata sandi baru" name="password_confirmation">                                            
+                                            <input type="password" class="p-2-5 form-control" id="KonfirmasiKataSandi" placeholder="Masukkan kata sandi baru" name="password_confirmation">
                                         </div>
                                         <div class="d-flex flex-row">
                                             &nbsp;
@@ -139,7 +142,7 @@
                                         </div>
                                         <div>
                                             <p class="text-serror m-0" style="font-weight: 500;">Email/Username Anda Sudah Terdaftar!</p>
-                                        </div>                                    
+                                        </div>
                                     </div> --}}
 
 
@@ -168,7 +171,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>
@@ -204,6 +207,6 @@
             }
         });
     });
-    
+
 </script>
 </html>

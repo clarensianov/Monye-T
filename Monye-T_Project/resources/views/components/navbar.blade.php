@@ -36,7 +36,7 @@
                 <div class="d-flex justify-content-center">
                     <img width="60" src="{{ asset('../assets/navbar/logo_monyet.png') }}" alt="">
                 </div>
-                <h2 class="m-0">Monye-T</h2>
+                <h2 class="m-0" style="margin-top: 30px">Monye-T</h2>
             </a>
             <hr>
             <div style="padding: 10px;">
@@ -53,7 +53,7 @@
                         <div class="icon-wrap">
                             <i class="fas fa-home"></i>
                         </div>
-                        <span class="beforehover">Home</span>
+                        <span class="beforehover">Dashboard</span>
                     </a>
                 </li>
                 <li>
